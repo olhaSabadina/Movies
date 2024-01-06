@@ -28,10 +28,10 @@ class SplashViewController: UIViewController {
     
     private func setConstraint() {
         NSLayoutConstraint.activate([
-            titleImageView.heightAnchor.constraint(equalToConstant: 36),
-            titleImageView.widthAnchor.constraint(equalToConstant: 274),
+            titleImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.01),
+            titleImageView.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
             titleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 1/3)
+            titleImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }

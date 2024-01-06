@@ -13,7 +13,7 @@ enum TabBarPage {
     case search
     case create
     case profile
-
+    
     init?(index: Int) {
         switch index {
         case 0:
@@ -25,7 +25,7 @@ enum TabBarPage {
         case 3:
             self = .profile
         default:
-            return
+            return nil
         }
     }
     
@@ -126,17 +126,29 @@ class TabCoordinator: BaseCoordinator {
             searchVC.title = page.title
             navController.pushViewController(searchVC, animated: true)
             
-        case .go:
-            let goVC = GoViewController()
-            goVC.didSendEventClosure = { [weak self] event in
+        case .create:
+            let createVC = CreateViewController()
+            createVC.didSendEventClosure = { [weak self] event in
                 switch event {
-                case .go:
+                case .profile:
                     self?.finish()
                 default: break
                 }
             }
-            goVC.title = page.title
-            navController.pushViewController(goVC, animated: true)
+            createVC.title = page.title
+            navController.pushViewController(createVC, animated: true)
+            
+        case .profile:
+            let profileVC = ProfileViewController()
+            profileVC.didSendEventClosure = { [weak self] event in
+                switch event {
+                case .home:
+                    self?.finish()
+                default: break
+                }
+            }
+            profileVC.title = page.title
+            navController.pushViewController(profileVC, animated: true)
         }
         
         return navController

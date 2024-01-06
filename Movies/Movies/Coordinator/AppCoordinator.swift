@@ -8,16 +8,9 @@
 import UIKit
 import Combine
 
-enum SessionState {
-    case loggedIn
-    case loggedOut
-    case flashScreen
-}
-
 class AppCoordinator: BaseCoordinator {
     
-    @Published var isAuthorized = SessionState.flashScreen
-    
+    var authorizedManager = AuthorizedManager.shared
     private var cancellable = Set<AnyCancellable>()
     
     required init(_ navigationController: UINavigationController, type: CoordinatorType) {
@@ -26,31 +19,31 @@ class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        coordinatorDidFinish(childCoordinator: .app)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.isAuthorized = .loggedOut
-            self.sinkToSessionState()
-        }
+        sinkToSessionState()
     }
     
     func sinkToSessionState() {
-       $isAuthorized
+        authorizedManager.$sessionState
             .sink { [weak self] state in
             switch state {
             case .loggedIn:
                 self?.coordinatorDidFinish(childCoordinator: .login)
             case .loggedOut:
                 self?.coordinatorDidFinish(childCoordinator: .tab)
-            case .flashScreen:
+            case .unknow:
                 self?.coordinatorDidFinish(childCoordinator: .app)
             }
         }
         .store(in: &cancellable)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.authorizedManager.setupFirebaseAuth()
+        }
     }
         
     func showLoginFlow() {
         let loginCoordinator = LoginCoordinator.init(navigationController, type: .login)
         loginCoordinator.finishDelegate = self
+        loginCoordinator.appCoordinator = self
         loginCoordinator.start()
         childCoordinators.append(loginCoordinator)
     }
@@ -71,12 +64,12 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         switch childCoordinator {
         case .tab:
             navigationController.viewControllers.removeAll()
-
             showLoginFlow()
+            
         case .login:
             navigationController.viewControllers.removeAll()
-
             showMainFlow()
+            
         case .app:
             let flashVC = SplashViewController()
             navigationController.viewControllers = [flashVC]

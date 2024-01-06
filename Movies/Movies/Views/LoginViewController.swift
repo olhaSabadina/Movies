@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    var didSendEventClosure: (() -> Void)?
+    var didSendEventClosure: ((Event) -> Void)?
         
     private let titleLabel = UILabel()
     private let signUpLabel = UILabel()
@@ -45,20 +45,17 @@ class LoginViewController: UIViewController {
     //MARK: - @objc Function
     
     @objc func logIn() {
-//        guard let email = emailNumberTextField.text, !email.isEmpty,
-//              let password = passwordTextField.text, !password.isEmpty else { return }
-//        authorisedCoordinator?.authManager.logIn(email: email, pasword: password, errorHandler: { [weak self] error in
-//            self?.presentAlert(with: "Error", message: error.localizedDescription, buttonTitles: "Ok", styleActionArray: [.cancel], alertStyle: .alert, completion: nil)
-//        })
+        
+        guard let email = emailNumberTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else { return }
+        didSendEventClosure?(.logIn(email, password))
     }
     
     @objc func signUpUser() {
-//        guard let email = emailNumberTextField.text, !email.isEmpty,
-//              let password = passwordTextField.text, !password.isEmpty else { return }
-//        let user = UserProfile(login: email)
-//        authorisedCoordinator?.authManager.signUp(email, password, profile: user, errorHandler: { [weak self] error in
-//            self?.presentAlert(with: "Error", message: error?.localizedDescription, buttonTitles: "OK", styleActionArray: [.default], alertStyle: .alert, completion: nil)
-//        })
+        guard let email = emailNumberTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else { return }
+        
+        didSendEventClosure?(.signUp(email, password))
     }
     
     @objc func goToSignUp() {
@@ -245,4 +242,11 @@ extension LoginViewController {
     }
 }
 
+extension LoginViewController {
+    enum Event {
+        case logIn(String, String)
+        case signUp(String, String)
+        case remindLater
+    }
+}
 
