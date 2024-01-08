@@ -9,12 +9,12 @@ import UIKit
 
 enum TitleConstants {
     // Title autorised
-    static let logInButton = "LOG IN"
+    static let logInButton = "LOG IN" //+
     static let signUpLabel = "You don't have an account? "
     static let logInLabel = "Do you already have account? "
-    static let signUpButton = "SIGN UP"
-    static let eventApp = "My Events"
-    static let eventDescriptionApp = "Сreate your events\n and track the time until they start"
+    static let signUpButton = "SIGN UP" //+
+    static let welcomeApp = "Welcome" // +
+    static let eventDescriptionApp = "Millions of movies, TV shows and people to discover." //+
     static let email = "email"
     static let password = "password"
     

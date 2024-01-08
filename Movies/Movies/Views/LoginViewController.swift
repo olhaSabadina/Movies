@@ -78,7 +78,7 @@ class LoginViewController: UIViewController {
     private func setConstraint() {
         NSLayoutConstraint.activate([
             
-            titlesStack.topAnchor.constraint(equalTo: navigationItem.titleView?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titlesStack.topAnchor.constraint(equalTo: navigationItem.titleView?.bottomAnchor ?? view.safeAreaLayoutGuide.topAnchor, constant: 100),
             titlesStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titlesStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             titlesStack.heightAnchor.constraint(equalToConstant: 150),
@@ -86,9 +86,9 @@ class LoginViewController: UIViewController {
             authorizedStack.topAnchor.constraint(equalTo: titlesStack.bottomAnchor, constant: 40),
             authorizedStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             authorizedStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            authorizedStack.heightAnchor.constraint(equalToConstant: 100),
+            authorizedStack.heightAnchor.constraint(equalToConstant: 140),
             
-            logInButton.topAnchor.constraint(equalTo: authorizedStack.bottomAnchor, constant: 30),
+            logInButton.topAnchor.constraint(equalTo: authorizedStack.bottomAnchor, constant: 40),
             logInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             logInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
@@ -146,20 +146,25 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController {
     
     private func setupView() {
-        view.backgroundColor = .systemCyan
+        view.backgroundColor = .white
+        let background = UIImageView()
+        background.frame = view.bounds
+        background.image = ImageConstants.welcomeBackground
+        background.contentMode = .scaleAspectFill
+        view.addSubview(background)
     }
     
     private func setTitlesLabel() {
         let labels = [titleLabel, descriptionLabel]
         labels.forEach { label in
-            label.textAlignment = .center
+            label.textAlignment = .left
             label.numberOfLines = 0
-            label.textColor = .label
+            label.textColor = .white
         }
-        titleLabel.text = TitleConstants.eventApp
-        titleLabel.font = .boldSystemFont(ofSize: 24)// UIFont(name: FontConstants.semiBold, size: 24)
+        titleLabel.text = TitleConstants.welcomeApp
+        titleLabel.font = UIFont(name: FontsConstants.openSansExtraBold, size: 42)
         descriptionLabel.text = TitleConstants.eventDescriptionApp
-        descriptionLabel.font = .systemFont(ofSize: 20)// UIFont(name: FontConstants.semiBold, size: 20)
+        descriptionLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 24)
     }
     
     private func setTitlesStack() {
@@ -194,7 +199,7 @@ extension LoginViewController {
     private func setAuthorizedStack() {
         authorizedStack = UIStackView(arrangedSubviews: [emailNumberTextField,passwordTextField])
         authorizedStack.axis = .vertical
-        authorizedStack.spacing = 10
+        authorizedStack.spacing = 40
         authorizedStack.distribution = .fillEqually
         authorizedStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(authorizedStack)
@@ -216,12 +221,12 @@ extension LoginViewController {
     
     private func setAuthorisedButton() {
         logInButton.translatesAutoresizingMaskIntoConstraints = false
-        logInButton.backgroundColor = .link
-        logInButton.tintColor = .systemBackground
+        logInButton.backgroundColor = ColorConstans.logInColor
+        logInButton.tintColor = .label
         logInButton.layer.cornerRadius = 10
         logInButton.layer.borderColor = UIColor.gray.cgColor
         logInButton.layer.borderWidth = 1
-        logInButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        logInButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
         view.addSubview(logInButton)
     }
     
@@ -229,9 +234,9 @@ extension LoginViewController {
         signUpLabel.textColor = .white
         signUpLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        signUpButton.tintColor = .link
+        signUpButton.tintColor = ColorConstans.logInColor
         signUpButton.addTarget(self, action: #selector(goToSignUp), for: .touchUpInside)
-        signUpButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        signUpButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 20)
         
         signUpStack = UIStackView(arrangedSubviews: [signUpLabel, signUpButton])
         signUpStack.axis = .horizontal

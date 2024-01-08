@@ -9,6 +9,9 @@ import UIKit
 
 enum ImageConstants {
     static let logoImage = UIImage(named: "logoImage")
+    static let welcomeBackground = UIImage(named: "welcomeBackground")
+    static let homeBackground = UIImage(named: "homeBackground")
+    
     
     
     

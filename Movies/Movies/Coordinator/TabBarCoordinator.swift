@@ -65,6 +65,8 @@ enum TabBarPage {
 
 class TabCoordinator: BaseCoordinator {
 
+    weak var appCoordinator: AppCoordinator?
+    
     var tabBarController = UITabBarController()
 
    override func start() {
@@ -142,9 +144,13 @@ class TabCoordinator: BaseCoordinator {
             let profileVC = ProfileViewController()
             profileVC.didSendEventClosure = { [weak self] event in
                 switch event {
-                case .home:
+                case .logOut:
+                    self?.appCoordinator?.authorizedManager.logOut()
                     self?.finish()
-                default: break
+                case .deleteProfile:
+                    print("deleteProfile")
+                case .editProfile:
+                    print("editProfile")
                 }
             }
             profileVC.title = page.title

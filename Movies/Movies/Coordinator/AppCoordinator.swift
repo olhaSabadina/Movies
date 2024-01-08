@@ -19,7 +19,8 @@ class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        sinkToSessionState()
+//        sinkToSessionState()
+        coordinatorDidFinish(childCoordinator: .login)
     }
     
     func sinkToSessionState() {
@@ -51,6 +52,7 @@ class AppCoordinator: BaseCoordinator {
     func showMainFlow() {
        let tabCoordinator = TabCoordinator.init(navigationController, type: .tab)
         tabCoordinator.finishDelegate = self
+        tabCoordinator.appCoordinator = self
         tabCoordinator.start()
         childCoordinators.append(tabCoordinator)
     }

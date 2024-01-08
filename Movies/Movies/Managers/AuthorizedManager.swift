@@ -70,10 +70,21 @@ final class AuthorizedManager: NSObject {
         }
     }
     
+    func deleteUser(errorHandler: ((Error?)->Void)?) {
+        guard let user = Auth.auth().currentUser else {
+            errorHandler?(AuthorizeError.userNotFound)
+            return
+        }
+        DatabaseService.shared.deleteProfile(uid: user.uid) { errorHandler?($0) }
+        user.delete { errorHandler?($0) }
+        logOut()
+    }
+    
     func logOut() {
         try? Auth.auth().signOut()
         self.uid = ""
         self.userProfile = nil
+        print("сработал logOut с менеджера")
     }
 }
 

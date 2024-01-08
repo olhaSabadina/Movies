@@ -9,5 +9,5 @@ import UIKit
 
 enum ColorConstans {
     static let splashColor = UIColor(named: "splashColor")
-    
+    static let logInColor = UIColor(named: "logInColor")
 }
