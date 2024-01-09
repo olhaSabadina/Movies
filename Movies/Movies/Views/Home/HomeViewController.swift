@@ -11,12 +11,13 @@ class HomeViewController: UIViewController {
     
     var didSendEventClosure: ((TabBarPage) -> Void)?
     
-    let scrollView = UIScrollView()
+    var collectionView: UICollectionView?
+    let homeViewModel = HomeViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        setScrolView()
+        setCollectionView()
         setConstraints()
     }
     
@@ -31,22 +32,16 @@ class HomeViewController: UIViewController {
         view.addSubview(background)
     }
     
-    private func setScrolView() {
-        scrollView.backgroundColor = .clear
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
-    }
-    
     //MARK: - constraints:
     
     private func setConstraints() {
+        guard let collView = collectionView else {return}
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            
+            collView.topAnchor.constraint(equalTo: view.topAnchor),
+            collView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            collView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
         ])
     }
-    
 }
+
