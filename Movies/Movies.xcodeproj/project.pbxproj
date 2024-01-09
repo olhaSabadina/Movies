@@ -272,9 +272,9 @@
 		20C3119C2B480F6800936DBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				20FD106A2B4D43E300D2297F /* Home */,
 				20C311B32B489F3000936DBC /* SplashViewController.swift */,
 				201555602B46D293007A7423 /* LoginViewController.swift */,
-				20FD106A2B4D43E300D2297F /* Home */,
 				20B3FEAE2B48B2CE00566ACC /* SearchViewController.swift */,
 				20B3FEB02B48B2FB00566ACC /* CreateViewController.swift */,
 				20B3FEB22B48B31800566ACC /* ProfileViewController.swift */,
