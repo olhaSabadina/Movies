@@ -41,19 +41,6 @@ enum TabBarPage {
             return "Profile"
         }
     }
-    
-    var image: UIImage? {
-        switch self {
-        case .home:
-            return ImageConstants.home
-        case .search:
-            return ImageConstants.search
-        case .create:
-            return ImageConstants.create
-        case .profile:
-            return ImageConstants.person
-        }
-    }
 
     func pageOrderNumber() -> Int {
         switch self {
@@ -103,10 +90,8 @@ class TabCoordinator: BaseCoordinator {
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
 
         tabBarController.tabBar.isTranslucent = true
-        tabBarController.tabBar.backgroundColor = .secondarySystemBackground
-        tabBarController.tabBar.tintColor = .systemBlue
-        
-        tabBarController.tabBar.unselectedItemTintColor = UIColor.lightGray
+        tabBarController.tabBar.backgroundColor = .gray
+        tabBarController.tabBar.tintColor = .white
 
         navigationController.viewControllers = [tabBarController]
     }
@@ -116,9 +101,8 @@ class TabCoordinator: BaseCoordinator {
         navController.setNavigationBarHidden(false, animated: false)
 
         navController.tabBarItem = UITabBarItem.init(title: page.title,
-                                                     image: page.image, //UIImage(systemName: "person"),
+                                                     image: UIImage(systemName: "person"),
                                                      tag: page.pageOrderNumber())
-        
 
         switch page {
         case .home:
@@ -158,18 +142,19 @@ class TabCoordinator: BaseCoordinator {
             
         case .profile:
             let profileVC = ProfileViewController()
-            profileVC.didSendEventClosure = { [weak self] event in
-                switch event {
-                case .logOut:
-                    self?.appCoordinator?.authorizedManager.logOut()
-                    self?.finish()
-                case .deleteProfile:
-                    print("deleteProfile")
-                case .editProfile:
-                    print("editProfile")
-                }
-            }
-            profileVC.title = page.title
+//            profileVC.didSendEventClosure = { [weak self] event in
+//                switch event {
+//                case .logOut:
+//                    self?.appCoordinator?.authorizedManager.logOut()
+//                    self?.finish()
+//                case .deleteProfile:
+//                    print("deleteProfile")
+//                case .editProfile:
+//                    print("editProfile")
+//                }
+//            }
+          //  profileVC.title = page.title
+            
             navController.pushViewController(profileVC, animated: true)
         }
         

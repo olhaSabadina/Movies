@@ -52,6 +52,8 @@
 		20FD10742B4D524700D2297F /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10732B4D524700D2297F /* HeaderCell.swift */; };
 		20FD10762B4D52C500D2297F /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10752B4D52C500D2297F /* HomeCell.swift */; };
 		20FD10782B4D7ACC00D2297F /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */; };
+		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
+		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		20FD10732B4D524700D2297F /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		20FD10752B4D52C500D2297F /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
+		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +302,9 @@
 			isa = PBXGroup;
 			children = (
 				20C311A92B482B5C00936DBC /* UITextFieldPudding.swift */,
+				9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */,
 				20C311AD2B482F2C00936DBC /* UIView+Extension.swift */,
+				9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */,
 				209965D52B49853D00DB6634 /* AuthorizedError.swift */,
 				209965D92B499A6600DB6634 /* Alert+Extension.swift */,
 			);
@@ -478,6 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */,
 				20C311A52B48201100936DBC /* LoginCoordinator.swift in Sources */,
 				20C311AE2B482F2C00936DBC /* UIView+Extension.swift in Sources */,
 				209965DA2B499A6600DB6634 /* Alert+Extension.swift in Sources */,
@@ -500,6 +507,7 @@
 				20FD10712B4D505F00D2297F /* CompositionalLayout.swift in Sources */,
 				209965D42B49843A00DB6634 /* UserProfile.swift in Sources */,
 				20FD106E2B4D4E7C00D2297F /* HomeVC+CollectionView.swift in Sources */,
+				9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */,
 				20C311B02B48300000936DBC /* ImageConstants.swift in Sources */,
 				20B3FEAF2B48B2CE00566ACC /* SearchViewController.swift in Sources */,
 				20B3FEAD2B48AE6400566ACC /* BaseCoordinator.swift in Sources */,
