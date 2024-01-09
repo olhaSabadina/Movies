@@ -54,6 +54,7 @@
 		20FD10782B4D7ACC00D2297F /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */; };
 		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
+		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +309,7 @@
 				9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */,
 				209965D52B49853D00DB6634 /* AuthorizedError.swift */,
 				209965D92B499A6600DB6634 /* Alert+Extension.swift */,
+				9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */,
 				20C311A52B48201100936DBC /* LoginCoordinator.swift in Sources */,
 				20C311AE2B482F2C00936DBC /* UIView+Extension.swift in Sources */,
+				9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */,
 				209965DA2B499A6600DB6634 /* Alert+Extension.swift in Sources */,
 				20FD106C2B4D440600D2297F /* HomeViewModel.swift in Sources */,
 				20B3FEAB2B48A23400566ACC /* ColorConstans.swift in Sources */,

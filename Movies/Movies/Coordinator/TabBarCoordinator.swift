@@ -44,7 +44,6 @@ enum TabBarPage {
 
     func pageOrderNumber() -> Int {
         switch self {
-        
         case .home:
             return 0
         case .search:
@@ -56,7 +55,20 @@ enum TabBarPage {
         }
     }
 
-    // Add tab icon value
+    var icons: UIImage? {
+        switch self {
+        case .home:
+            return ImageConstants.home
+        case .search:
+            return ImageConstants.search
+        case .create:
+           return ImageConstants.create
+        case .profile:
+            return .getPersonImage()?
+                .resized(to: .init(width: 30, height: 30))
+                .withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        }
+    }
     
     // Add tab icon selected / deselected color
     
@@ -101,7 +113,7 @@ class TabCoordinator: BaseCoordinator {
         navController.setNavigationBarHidden(false, animated: false)
 
         navController.tabBarItem = UITabBarItem.init(title: page.title,
-                                                     image: UIImage(systemName: "person"),
+                                                     image: page.icons,
                                                      tag: page.pageOrderNumber())
 
         switch page {

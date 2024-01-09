@@ -64,12 +64,7 @@ class ProfileViewController: UIViewController {
     
     private func setProfileData() {
         userName.text = authManager.userProfile?.login
-        
-        if let userImageFromStore = UserDefaults.standard.data(forKey: TitleConstants.userImage) {
-            userImage.image = UIImage(data: userImageFromStore)
-        } else {
-            userImage.image = ImageConstants.person
-        }
+        userImage.image = .getPersonImage()
     }
     
     private func setUserName() {
@@ -187,7 +182,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate,  UINavigationC
         }
         self.userImage.image = userImage
         
-        UserDefaults.standard.set(userImage.jpegData(compressionQuality: 0.5), forKey: TitleConstants.userImage)
+        UserDefaults.standard.set(userImage.pngData(), forKey: TitleConstants.userImage)
         
         dismiss(animated: true)
     }
