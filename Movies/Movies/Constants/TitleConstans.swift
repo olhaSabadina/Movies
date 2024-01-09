@@ -15,8 +15,8 @@ enum TitleConstants {
     static let signUpButton = "SIGN UP" //+
     static let welcomeApp = "Welcome" // +
     static let eventDescriptionApp = "Millions of movies, TV shows and people to discover." //+
-    static let email = "email"
-    static let password = "password"
+    static let email = "email" //+
+    static let password = "password" //+
     
     // Title for choosign VC
     static let createEventVC = "New Event"
