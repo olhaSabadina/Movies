@@ -12,7 +12,11 @@ enum ImageConstants {
     static let welcomeBackground = UIImage(named: "welcomeBackground")
     static let homeBackground = UIImage(named: "homeBackground")
     
-    
+    static let home = UIImage(systemName: "house")
+    static let search = UIImage(systemName: "magnifyingglass")
+    static let create = UIImage(systemName: "plus")
+    static let user = UIImage(systemName: "person")
+
     
     
     static let xmark = UIImage(systemName: "xmark.circle")

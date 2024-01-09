@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setStackButtons()
-        addTargetButton()
         setConstraints()
     }
     
@@ -67,12 +66,6 @@ class ProfileViewController: UIViewController {
         stackButtons.distribution = .fillEqually
         stackButtons.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackButtons)
-    }
-    
-    private func addTargetButton() {
-//        logOutProfileButton.addTarget(self, action: #selector(logOut), for: .touchUpInside)
-//        deleteProfileButton.addTarget(self, action: #selector(deleteUser), for: .touchUpInside)
-//        editProfileButton.addTarget(self, action: #selector(editUserProfile), for: .touchUpInside)
     }
     
     //MARK: - constraints:

@@ -41,6 +41,19 @@ enum TabBarPage {
             return "Profile"
         }
     }
+    
+    var image: UIImage? {
+        switch self {
+        case .home:
+            return ImageConstants.home
+        case .search:
+            return ImageConstants.search
+        case .create:
+            return ImageConstants.create
+        case .profile:
+            return ImageConstants.person
+        }
+    }
 
     func pageOrderNumber() -> Int {
         switch self {
@@ -90,8 +103,10 @@ class TabCoordinator: BaseCoordinator {
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
 
         tabBarController.tabBar.isTranslucent = true
-        tabBarController.tabBar.backgroundColor = .gray
-        tabBarController.tabBar.tintColor = .white
+        tabBarController.tabBar.backgroundColor = .secondarySystemBackground
+        tabBarController.tabBar.tintColor = .systemBlue
+        
+        tabBarController.tabBar.unselectedItemTintColor = UIColor.lightGray
 
         navigationController.viewControllers = [tabBarController]
     }
@@ -101,8 +116,9 @@ class TabCoordinator: BaseCoordinator {
         navController.setNavigationBarHidden(false, animated: false)
 
         navController.tabBarItem = UITabBarItem.init(title: page.title,
-                                                     image: UIImage(systemName: "person"),
+                                                     image: page.image, //UIImage(systemName: "person"),
                                                      tag: page.pageOrderNumber())
+        
 
         switch page {
         case .home:
