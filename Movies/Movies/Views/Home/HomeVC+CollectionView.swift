@@ -12,7 +12,6 @@ extension HomeViewController {
     func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         guard let collectionView = collectionView else {return}
-      //  collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,12 +25,13 @@ extension HomeViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
            
             let sectionType: HomeSectionType = HomeSectionType(rawValue: sectionIndex) ?? .categories
+            let isAll = self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] ?? false
             
             switch sectionType {
             case .categories:
                 return self.createCategoriesSection()
             case .popular:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             case .freeWatch:
                 return self.createImageSection()
             case .latestTrailers:
@@ -54,7 +54,8 @@ extension HomeViewController {
         return section
     }
     
-    private func createImageSection() -> NSCollectionLayoutSection {
+    private func createImageSection(_ seeAll: Bool = false) -> NSCollectionLayoutSection {
+        
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -151,34 +152,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionType: HomeSectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
+       
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+        let index = homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] ?? 0
+        header.selectedSegmentIndex = index
+        header.sectionType = sectionType
         
-        switch sectionType {
-        case .categories:
-            break
-        case .popular:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            header.actionSeeAll = {
-                print(header.headerLabel.text ?? "nil")
-            }
-            header.segmentAction = { index in
-                print(index, "segment index")
-            }
-            return header
-        case .freeWatch:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
-        case .latestTrailers:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
-        case .trending:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
+        header.actionSeeAll = {
+            let isAll = self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] ?? false
+            let newState = isAll ? false : true
+            self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] = newState
+            self.homeViewModel.seeAllSectionType = sectionType
+            print(self.homeViewModel.seeAllSectionDictionary)
         }
-        return UICollectionReusableView()
+        
+        header.segmentAction = { index in
+            print(index, "segment index", header.sectionType.headerTitle ?? "iop")
+            self.homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] = index
+        }
+        
+        return header
     }
     
     

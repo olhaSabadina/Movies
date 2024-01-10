@@ -13,6 +13,7 @@ class HomeCell: UICollectionViewCell {
     static var identCell = "homeCell"
     let bacgroundView = UIView()
     var imageView = UIImageView()
+    var circleView = UIView()
     var persentLabel = UILabel()
     var moviesNameLabel = UILabel()
     
@@ -31,14 +32,15 @@ class HomeCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        persentLabel.text = ""
-        moviesNameLabel.text = ""
-        imageView.image = nil
+//        persentLabel.text = ""
+//        moviesNameLabel.text = ""
+//        imageView.image = nil
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         bacgroundView.setShadowWithCornerRadius(cornerRadius: 20, shadowColor: .black, shadowOffset: .zero, shadowOpacity: 0.5, shadowRadius: 2)
+        circleView.circleStrokeView(total: 50, current: 30)
     }
     
     private func setImageView() {
@@ -60,6 +62,10 @@ class HomeCell: UICollectionViewCell {
         persentLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
         persentLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(persentLabel)
+        circleView.backgroundColor = .yellow
+        
+        circleView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(circleView)
     }
     
     private func setMoviesNameLabel() {
@@ -75,8 +81,13 @@ class HomeCell: UICollectionViewCell {
             bacgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bacgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
+            circleView.topAnchor.constraint(equalTo: bacgroundView.bottomAnchor, constant: 5),
+            circleView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor),
+            circleView.widthAnchor.constraint(equalToConstant: 15),
+            
             persentLabel.topAnchor.constraint(equalTo: bacgroundView.bottomAnchor, constant: 5),
-            persentLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            persentLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 3),
             persentLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             moviesNameLabel.topAnchor.constraint(equalTo: persentLabel.bottomAnchor, constant: 5),
@@ -90,6 +101,4 @@ class HomeCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: bacgroundView.bottomAnchor)
         ])
     }
-    
-    
 }

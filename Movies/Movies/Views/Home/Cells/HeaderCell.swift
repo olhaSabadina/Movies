@@ -14,8 +14,9 @@ class HeaderCell: UICollectionReusableView {
     
     var actionSeeAll: (()->Void)?
     var segmentAction: ((Int)->Void)?
-    var headerLabel = UILabel()
-    let seeAllButton = UIButton(type: .system)
+    private var headerLabel = UILabel()
+    private let seeAllButton = UIButton(type: .system)
+    var selectedSegmentIndex = 0
     var sectionType: HomeSectionType = .categories {
         didSet {
             setHeaderData()
@@ -36,14 +37,12 @@ class HeaderCell: UICollectionReusableView {
     override func prepareForReuse() {
         super.prepareForReuse()
         headerLabel.text = ""
-        
     }
     
     private func setHeaderLabelAndSegment() {
         headerLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(headerLabel)
-        
     }
     
     private func setSeeAllButton() {
@@ -55,26 +54,21 @@ class HeaderCell: UICollectionReusableView {
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(seeAllButton)
         
-        let action = UIAction { _ in
-            self.actionSeeAll?()
-        }
+        let action = UIAction { _ in self.actionSeeAll?() }
         seeAllButton.addAction(action, for: .touchUpInside)
     }
     
     private func setHeaderData() {
-        let moviesSegmentControl = MoviesSegmentControl(self.sectionType.headersSegments, action: { index in
-            self.segmentAction?(index)
-        })
+        let moviesSegmentControl = MoviesSegmentControl(self.sectionType.headersSegments, selectedIndex: selectedSegmentIndex) { self.segmentAction?($0) }
         moviesSegmentControl.tag = 7
         self.headerLabel.text = self.sectionType.headerTitle
         
         subviews.forEach { view in
             if view.tag == 7 {
-                print(view.tag)
                 view.removeFromSuperview()
             }
-            
         }
+        
         moviesSegmentControl.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviesSegmentControl)
         NSLayoutConstraint.activate([
@@ -84,7 +78,6 @@ class HeaderCell: UICollectionReusableView {
             moviesSegmentControl.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
-    
     
     private func setConstraint() {
         

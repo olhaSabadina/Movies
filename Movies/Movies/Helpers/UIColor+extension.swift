@@ -51,7 +51,7 @@ extension UIColor {
 //        case 0.68...1.0:
 //            return UIColor.systemGreen.cgColor
         default:
-            return UIColor.gray.cgColor
+            return UIColor.systemGray5.cgColor
         }
     }
 }

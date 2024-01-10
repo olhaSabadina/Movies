@@ -32,21 +32,6 @@ enum HomeSectionType: Int, CaseIterable {
         }
     }
     
-    var segmentControlInHeader: CustomSegment? {
-        switch self {
-        case .categories:
-            return nil
-        case .popular:
-            return createHeaderSegment()
-        case .freeWatch:
-            return createHeaderSegment()
-        case .latestTrailers:
-            return createHeaderSegment()
-        case .trending:
-            return createHeaderSegment()
-        }
-    }
-    
     var headersSegments: [String] {
         switch self {
         case .categories:
@@ -62,11 +47,20 @@ enum HomeSectionType: Int, CaseIterable {
         }
     }
     
-    
-    private func createHeaderSegment() -> CustomSegment {
-        return CustomSegment()
+    var segmentKeyForIndex: String {
+        switch self {
+        case .categories:
+            return ""
+        case .popular:
+            return "popular"
+        case .freeWatch:
+            return "freeWatch"
+        case .latestTrailers:
+            return "latestTrailers"
+        case .trending:
+            return "trending"
+        }
     }
-    
 }
 
 class HomeViewModel {
@@ -74,6 +68,11 @@ class HomeViewModel {
     let categoriesTitle = ["Movies", "TV Shows", "People", "More"]
     let moviesTitle = ["Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown"]
     let viewsPercent = ["90%", "75%", "8%", "55%", "90%", "75%", "8%", "55%","90%", "75%", "8%", "55%"]
+    
+    @Published var segmentSectionsIndex: [String:Int] = [:]
+    @Published var seeAllSectionDictionary: [String:Bool] = [:]
+    @Published var seeAllSectionType: HomeSectionType = .categories
+    private var cancellable = Set<AnyCancellable>()
     
     func nuberOfSection() -> Int {
         HomeSectionType.allCases.count
@@ -95,5 +94,9 @@ class HomeViewModel {
             return 0
         }
     }
+    
+    
+    
+    
     
 }
