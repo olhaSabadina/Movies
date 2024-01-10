@@ -28,5 +28,31 @@ extension UIColor {
         
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
+    
+    static func primaryCircleColor(_ progress: Double) -> CGColor {
+        switch progress {
+        case 0...0.33:
+            return UIColor.red.cgColor
+        case 0.34...0.67:
+            return ColorConstans.circleMediumPrimary
+        case 0.68...1.0:
+            return ColorConstans.circleFullPrimary
+        default:
+            return UIColor.green.cgColor
+        }
+    }
+    
+    static func secondaryCircleColor(_ progress: Double) -> CGColor {
+        switch progress {
+//        case 0...0.33:
+//            return UIColor.systemYellow.cgColor
+//        case 0.34...0.67:
+//            return UIColor.yellow.cgColor
+//        case 0.68...1.0:
+//            return UIColor.systemGreen.cgColor
+        default:
+            return UIColor.gray.cgColor
+        }
+    }
 }
 

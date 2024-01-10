@@ -56,6 +56,7 @@
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
 		9C6F58F92B4E7A2700D820BA /* MoviesSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */; };
+		9C6F58FB2B4EB6AB00D820BA /* CircleStrokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesSegmentControl.swift; sourceTree = "<group>"; };
+		9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleStrokeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */,
+				9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				20C311AC2B482EA800936DBC /* TitleConstans.swift in Sources */,
 				20C311A12B481A9D00936DBC /* Coordinator.swift in Sources */,
 				209965D82B49871000DB6634 /* DataBaseManager.swift in Sources */,
+				9C6F58FB2B4EB6AB00D820BA /* CircleStrokeView.swift in Sources */,
 				20C311B42B489F3000936DBC /* SplashViewController.swift in Sources */,
 				20FD10782B4D7ACC00D2297F /* CategoriesCell.swift in Sources */,
 				209965D62B49853D00DB6634 /* AuthorizedError.swift in Sources */,
