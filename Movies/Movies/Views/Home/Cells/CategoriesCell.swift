@@ -23,6 +23,7 @@ class CategoriesCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        categoriesButton.setTitle("", for: .normal)
     }
     
     required init?(coder: NSCoder) {
@@ -31,11 +32,16 @@ class CategoriesCell: UICollectionViewCell {
     
     private func setCategoriesButton() {
         categoriesButton.backgroundColor = .clear
-        categoriesButton.setTitle("Movies", for: .normal)
         categoriesButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
         categoriesButton.tintColor = .label
+        categoriesButton.titleLabel?.textAlignment = .left
         categoriesButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(categoriesButton)
+        
+        let action = UIAction { _ in
+            print("button category action")
+        }
+        categoriesButton.addAction(action, for: .touchUpInside)
     }
     
     private func setConstraint() {

@@ -11,16 +11,17 @@ import UIKit
 class HomeCell: UICollectionViewCell {
     
     static var identCell = "homeCell"
-    
+    let bacgroundView = UIView()
     var imageView = UIImageView()
     var persentLabel = UILabel()
     var moviesNameLabel = UILabel()
     
     override init(frame: CGRect) {
         super .init(frame: frame)
-        setImageView()
         setPersentLabel()
         setMoviesNameLabel()
+        setBackgroundView()
+        setImageView()
         setConstraint()
     }
     
@@ -30,42 +31,63 @@ class HomeCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        persentLabel.text = ""
+        moviesNameLabel.text = ""
+        imageView.image = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        bacgroundView.setShadowWithCornerRadius(cornerRadius: 20, shadowColor: .black, shadowOffset: .zero, shadowOpacity: 0.5, shadowRadius: 2)
     }
     
     private func setImageView() {
-        imageView.backgroundColor = .orange
+        imageView.image = ImageConstants.home
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(imageView)
+        bacgroundView.addSubview(imageView)
+    }
+    
+    private func setBackgroundView() {
+        bacgroundView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bacgroundView)
+        bacgroundView.backgroundColor = .white
     }
     
     private func setPersentLabel() {
-        persentLabel.text = "90%"
-        persentLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
+        persentLabel.textColor = ColorConstans.moviesName
+        persentLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
         persentLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(persentLabel)
     }
     
     private func setMoviesNameLabel() {
-        moviesNameLabel.text = "Mare of Easttown"
-        moviesNameLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
+        moviesNameLabel.textColor = ColorConstans.moviesName
+        moviesNameLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
         moviesNameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviesNameLabel)
     }
     
     private func setConstraint() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bacgroundView.topAnchor.constraint(equalTo: topAnchor),
+            bacgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bacgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            persentLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
+            persentLabel.topAnchor.constraint(equalTo: bacgroundView.bottomAnchor, constant: 5),
             persentLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             persentLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             moviesNameLabel.topAnchor.constraint(equalTo: persentLabel.bottomAnchor, constant: 5),
             moviesNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             moviesNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            moviesNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            moviesNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            imageView.topAnchor.constraint(equalTo: bacgroundView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: bacgroundView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: bacgroundView.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bacgroundView.bottomAnchor)
         ])
     }
     

@@ -25,7 +25,7 @@ class MoviesSegmentControl: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(_ buttonsTitles: String..., action: ((Int) -> Void)? ) {
+    convenience init(_ buttonsTitles: [String], action: ((Int) -> Void)? ) {
         self.init()
         
         self.action = action

@@ -12,6 +12,7 @@ extension UIButton {
     static func createSegmentButton(_ title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont(name: FontsConstants.openSansRegular, size: 13)
         button.setTitleColor(.black, for: .normal)
         return button
     }
@@ -19,9 +20,9 @@ extension UIButton {
     func buttonIsActive(_ isSelected: Bool) {
         var font = UIFont()
         if isSelected {
-            font = UIFont.systemFont(ofSize: 18, weight: .bold)
+            font = UIFont(name: FontsConstants.openSansSemiBold, size: 13) ?? .boldSystemFont(ofSize: 13)
         } else {
-            font = UIFont.systemFont(ofSize: 18)
+            font = UIFont(name: FontsConstants.openSansRegular, size: 13) ?? .systemFont(ofSize: 13)
         }
         self.titleLabel?.font = font
     }

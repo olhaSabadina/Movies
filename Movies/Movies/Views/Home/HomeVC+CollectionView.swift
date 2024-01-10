@@ -12,7 +12,7 @@ extension HomeViewController {
     func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         guard let collectionView = collectionView else {return}
-        collectionView.backgroundColor = .clear
+      //  collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +35,8 @@ extension HomeViewController {
             case .freeWatch:
                 return self.createImageSection()
             case .latestTrailers:
+                return self.createlatestTrailersSection()
+            case .trending:
                 return self.createImageSection()
             }
         }
@@ -43,36 +45,53 @@ extension HomeViewController {
     
     private func createCategoriesSection() -> NSCollectionLayoutSection {
         
-        let item = CompositionalLayout.createItem(width: .estimated(80), height: .absolute(30), spacing: 0)
+        let item = CompositionalLayout.createItem(width: .fractionalWidth(0.25), height: .absolute(30), spacing: 10)
         
-        let group = CompositionalLayout.createGroupeCount(aligment: .horizontal, width: .estimated(80), height: .absolute(30), item: item, count: 1)
-        
+        let group = CompositionalLayout.createGroupeCount(aligment: .horizontal, width: .fractionalWidth(1), height: .absolute(30), item: item, count: 4)
+
         let section = NSCollectionLayoutSection(group: group)
-        
-        section.interGroupSpacing = 8
-        section.orthogonalScrollingBehavior = .continuous
-    
+        section.contentInsets = .init(top: 0, leading: 16, bottom: 20, trailing: 16)
         return section
     }
     
     private func createImageSection() -> NSCollectionLayoutSection {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        sectionHeader.contentInsets = .init(top: 0, leading: 20, bottom: 0, trailing: 0)
+        
         
         let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
         
-        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(1), height: .fractionalHeight((1/3)), items: [item])
-        
-        group.contentInsets = .init(top: 8, leading: 20, bottom: 8, trailing: 20)
-        
+        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((1/3)), items: [item])
+                
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.top = 15
+        section.interGroupSpacing = 15
+        section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
+        section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [sectionHeader]
         
         return section
     }
+    
+    private func createlatestTrailersSection() -> NSCollectionLayoutSection {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(90))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        
+        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+        
+        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
+                
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.interGroupSpacing = 15
+        section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
+        section.orthogonalScrollingBehavior = .continuous
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        return section
+    }
+    
 }
     
 //  MARK: - CollectionViewDelegate,DataSours:
@@ -94,22 +113,36 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         switch sectionType {
             
         case .categories:
-            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identCell, for: indexPath) as? CategoriesCell else { return UICollectionViewCell()}
+            cell.categoriesButton.setTitle(homeViewModel.categoriesTitle[indexPath.item], for: .normal)
+            return cell
+            
+        case .popular:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
             return cell
             
         case .freeWatch:
-            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            return cell
             
+        case .latestTrailers:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            return cell
+            
+        case .trending:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
             return cell
             
         default:
-            //return UICollectionViewCell()
-            
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            
-            return cell
+            return UICollectionViewCell()
         }
         
         
@@ -117,7 +150,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-       // if kind == UICollectionView.elementKindSectionHeader && indexPath.section == 1 {
         let sectionType: HomeSectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
         
         switch sectionType {
@@ -125,12 +157,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             break
         case .popular:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+            header.sectionType = sectionType
+            header.actionSeeAll = {
+                print(header.headerLabel.text ?? "nil")
+            }
+            header.segmentAction = { index in
+                print(index, "segment index")
+            }
             return header
         case .freeWatch:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+            header.sectionType = sectionType
             return header
         case .latestTrailers:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+            header.sectionType = sectionType
+            return header
+        case .trending:
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+            header.sectionType = sectionType
             return header
         }
         return UICollectionReusableView()

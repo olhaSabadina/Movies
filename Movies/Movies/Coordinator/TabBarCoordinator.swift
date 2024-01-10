@@ -96,8 +96,9 @@ class TabCoordinator: BaseCoordinator {
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
         
         tabBarController.tabBar.isTranslucent = true
-        tabBarController.tabBar.backgroundColor = .gray
-        tabBarController.tabBar.tintColor = .white
+        tabBarController.tabBar.backgroundColor = .secondarySystemBackground
+        tabBarController.tabBar.tintColor = ColorConstans.selectedTabBar
+        tabBarController.tabBar.unselectedItemTintColor = ColorConstans.tintTabBar
         
         navigationController.viewControllers = [tabBarController]
     }

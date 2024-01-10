@@ -12,12 +12,19 @@ class HeaderCell: UICollectionReusableView {
     
     static let identCell = "headerCell"
     
+    var actionSeeAll: (()->Void)?
+    var segmentAction: ((Int)->Void)?
     var headerLabel = UILabel()
     let seeAllButton = UIButton(type: .system)
+    var sectionType: HomeSectionType = .categories {
+        didSet {
+            setHeaderData()
+        }
+    }
     
     override init(frame: CGRect) {
         super .init(frame: frame)
-        setHeaderLabel()
+        setHeaderLabelAndSegment()
         setSeeAllButton()
         setConstraint()
     }
@@ -26,11 +33,17 @@ class HeaderCell: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setHeaderLabel() {
-        headerLabel.text = "What's Popular"
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        headerLabel.text = ""
+        
+    }
+    
+    private func setHeaderLabelAndSegment() {
         headerLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(headerLabel)
+        
     }
     
     private func setSeeAllButton() {
@@ -41,21 +54,47 @@ class HeaderCell: UICollectionReusableView {
         seeAllButton.titleLabel?.textAlignment = .right
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(seeAllButton)
+        
+        let action = UIAction { _ in
+            self.actionSeeAll?()
+        }
+        seeAllButton.addAction(action, for: .touchUpInside)
     }
     
-    private func setConstraint() {
-        NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: topAnchor),
-            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headerLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3),
+    private func setHeaderData() {
+        let moviesSegmentControl = MoviesSegmentControl(self.sectionType.headersSegments, action: { index in
+            self.segmentAction?(index)
+        })
+        moviesSegmentControl.tag = 7
+        self.headerLabel.text = self.sectionType.headerTitle
+        
+        subviews.forEach { view in
+            if view.tag == 7 {
+                print(view.tag)
+                view.removeFromSuperview()
+            }
             
-            seeAllButton.topAnchor.constraint(equalTo: topAnchor),
-            seeAllButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            seeAllButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            seeAllButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3),
+        }
+        moviesSegmentControl.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(moviesSegmentControl)
+        NSLayoutConstraint.activate([
+            moviesSegmentControl.leadingAnchor.constraint(equalTo: leadingAnchor),
+            moviesSegmentControl.trailingAnchor.constraint(equalTo: trailingAnchor),
+            moviesSegmentControl.bottomAnchor.constraint(equalTo: bottomAnchor),
+            moviesSegmentControl.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
     
     
+    private func setConstraint() {
+        
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: topAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2),
+            
+            seeAllButton.topAnchor.constraint(equalTo: topAnchor),
+            seeAllButton.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
 }

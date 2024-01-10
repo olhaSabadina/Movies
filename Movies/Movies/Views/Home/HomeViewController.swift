@@ -21,6 +21,15 @@ class HomeViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView?.gradientBackgroundHorizontal(leftColor: .clear.withAlphaComponent(0), rightColor: .red)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     //MARK: - private Functions:
     
     private func setView() {
@@ -39,8 +48,8 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             collView.topAnchor.constraint(equalTo: view.topAnchor),
             collView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            collView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15)
+            collView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
