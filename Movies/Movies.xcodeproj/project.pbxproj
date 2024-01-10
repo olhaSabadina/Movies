@@ -55,6 +55,7 @@
 		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
+		9C6F58F92B4E7A2700D820BA /* MoviesSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
+		9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesSegmentControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +305,7 @@
 		20C311A82B482B2300936DBC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9C6F58F72B4E7A1900D820BA /* CustomViews */,
 				20C311A92B482B5C00936DBC /* UITextFieldPudding.swift */,
 				9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */,
 				20C311AD2B482F2C00936DBC /* UIView+Extension.swift */,
@@ -340,6 +343,14 @@
 				20FD10752B4D52C500D2297F /* HomeCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		9C6F58F72B4E7A1900D820BA /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,6 +506,7 @@
 				20FD106C2B4D440600D2297F /* HomeViewModel.swift in Sources */,
 				20B3FEAB2B48A23400566ACC /* ColorConstans.swift in Sources */,
 				20B3FEB12B48B2FB00566ACC /* CreateViewController.swift in Sources */,
+				9C6F58F92B4E7A2700D820BA /* MoviesSegmentControl.swift in Sources */,
 				20C311A32B481CEB00936DBC /* AppCoordinator.swift in Sources */,
 				20765D6C2B4C127500B30CAB /* FontsConstants.swift in Sources */,
 				20C311A72B48203100936DBC /* TabBarCoordinator.swift in Sources */,

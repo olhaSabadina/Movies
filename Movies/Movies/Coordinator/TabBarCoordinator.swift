@@ -41,7 +41,7 @@ enum TabBarPage {
             return "Profile"
         }
     }
-
+    
     func pageOrderNumber() -> Int {
         switch self {
         case .home:
@@ -54,7 +54,7 @@ enum TabBarPage {
             return 3
         }
     }
-
+    
     var icons: UIImage? {
         switch self {
         case .home:
@@ -62,27 +62,21 @@ enum TabBarPage {
         case .search:
             return ImageConstants.search
         case .create:
-           return ImageConstants.create
+            return ImageConstants.create
         case .profile:
-            return .getPersonImage()?
-                .resized(to: .init(width: 30, height: 30))
-                .withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+            return .getPersonImage()?.prepareImageToTabBar()
         }
     }
-    
-    // Add tab icon selected / deselected color
-    
-    // etc
 }
 
 class TabCoordinator: BaseCoordinator {
-
+    
     weak var appCoordinator: AppCoordinator?
     
     var tabBarController = UITabBarController()
-
-   override func start() {
-       let pages: [TabBarPage] = [.home, .search, .create, .profile]
+    
+    override func start() {
+        let pages: [TabBarPage] = [.home, .search, .create, .profile]
             .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
         
         let controllers: [UINavigationController] = pages.map({ getTabController($0) })
@@ -95,27 +89,27 @@ class TabCoordinator: BaseCoordinator {
     }
     
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
-
+        
         tabBarController.delegate = self
         tabBarController.setViewControllers(tabControllers, animated: true)
         
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
-
+        
         tabBarController.tabBar.isTranslucent = true
         tabBarController.tabBar.backgroundColor = .gray
         tabBarController.tabBar.tintColor = .white
-
+        
         navigationController.viewControllers = [tabBarController]
     }
-      
+    
     private func getTabController(_ page: TabBarPage) -> UINavigationController {
         let navController = UINavigationController()
         navController.setNavigationBarHidden(false, animated: false)
-
+        
         navController.tabBarItem = UITabBarItem.init(title: page.title,
                                                      image: page.icons,
                                                      tag: page.pageOrderNumber())
-
+        
         switch page {
         case .home:
             let homeVC = HomeViewController()
@@ -154,18 +148,6 @@ class TabCoordinator: BaseCoordinator {
             
         case .profile:
             let profileVC = ProfileViewController()
-//            profileVC.didSendEventClosure = { [weak self] event in
-//                switch event {
-//                case .logOut:
-//                    self?.appCoordinator?.authorizedManager.logOut()
-//                    self?.finish()
-//                case .deleteProfile:
-//                    print("deleteProfile")
-//                case .editProfile:
-//                    print("editProfile")
-//                }
-//            }
-          //  profileVC.title = page.title
             
             navController.pushViewController(profileVC, animated: true)
         }
@@ -174,7 +156,7 @@ class TabCoordinator: BaseCoordinator {
     }
     
     func currentPage() -> TabBarPage? { TabBarPage.init(index: tabBarController.selectedIndex) }
-
+    
     func selectPage(_ page: TabBarPage) {
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
@@ -190,7 +172,7 @@ class TabCoordinator: BaseCoordinator {
 extension TabCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
-
+        
         print(viewController.tabBarItem.title ?? "")
     }
 }
