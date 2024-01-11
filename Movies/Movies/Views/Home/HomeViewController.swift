@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class HomeViewController: UIViewController {
     
     var didSendEventClosure: ((TabBarPage) -> Void)?
-    
+    private var cancellable = Set<AnyCancellable>()
     var collectionView: UICollectionView?
     let homeViewModel = HomeViewModel()
 
@@ -19,6 +20,7 @@ class HomeViewController: UIViewController {
         setView()
         setCollectionView()
         setConstraints()
+        sincToProperties()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +33,22 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - private Functions:
+    
+    private func sincToProperties() {
+        homeViewModel.$seeAllSectionType
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { type in
+                self.reloadCollection()
+        }
+        .store(in: &cancellable)
+    }
+    
+    func reloadCollection() {
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
+    }
     
     private func setView() {
         view.backgroundColor = .white

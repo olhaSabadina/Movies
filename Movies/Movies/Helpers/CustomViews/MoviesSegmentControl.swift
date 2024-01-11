@@ -25,7 +25,7 @@ class MoviesSegmentControl: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(_ buttonsTitles: [String], action: ((Int) -> Void)? ) {
+    convenience init(_ buttonsTitles: [String], selectedIndex: Int, action: ((Int) -> Void)? ) {
         self.init()
         
         self.action = action
@@ -47,6 +47,8 @@ class MoviesSegmentControl: UIView {
             self.selectedTopView.layer.cornerRadius = self.selectedView.frame.height/2
             self.selectedView.setShadowWithCornerRadius(cornerRadius: self.selectedView.frame.height/2, shadowColor: .darkGray, shadowOffset: .zero, shadowOpacity: 1, shadowRadius: 3)
             self.stackView.setBorderLayer(backgroundColor: .white, borderColor: ColorConstans.borderColorSegment, borderWidth: 1, cornerRadius: self.stackView.frame.height/2, tintColor: nil)
+            
+            self.selectedSegmentIndex(selectedIndex)
         }
     }
     
@@ -63,6 +65,11 @@ class MoviesSegmentControl: UIView {
                 }
             }
         }
+    }
+    
+    private func selectedSegmentIndex(_ index: Int) {
+        let selectorStartPosition = selectedViewWidth * CGFloat(index)
+        self.selectedView.frame.origin.x = selectorStartPosition
     }
 }
 

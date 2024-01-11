@@ -1,31 +1,25 @@
 //
-//  HomeCell.swift
+//  LatestTrailersCell.swift
 //  Movies
 //
-//  Created by Olga Sabadina on 09.01.2024.
+//  Created by Olga Sabadina on 11.01.2024.
 //
 
 import UIKit
 
-
-class HomeCell: BaseHomeCell {
+class LatestTrailersCell: BaseHomeCell {
     
-    static var identCell = "homeCell"
+    static var identCell = "latestTrailersCell"
     
     override func setPersentLabel() {
-        persentLabel.textColor = ColorConstans.moviesName
-        persentLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
+        persentLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
         persentLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(persentLabel)
-        circleView.backgroundColor = .yellow
-        
-        circleView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(circleView)
     }
     
     override func setMoviesNameLabel() {
-        moviesNameLabel.textColor = ColorConstans.moviesName
-        moviesNameLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
+        moviesNameLabel.textColor = ColorConstans.latestTrailers
+        moviesNameLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
         moviesNameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviesNameLabel)
     }
@@ -36,13 +30,8 @@ class HomeCell: BaseHomeCell {
             bacgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bacgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            circleView.topAnchor.constraint(equalTo: bacgroundView.bottomAnchor, constant: 5),
-            circleView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            circleView.heightAnchor.constraint(equalTo: circleView.widthAnchor),
-            circleView.widthAnchor.constraint(equalToConstant: 15),
-            
             persentLabel.topAnchor.constraint(equalTo: bacgroundView.bottomAnchor, constant: 5),
-            persentLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 3),
+            persentLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             persentLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             moviesNameLabel.topAnchor.constraint(equalTo: persentLabel.bottomAnchor, constant: 5),
@@ -58,4 +47,3 @@ class HomeCell: BaseHomeCell {
     }
     
 }
- 

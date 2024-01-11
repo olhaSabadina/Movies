@@ -12,13 +12,13 @@ extension HomeViewController {
     func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         guard let collectionView = collectionView else {return}
-      //  collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.identCell)
         collectionView.register(HeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCell.identCell )
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: HomeCell.identCell)
+        collectionView.register(LatestTrailersCell.self, forCellWithReuseIdentifier: LatestTrailersCell.identCell)
         view.addSubview(collectionView)
     }
     
@@ -26,18 +26,19 @@ extension HomeViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
            
             let sectionType: HomeSectionType = HomeSectionType(rawValue: sectionIndex) ?? .categories
+            let isAll = self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] ?? false
             
             switch sectionType {
             case .categories:
                 return self.createCategoriesSection()
             case .popular:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             case .freeWatch:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             case .latestTrailers:
-                return self.createlatestTrailersSection()
+                return self.createlatestTrailersSection(isAll)
             case .trending:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             }
         }
         return layout
@@ -54,17 +55,32 @@ extension HomeViewController {
         return section
     }
     
-    private func createImageSection() -> NSCollectionLayoutSection {
+    private func createImageSection(_ seeAll: Bool = false) -> NSCollectionLayoutSection {
+        
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
+        let itemsGroup: NSCollectionLayoutGroup
         
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+        if seeAll {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(0.5), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((0.68)), items: [item, item])
+            
+            itemsGroup = group
+            
+        } else {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((0.34)), items: [item])
+            
+            itemsGroup = group
+        }
         
-        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((1/3)), items: [item])
-                
-        let section = NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: itemsGroup)
         section.interGroupSpacing = 15
         section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
@@ -73,16 +89,32 @@ extension HomeViewController {
         return section
     }
     
-    private func createlatestTrailersSection() -> NSCollectionLayoutSection {
+    private func createlatestTrailersSection(_ seeAll: Bool = false) -> NSCollectionLayoutSection {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(90))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
         
-        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
-                
-        let section = NSCollectionLayoutSection(group: group)
+        let itemsGroup: NSCollectionLayoutGroup
+        
+        if seeAll {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(0.5), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.5)), items: [item, item])
+            
+            itemsGroup = group
+            
+        } else {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
+            
+            itemsGroup = group
+        }
+        
+        let section = NSCollectionLayoutSection(group: itemsGroup)
         
         section.interGroupSpacing = 15
         section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
@@ -130,8 +162,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
             
         case .latestTrailers:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LatestTrailersCell.identCell, for: indexPath) as? LatestTrailersCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.moviesTitle[indexPath.item]
             cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
             return cell
             
@@ -151,34 +183,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionType: HomeSectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
+       
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
+        let index = homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] ?? 0
+        header.selectedSegmentIndex = index
+        header.sectionType = sectionType
         
-        switch sectionType {
-        case .categories:
-            break
-        case .popular:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            header.actionSeeAll = {
-                print(header.headerLabel.text ?? "nil")
-            }
-            header.segmentAction = { index in
-                print(index, "segment index")
-            }
-            return header
-        case .freeWatch:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
-        case .latestTrailers:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
-        case .trending:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
-            header.sectionType = sectionType
-            return header
+        header.actionSeeAll = {
+            let isAll = self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] ?? false
+            let newState = isAll ? false : true
+            self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] = newState
+            self.homeViewModel.seeAllSectionType = sectionType
+            header.isStateSeeAll = newState
+            print(self.homeViewModel.seeAllSectionDictionary)
         }
-        return UICollectionReusableView()
+        
+        header.segmentAction = { index in
+            print(index, "segment index", header.sectionType.headerTitle ?? "iop")
+            self.homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] = index
+        }
+        
+        return header
     }
     
     
