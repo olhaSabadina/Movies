@@ -18,6 +18,7 @@ extension HomeViewController {
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.identCell)
         collectionView.register(HeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCell.identCell )
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: HomeCell.identCell)
+        collectionView.register(LatestTrailersCell.self, forCellWithReuseIdentifier: LatestTrailersCell.identCell)
         view.addSubview(collectionView)
     }
     
@@ -33,11 +34,11 @@ extension HomeViewController {
             case .popular:
                 return self.createImageSection(isAll)
             case .freeWatch:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             case .latestTrailers:
-                return self.createlatestTrailersSection()
+                return self.createlatestTrailersSection(isAll)
             case .trending:
-                return self.createImageSection()
+                return self.createImageSection(isAll)
             }
         }
         return layout
@@ -60,12 +61,26 @@ extension HomeViewController {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
+        let itemsGroup: NSCollectionLayoutGroup
         
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+        if seeAll {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(0.5), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((0.68)), items: [item, item])
+            
+            itemsGroup = group
+            
+        } else {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((0.34)), items: [item])
+            
+            itemsGroup = group
+        }
         
-        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.38), height: .fractionalHeight((1/3)), items: [item])
-                
-        let section = NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: itemsGroup)
         section.interGroupSpacing = 15
         section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous
@@ -74,16 +89,32 @@ extension HomeViewController {
         return section
     }
     
-    private func createlatestTrailersSection() -> NSCollectionLayoutSection {
+    private func createlatestTrailersSection(_ seeAll: Bool = false) -> NSCollectionLayoutSection {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(90))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
         
-        let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
-                
-        let section = NSCollectionLayoutSection(group: group)
+        let itemsGroup: NSCollectionLayoutGroup
+        
+        if seeAll {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(0.5), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.5)), items: [item, item])
+            
+            itemsGroup = group
+            
+        } else {
+            
+            let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
+            item.contentInsets.bottom = 10
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
+            
+            itemsGroup = group
+        }
+        
+        let section = NSCollectionLayoutSection(group: itemsGroup)
         
         section.interGroupSpacing = 15
         section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
@@ -131,8 +162,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
             
         case .latestTrailers:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LatestTrailersCell.identCell, for: indexPath) as? LatestTrailersCell else { return UICollectionViewCell()}
+            cell.persentLabel.text = homeViewModel.moviesTitle[indexPath.item]
             cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
             return cell
             
@@ -163,6 +194,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let newState = isAll ? false : true
             self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] = newState
             self.homeViewModel.seeAllSectionType = sectionType
+            header.isStateSeeAll = newState
             print(self.homeViewModel.seeAllSectionDictionary)
         }
         

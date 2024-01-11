@@ -83,7 +83,7 @@ class HomeViewModel {
         case 0:
             return categoriesTitle.count
         case 1:
-            return 3
+            return 7
         case 2:
             return 5
         case 3:

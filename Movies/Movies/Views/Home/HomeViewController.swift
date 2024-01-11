@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
     private func sincToProperties() {
         homeViewModel.$seeAllSectionType
             .receive(on: DispatchQueue.main)
+            .dropFirst()
             .sink { type in
                 self.reloadCollection()
         }

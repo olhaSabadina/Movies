@@ -17,6 +17,14 @@ class HeaderCell: UICollectionReusableView {
     private var headerLabel = UILabel()
     private let seeAllButton = UIButton(type: .system)
     var selectedSegmentIndex = 0
+    var isStateSeeAll: Bool = false {
+        didSet {
+            print(isStateSeeAll, "in header cell")
+            seeAllButton.setTitle(isStateSeeAll ? "See less" : "See All", for: .normal)
+            setNeedsDisplay()
+        }
+    }
+    
     var sectionType: HomeSectionType = .categories {
         didSet {
             setHeaderData()
