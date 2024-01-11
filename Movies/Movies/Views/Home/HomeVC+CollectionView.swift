@@ -176,8 +176,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         default:
             return UICollectionViewCell()
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -206,5 +204,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return header
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let sectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
+        let ItemDetailsVC = ItemDetailsViewController()
+        
+        switch sectionType {
+        case .categories:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? CategoriesCell else { return }
+        case .popular:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
+            navigationController?.pushViewController(ItemDetailsVC, animated: true)
+            
+        case .freeWatch:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
+        case .latestTrailers:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? LatestTrailersCell else { return }
+        case .trending:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
+        }
+    }
     
 }
