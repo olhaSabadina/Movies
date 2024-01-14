@@ -20,6 +20,7 @@ enum SessionState {
 final class AuthorizedManager: NSObject {
     
     static let shared = AuthorizedManager()
+    private let userDefaults = UserDefaults.standard
     
     @Published var userProfile: UserProfile?
     @Published var sessionState: SessionState = .unknow
@@ -35,15 +36,31 @@ final class AuthorizedManager: NSObject {
             self.sessionState = user == nil ? .loggedOut : .loggedIn
             guard let user = user else { return }
             self.uid = user.uid
-
+            
+            DatabaseService.shared.fetchProfile(uid: self.uid) { result in
+                switch result {
+                case .success(let userData):
+                    self.userProfile = userData
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
             UserDefaults.standard.set(user.uid, forKey: TitleConstants.uid)
         }
     }
     
     func logIn(email: String, pasword: String, errorHandler: ((Error)->Void)?) {
         Auth.auth().signIn(withEmail: email, password: pasword) { result, error in
-                if let err = error {
+            if let err = error {
                 errorHandler?(err)
+                
+            } else if let result {
+                
+                let date = result.user.metadata.lastSignInDate
+                print("Last signed user = \(date ?? .now)")
+
+                self.userDefaults.set(email, forKey: TitleConstants.userEmail)
+                self.userDefaults.set(pasword, forKey: TitleConstants.userPassword)
             }
         }
     }
@@ -63,6 +80,9 @@ final class AuthorizedManager: NSObject {
                 self?.uid = uid
                 profile.uid = uid
 
+                self?.userDefaults.set(email, forKey: TitleConstants.userEmail)
+                self?.userDefaults.set(pasword, forKey: TitleConstants.userPassword)
+                
                 DatabaseService.shared.sendProfileToServer(uid: uid, profile: profile) { error in
                     errorHandler?(error)
                 }
@@ -75,6 +95,9 @@ final class AuthorizedManager: NSObject {
             errorHandler?(AuthorizeError.userNotFound)
             return
         }
+        self.userDefaults.set(nil, forKey: TitleConstants.userEmail)
+        self.userDefaults.set(nil, forKey: TitleConstants.userPassword)
+       
         DatabaseService.shared.deleteProfile(uid: user.uid) { errorHandler?($0) }
         user.delete { errorHandler?($0) }
         logOut()
@@ -84,7 +107,6 @@ final class AuthorizedManager: NSObject {
         try? Auth.auth().signOut()
         self.uid = ""
         self.userProfile = nil
-        print("сработал logOut с менеджера")
     }
 }
 

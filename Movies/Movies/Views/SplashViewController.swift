@@ -18,11 +18,25 @@ class SplashViewController: UIViewController {
         setConstraint()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 1) {
+            self.titleImageView.alpha = 0.7
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIView.animate(withDuration: 1.8, delay: 1) {
+                self.titleImageView.alpha = 0
+                self.view.backgroundColor = .black
+            }
+        }
+    }
+    
     private func setTitleImageView() {
         titleImageView.backgroundColor = .clear
         titleImageView.image = ImageConstants.logoImage
         titleImageView.contentMode = .scaleAspectFill
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleImageView.alpha = 0
         view.addSubview(titleImageView)
     }
     

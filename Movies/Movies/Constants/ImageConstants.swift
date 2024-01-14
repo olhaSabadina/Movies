@@ -35,4 +35,7 @@ enum ImageConstants {
     static let clear = UIImage(systemName: "multiply")
     static let emailOk = UIImage(systemName: "person.crop.circle.badge.checkmark")
     static let emailBusy = UIImage(systemName: "person.crop.circle.fill.badge.xmark")
+    
+    static let faceID = UIImage(systemName: "faceid")
+    static let fingerID = UIImage(systemName: "touchid")
 }

@@ -26,4 +26,8 @@ extension UIViewController {
     func alertError(_ error: Error?) {
         presentAlert(with: "Error", message: error?.localizedDescription, buttonTitles: "Ok", styleActionArray: [.cancel], alertStyle: .alert, completion: nil)
     }
+    
+    func alertErrorString(_ error: String?) {
+        presentAlert(with: "Error", message: error, buttonTitles: "Ok", styleActionArray: [.cancel], alertStyle: .alert, completion: nil)
+    }
 }

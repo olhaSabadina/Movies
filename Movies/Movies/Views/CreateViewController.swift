@@ -21,6 +21,9 @@ class CreateViewController: UIViewController {
         circleView.circleStrokeView(total: 10, current: 2)
         circleView1.circleStrokeView(total: 10, current: 5)
         circleView2.circleStrokeView(total: 10, current: 8)
+        deleteProfile()
+        
+       
     }
     
     func setCircleView() {
@@ -32,6 +35,19 @@ class CreateViewController: UIViewController {
         
         view.addSubview(circleView2)
         circleView2.frame = .init(x:150, y: 300, width: 80, height: 80)
+    }
+    
+    func deleteProfile() {
+        let database = DatabaseService.shared
+        let action = UIAction { _ in
+            Task {
+                await database.deleteProfileAsync()
+            }
+        }
+        let button = UIButton(type: .system, primaryAction: action)
+        view.addSubview(button)
+        button.frame = .init(x: 90, y: 500, width: 100, height: 45)
+        button.setTitle("Delete profile", for: .normal)
     }
 
 }
