@@ -43,5 +43,7 @@ enum TitleConstants {
     //Key UserDefaults
     static let uid = "UiD" //+
     static let userImage = "UserImage" //+
+    static let userEmail = "userEmail" //+
+    static let userPassword = "userPassword" //+
 }
 

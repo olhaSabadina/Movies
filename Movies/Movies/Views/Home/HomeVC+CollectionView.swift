@@ -115,7 +115,6 @@ extension HomeViewController {
         }
         
         let section = NSCollectionLayoutSection(group: itemsGroup)
-        
         section.interGroupSpacing = 15
         section.contentInsets = .init(top: 10, leading: 16, bottom: 20, trailing: 16)
         section.orthogonalScrollingBehavior = .continuous

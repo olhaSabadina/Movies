@@ -52,6 +52,13 @@ final class DatabaseService {
         }
     }
     
+    func deleteProfileAsync() async {
+        let uid = UserDefaults.standard.string(forKey: TitleConstants.uid) ?? ""
+        let path = FirebaseRefferencies.profile.ref.document(uid).path
+        print(path)
+        try? await FirebaseRefferencies.profile.ref.document(uid).delete()
+    }
+    
     func sendProfileToServer(uid: String, profile: UserProfile, errorHandler: ((Error?)->Void)?) {
         do {
             try FirebaseRefferencies.profile.ref.document(uid).setData(from: profile, merge: true)

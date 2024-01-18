@@ -10,7 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     var didSendEventClosure: ((Event) -> Void)?
-        
+    
     private let titleLabel = UILabel()
     private let signUpLabel = UILabel()
     private let descriptionLabel = UILabel()
@@ -21,6 +21,11 @@ class LoginViewController: UIViewController {
     private var titlesStack = UIStackView()
     private var authorizedStack = UIStackView()
     private var signUpStack = UIStackView()
+    private let biometricIDAutn = BiometricIDAuth()
+    private var email = ""
+    private var password = ""
+    private var biometricType: BiometricType = .none
+   
     var isHaveAccount = true {
         didSet {
             changeAuthVCview()
@@ -40,6 +45,7 @@ class LoginViewController: UIViewController {
         setSignInStack()
         setAuthorisedButton()
         setConstraint()
+        checkSavedUsersData()
     }
     
     //MARK: - @objc Function
@@ -54,7 +60,6 @@ class LoginViewController: UIViewController {
     @objc func signUpUser() {
         guard let email = emailNumberTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else { return }
-        
         didSendEventClosure?(.signUp(email, password))
     }
     
@@ -71,6 +76,69 @@ class LoginViewController: UIViewController {
         case false:
             setSignUpButton()
         }
+    }
+    
+    private func checkSavedUsersData() {
+        let userDefaults = UserDefaults.standard
+                guard let userEmail = userDefaults.string(forKey: TitleConstants.userEmail),
+                      let userPassword = userDefaults.string(forKey: TitleConstants.userPassword) else { return }
+           email = userEmail
+           password = userPassword
+        
+        biometricIDAutn.canEvaluate { canEvaluate, bioType, biometricError in
+            guard canEvaluate else { return }
+            self.biometricType = bioType
+            self.setFaceIDButton()
+            self.evaluateBiometricData()
+        }
+    }
+    
+    private func evaluateBiometricData() {
+        biometricIDAutn.evaluate { [weak self] success, error in
+            guard error == nil, let self else {
+                if error != .userCancel {
+                    self?.alertErrorString(error?.errorDescription)
+                }
+                return
+            }
+            
+            guard success else {
+                self.alertErrorString("Face ID/Touch ID may not be configured")
+                return
+            }
+            
+            self.didSendEventClosure?(.logIn(self.email, self.password))
+        }
+    }
+    
+    private func setFaceIDButton() {
+        var icon: UIImage?
+        switch biometricType {
+        case .touchID:
+            icon = ImageConstants.fingerID
+        case .faceID:
+            icon = ImageConstants.faceID
+        default: icon = nil
+        }
+        
+        let action = UIAction { _ in
+            self.evaluateBiometricData()
+        }
+        
+        let faceIDButton = UIButton(type: .system)
+        faceIDButton.setBackgroundImage(icon, for: .normal)
+        faceIDButton.addAction(action, for: .touchUpInside)
+        faceIDButton.tintColor = .white
+        faceIDButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(faceIDButton)
+        
+        NSLayoutConstraint.activate([
+            faceIDButton.widthAnchor.constraint(equalTo: faceIDButton.heightAnchor),
+            faceIDButton.widthAnchor.constraint(equalToConstant: 50),
+            faceIDButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            faceIDButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 30)
+        ])
     }
     
     //MARK: - constraints:

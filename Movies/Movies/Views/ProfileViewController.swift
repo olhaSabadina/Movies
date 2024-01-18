@@ -184,6 +184,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate,  UINavigationC
         
         UserDefaults.standard.set(userImage.pngData(), forKey: TitleConstants.userImage)
         
+        tabBarController?.tabBar.items?.last?.image = userImage.prepareImageToTabBar()
+        
         dismiss(animated: true)
     }
 }
@@ -193,8 +195,9 @@ extension ProfileViewController: UITextFieldDelegate {
         view.endEditing(true)
         guard var userProfile = authManager.userProfile else {return true}
         
-        if textField.text != userProfile.login {
-            userProfile.login = textField.text ?? ""
+        if textField.text != userProfile.login, let login = textField.text {
+            userProfile.login = login
+            authManager.userProfile?.login = login
             DatabaseService.shared.sendProfileToServer(uid: userProfile.uid, profile: userProfile) { self.alertError($0) }
         }
         isEditable = false

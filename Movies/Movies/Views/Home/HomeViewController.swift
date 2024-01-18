@@ -20,12 +20,13 @@ class HomeViewController: UIViewController {
         setView()
         setCollectionView()
         setConstraints()
+        gradienLayer()
         sincToProperties()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView?.gradientBackgroundHorizontal(leftColor: .clear.withAlphaComponent(0), rightColor: .red)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     override func viewWillLayoutSubviews() {
@@ -52,11 +53,27 @@ class HomeViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .white
-        let background = UIImageView()
-        background.frame = view.bounds
-        background.image = ImageConstants.homeBackground
-        background.contentMode = .scaleAspectFill
-        view.addSubview(background)
+    }
+    
+    private func gradienLayer() {
+        let backView = UIView()
+        backView.frame = view.bounds
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [0.2, 0.97]
+        gradientLayer.frame = .init(x: 0, y: 0, width: backView.bounds.width, height: backView.bounds.height/2)
+      
+        let backgroundImage = UIImageView()
+        backgroundImage.frame = .init(x: 0, y: 0, width: backView.bounds.width, height: backView.bounds.height/2)
+        backgroundImage.image = ImageConstants.homeBackground
+        backgroundImage.alpha = 0.6
+        backgroundImage.contentMode = .scaleAspectFill
+        backgroundImage.layer.addSublayer(gradientLayer)
+        backgroundImage.clipsToBounds = true
+        backView.addSubview(backgroundImage)
+        
+        collectionView?.backgroundView = backView
     }
     
     //MARK: - constraints:

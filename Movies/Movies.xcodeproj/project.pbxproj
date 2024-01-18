@@ -55,6 +55,8 @@
 		20FD107C2B4FE26300D2297F /* LatestTrailersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */; };
 		20FD107E2B4FE4BD00D2297F /* BaseHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD107D2B4FE4BD00D2297F /* BaseHomeCell.swift */; };
 		20FD10812B5063B800D2297F /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10802B5063B800D2297F /* ItemDetailsViewController.swift */; };
+		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
+		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
 		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
@@ -126,6 +128,8 @@
 		20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTrailersCell.swift; sourceTree = "<group>"; };
 		20FD107D2B4FE4BD00D2297F /* BaseHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeCell.swift; sourceTree = "<group>"; };
 		20FD10802B5063B800D2297F /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
+		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
@@ -169,7 +173,6 @@
 			children = (
 				2015555B2B46D293007A7423 /* Movies */,
 				201555722B46D296007A7423 /* MoviesTests */,
-				2015557C2B46D296007A7423 /* MoviesUITests */,
 				2015555A2B46D293007A7423 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 		20C311982B480F1D00936DBC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9C26ABE62B53EF3900FDDA88 /* Biometric */,
 				209965D12B4983B900DB6634 /* AuthorizedManager.swift */,
 				209965D72B49871000DB6634 /* DataBaseManager.swift */,
 			);
@@ -273,6 +277,7 @@
 				201555672B46D296007A7423 /* LaunchScreen.storyboard */,
 				209965C22B497DFC00DB6634 /* GoogleService-Info.plist */,
 				2015556A2B46D296007A7423 /* Info.plist */,
+				2015557C2B46D296007A7423 /* MoviesUITests */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -362,6 +367,15 @@
 				20FD10802B5063B800D2297F /* ItemDetailsViewController.swift */,
 			);
 			path = ItemDetails;
+			sourceTree = "<group>";
+		};
+		9C26ABE62B53EF3900FDDA88 /* Biometric */ = {
+			isa = PBXGroup;
+			children = (
+				9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */,
+				9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */,
+			);
+			path = Biometric;
 			sourceTree = "<group>";
 		};
 		9C6F58F72B4E7A1900D820BA /* CustomViews */ = {
@@ -528,9 +542,11 @@
 				20B3FEB12B48B2FB00566ACC /* CreateViewController.swift in Sources */,
 				9C6F58F92B4E7A2700D820BA /* MoviesSegmentControl.swift in Sources */,
 				20C311A32B481CEB00936DBC /* AppCoordinator.swift in Sources */,
+				9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */,
 				20765D6C2B4C127500B30CAB /* FontsConstants.swift in Sources */,
 				20C311A72B48203100936DBC /* TabBarCoordinator.swift in Sources */,
 				209965D22B4983B900DB6634 /* AuthorizedManager.swift in Sources */,
+				9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */,
 				20B3FEB32B48B31800566ACC /* ProfileViewController.swift in Sources */,
 				20C311AC2B482EA800936DBC /* TitleConstans.swift in Sources */,
 				20C311A12B481A9D00936DBC /* Coordinator.swift in Sources */,

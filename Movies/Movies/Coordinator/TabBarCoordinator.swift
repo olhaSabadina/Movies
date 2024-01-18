@@ -99,8 +99,8 @@ class TabCoordinator: BaseCoordinator {
         tabBarController.tabBar.backgroundColor = .secondarySystemBackground
         tabBarController.tabBar.tintColor = ColorConstans.selectedTabBar
         tabBarController.tabBar.unselectedItemTintColor = ColorConstans.tintTabBar
-        
-        navigationController.viewControllers = [tabBarController]
+       
+        navigationController.pushViewController(tabBarController, animated: true)
     }
     
     private func getTabController(_ page: TabBarPage) -> UINavigationController {

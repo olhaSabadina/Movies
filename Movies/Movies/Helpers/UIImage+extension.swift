@@ -62,7 +62,7 @@ extension UIImage {
     
     func prepareImageToTabBar() -> UIImage {
         self.cropImageToCircle()
-            .resized(to: .init(width: 25, height: 25))
+            .resized(to: .init(width: 24, height: 24))
             .withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
     }
 }
