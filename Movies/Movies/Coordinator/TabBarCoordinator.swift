@@ -125,13 +125,8 @@ class TabCoordinator: BaseCoordinator {
             
         case .search:
             let searchVC = SearchViewController()
-            searchVC.didSendEventClosure = { [weak self] event in
-                switch event {
-                case .search:
-                    self?.selectPage(.create)
-                default: break
-                }
-            }
+            
+            
             searchVC.title = page.title
             navController.pushViewController(searchVC, animated: true)
             
