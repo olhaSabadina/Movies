@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033B428856BD9ABE93AE422B /* libPods-Movies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE0A3E65DECDE8EAAB15E4D /* libPods-Movies.a */; };
 		2015555D2B46D293007A7423 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2015555C2B46D293007A7423 /* AppDelegate.swift */; };
 		2015555F2B46D293007A7423 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2015555E2B46D293007A7423 /* SceneDelegate.swift */; };
 		201555612B46D293007A7423 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201555602B46D293007A7423 /* LoginViewController.swift */; };
@@ -57,6 +58,7 @@
 		20FD10812B5063B800D2297F /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10802B5063B800D2297F /* ItemDetailsViewController.swift */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
+		9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5EFB202B5FB213000D7B0E /* SDWebImage */; };
 		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
@@ -128,6 +130,8 @@
 		20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTrailersCell.swift; sourceTree = "<group>"; };
 		20FD107D2B4FE4BD00D2297F /* BaseHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeCell.swift; sourceTree = "<group>"; };
 		20FD10802B5063B800D2297F /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
+		7A2793A65F0F762E4B3941C4 /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
+		8AE0A3E65DECDE8EAAB15E4D /* libPods-Movies.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Movies.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesSegmentControl.swift; sourceTree = "<group>"; };
 		9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleStrokeView.swift; sourceTree = "<group>"; };
+		E09A0E9879FEEDFA25436FAD /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,10 +149,12 @@
 			files = (
 				209965CE2B497F5700DB6634 /* FirebaseFirestoreSwift in Frameworks */,
 				209965CA2B497F5700DB6634 /* FirebaseDatabaseSwift in Frameworks */,
+				9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */,
 				209965CC2B497F5700DB6634 /* FirebaseFirestore in Frameworks */,
 				209965C82B497F5700DB6634 /* FirebaseDatabase in Frameworks */,
 				209965C62B497F5700DB6634 /* FirebaseAuth in Frameworks */,
 				209965D02B497F5700DB6634 /* FirebaseStorage in Frameworks */,
+				033B428856BD9ABE93AE422B /* libPods-Movies.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +181,8 @@
 				2015555B2B46D293007A7423 /* Movies */,
 				201555722B46D296007A7423 /* MoviesTests */,
 				2015555A2B46D293007A7423 /* Products */,
+				85B8F1D85478E43826E36468 /* Pods */,
+				8DC981F07044271BB07E8290 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -369,6 +378,23 @@
 			path = ItemDetails;
 			sourceTree = "<group>";
 		};
+		85B8F1D85478E43826E36468 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A2793A65F0F762E4B3941C4 /* Pods-Movies.debug.xcconfig */,
+				E09A0E9879FEEDFA25436FAD /* Pods-Movies.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8DC981F07044271BB07E8290 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8AE0A3E65DECDE8EAAB15E4D /* libPods-Movies.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9C26ABE62B53EF3900FDDA88 /* Biometric */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +420,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 201555832B46D296007A7423 /* Build configuration list for PBXNativeTarget "Movies" */;
 			buildPhases = (
+				FE68F56327692BB57D01510B /* [CP] Check Pods Manifest.lock */,
 				201555552B46D293007A7423 /* Sources */,
 				201555562B46D293007A7423 /* Frameworks */,
 				201555572B46D293007A7423 /* Resources */,
@@ -410,6 +437,7 @@
 				209965CB2B497F5700DB6634 /* FirebaseFirestore */,
 				209965CD2B497F5700DB6634 /* FirebaseFirestoreSwift */,
 				209965CF2B497F5700DB6634 /* FirebaseStorage */,
+				9C5EFB202B5FB213000D7B0E /* SDWebImage */,
 			);
 			productName = Movies;
 			productReference = 201555592B46D293007A7423 /* Movies.app */;
@@ -485,6 +513,7 @@
 			mainGroup = 201555502B46D293007A7423;
 			packageReferences = (
 				209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 2015555A2B46D293007A7423 /* Products */;
 			projectDirPath = "";
@@ -526,6 +555,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FE68F56327692BB57D01510B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Movies-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		201555552B46D293007A7423 /* Sources */ = {
@@ -656,7 +710,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -719,7 +773,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -740,6 +794,7 @@
 		};
 		201555842B46D296007A7423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A2793A65F0F762E4B3941C4 /* Pods-Movies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -767,6 +822,7 @@
 		};
 		201555852B46D296007A7423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E09A0E9879FEEDFA25436FAD /* Pods-Movies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -918,6 +974,14 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.10;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -950,6 +1014,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		9C5EFB202B5FB213000D7B0E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
