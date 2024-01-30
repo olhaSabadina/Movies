@@ -19,8 +19,8 @@ class AppCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        sinkToSessionState()
-//        coordinatorDidFinish(childCoordinator: .login)
+     //   sinkToSessionState()
+        coordinatorDidFinish(childCoordinator: .login)
     }
     
     func sinkToSessionState() {

@@ -69,11 +69,44 @@ class HomeViewModel {
     let moviesTitle = ["Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown"]
     let viewsPercent = ["90%", "75%", "8%", "55%", "90%", "75%", "8%", "55%","90%", "75%", "8%", "55%"]
     
+    @Published var error: Error?
+    @Published var moviesArray: [MoviesCellModel] = []
     @Published var segmentSectionsIndex: [String:Int] = [:]
     @Published var seeAllSectionDictionary: [String:Bool] = [:]
     @Published var seeAllSectionType: HomeSectionType = .categories
+    private let networkManager: NetworkProtocol
     private var cancellable = Set<AnyCancellable>()
     
+    
+    init(_ networkManager: NetworkProtocol) {
+        self.networkManager = networkManager
+        fatchMovies()
+    }
+    
+    private func fatchMovies() {
+        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: Movies.self)
+               .sink { сompletion in
+                   switch сompletion {
+                   case .finished:
+                       break
+                   case .failure(let error):
+                       self.error = error
+                       print(error.localizedDescription, "parse error")
+                   }
+               } receiveValue: { movies in
+                   self.createMoviesModelsArray(movies)
+               }
+               .store(in: &cancellable)
+       }
+    
+    private func createMoviesModelsArray(_ dataMovies: Movies) {
+        let resultsArray = dataMovies.results
+        resultsArray.forEach { item in
+            let cellModel = MoviesCellModel(posterUrlString: item.posterFullPath, nameMovie: item.title, percent: Int(item.voteAverage*10))
+            moviesArray.append(cellModel)
+        }
+    }
+       
     func nuberOfSection() -> Int {
         HomeSectionType.allCases.count
     }
@@ -82,8 +115,9 @@ class HomeViewModel {
         switch section {
         case 0:
             return categoriesTitle.count
-        case 1:
-            return 7
+        case 1: // what's Popular
+            print(self.moviesArray.count, "numberItemsInSections moviesArray.results.count")
+            return moviesArray.count
         case 2:
             return 5
         case 3:

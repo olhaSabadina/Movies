@@ -4,13 +4,18 @@
 //
 //  Created by Olga Sabadina on 09.01.2024.
 //
-
+import SDWebImage
 import UIKit
 
 
 class HomeCell: BaseHomeCell {
     
     static var identCell = "homeCell"
+    var model: MoviesCellModel? = nil {
+        didSet {
+            updateCell()
+        }
+    }
     
     override func setPersentLabel() {
         persentLabel.textColor = ColorConstans.moviesName
@@ -56,6 +61,16 @@ class HomeCell: BaseHomeCell {
             imageView.bottomAnchor.constraint(equalTo: bacgroundView.bottomAnchor)
         ])
     }
-    
+
+    private func updateCell() {
+        guard let model else {return}
+        let urlPoster = URL(string: model.posterUrlString)
+        imageView.sd_setImage(with: urlPoster)
+        DispatchQueue.main.async {
+            self.circleView.circleStrokeView(total: 100, current: model.percent)
+        }
+        persentLabel.text = "\(model.percent) %"
+        moviesNameLabel.text = model.nameMovie
+    }
 }
  

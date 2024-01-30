@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     var didSendEventClosure: ((TabBarPage) -> Void)?
     private var cancellable = Set<AnyCancellable>()
     var collectionView: UICollectionView?
-    let homeViewModel = HomeViewModel()
+    let homeViewModel = HomeViewModel(NetworkManager())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
         setConstraints()
         gradienLayer()
         sincToProperties()
+        sincToMoviesArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,16 @@ class HomeViewController: UIViewController {
     
     private func sincToProperties() {
         homeViewModel.$seeAllSectionType
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { type in
+                self.reloadCollection()
+        }
+        .store(in: &cancellable)
+    }
+    
+    private func sincToMoviesArray() {
+        homeViewModel.$moviesArray
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink { type in
