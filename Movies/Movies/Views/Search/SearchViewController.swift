@@ -15,7 +15,7 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
         }
     }
     
-    private lazy var tableSearch = SearchTable()
+    private var tableSearch: SearchTable
     
     private let rootNode: ASDisplayNode = {
         let root = ASDisplayNode()
@@ -23,24 +23,28 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
         return root
     }()
     
-    
-    
     override init() {
+        tableSearch = SearchTable()
         super.init(node: rootNode)
-        
         node.layoutSpecBlock = {_,_ in
-            
             return ASInsetLayoutSpec(insets: .init(), child: self.tableSearch)
         }
     }
     
     required init?(coder: NSCoder) {
+        tableSearch = SearchTable()
         super.init(node: rootNode)
     }
     
     override func loadView() {
         super.loadView()
         setSearchController()
+        navigationItem.backButtonTitle = ""
+//        tableSearch.completionAction = { search in
+//            let vc = DetailsViewController()
+//            vc.title = search.title
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     private func setSearchController() {

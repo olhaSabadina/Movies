@@ -9,23 +9,25 @@ import UIKit
 
 class HeaderInTable: UIView {
     
+    var typeCell: TypeSearchCell
     let headerTitle = UILabel()
     
-    init(title: String, isMain: Bool) {
+    init(title: String, type: TypeSearchCell = .short) {
+        self.typeCell = type
         super.init(frame: .zero)
         backgroundColor = .white
-        setHeaderTitle(title, isMain)
+        setHeaderTitle(title)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
    
-    private func setHeaderTitle(_ title: String, _ isMain: Bool) {
-        headerTitle.text = isMain ? title : "Yura test"
+    private func setHeaderTitle(_ title: String) {
+        headerTitle.text = title
         headerTitle.frame = .init(x: 5, y: 2, width: 200, height: 45)
         
-        headerTitle.font = .boldSystemFont(ofSize: isMain ? 24 : 18)
+        headerTitle.font = typeCell.font
         addSubview(headerTitle)
     }
 }

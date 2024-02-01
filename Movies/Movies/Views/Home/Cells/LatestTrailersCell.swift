@@ -12,14 +12,14 @@ class LatestTrailersCell: BaseHomeCell {
     static var identCell = "latestTrailersCell"
     
     override func setPersentLabel() {
-        persentLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
+        persentLabel.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
         persentLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(persentLabel)
     }
     
     override func setMoviesNameLabel() {
         moviesNameLabel.textColor = ColorConstans.latestTrailers
-        moviesNameLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
+        moviesNameLabel.font = UIFont(name: FontConstants.openSansRegular, size: 14)
         moviesNameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviesNameLabel)
     }

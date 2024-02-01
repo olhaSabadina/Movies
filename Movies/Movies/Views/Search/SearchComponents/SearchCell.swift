@@ -7,24 +7,25 @@
 
 import SDWebImage
 import AsyncDisplayKit
+import UIKit
 
 class SearchCell: ASCellNode {
     
-    let search: Search
-    var isMain: Bool = false
+    let model: MovieCellModel
+    var typeCell: TypeSearchCell
     
     let bottomSeparator: ASDisplayNode
     let searchImage: ASImageNode
     let searchTitle: ASTextNode
     let searchDescription: ASTextNode
     
-    init(search: Search, isMain: Bool) {
-        self.search = search
+    init(search: MovieCellModel, type: TypeSearchCell) {
+        self.model = search
         searchImage = ASImageNode()
         searchTitle = ASTextNode()
         searchDescription = ASTextNode()
         bottomSeparator = ASDisplayNode()
-        self.isMain = isMain
+        self.typeCell = type
         super.init()
         self.automaticallyManagesSubnodes = true
     }
@@ -32,7 +33,7 @@ class SearchCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        downloadImage(urlString: search.imageUrl)
+        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl) { self.searchImage.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -40,12 +41,18 @@ class SearchCell: ASCellNode {
         
         var rightStack = ASLayoutSpec()
         
-        if search.description != nil {
+        switch typeCell {
+        case .full:
             rightStack = ASStackLayoutSpec(direction: .vertical, spacing: 5, justifyContent: .start, alignItems: .start, children: [self.searchTitle, self.searchDescription])
             rightStack.style.flexShrink = 1
             
-        } else {
+        case .medium:
+            let insetBottom = ASInsetLayoutSpec(insets: .init(top: 0, left: 5, bottom: 0, right: 15), child: self.bottomSeparator)
+            rightStack = ASStackLayoutSpec(direction: .vertical, spacing: 5, justifyContent: .start, alignItems: .start, children: [self.searchTitle, self.searchDescription, insetBottom])
+            rightStack.style.flexShrink = 1
+            rightStack.style.flexGrow = 1
             
+        case .short:
             let insetBottom = ASInsetLayoutSpec(insets: .init(top: 0, left: 5, bottom: 0, right: 15), child: self.bottomSeparator)
             rightStack = ASStackLayoutSpec(direction: .vertical, spacing: 15, justifyContent: .center, alignItems: .start, children: [self.searchTitle, insetBottom])
             rightStack.style.flexGrow = 1
@@ -60,31 +67,79 @@ class SearchCell: ASCellNode {
     
     private func setCell() {
         searchImage.contentMode = .scaleAspectFill
-        searchImage.style.width = .init(unit: .points, value: isMain ? 126 : 32)
-        searchImage.style.height = .init(unit: .points, value: isMain ? 78 : 48)
-        searchImage.cornerRadius = isMain ? 15 : 5
+        searchImage.style.width = .init(unit: .points, value: typeCell.widthImage)
+        searchImage.style.height = .init(unit: .points, value: typeCell.heightImage)
+        searchImage.cornerRadius = typeCell.cornerRadius
         
-        let textTitle = NSMutableAttributedString(string: search.title, attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributesBold: [NSAttributedString.Key: Any] = [
+            .font: UIFont.boldSystemFont(ofSize: 14),
+            .foregroundColor: UIColor.black]
+        let mainAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.gray]
+        
+        let textTitle = NSMutableAttributedString(string: model.title, attributes: attributesBold)
+        
+        let yearMovie: NSAttributedString = .init(string: " | \(model.yearEnterMovie ?? 0)", attributes: mainAttributes)
+        
+        var text = NSMutableAttributedString()
+        
+        if typeCell == .medium {
+            textTitle.append(yearMovie)
+            text = NSMutableAttributedString(string: model.asHeroInFilm ?? "", attributes: mainAttributes)
+            searchDescription.maximumNumberOfLines = 1
+            
+        } else if typeCell == .full {
+            text = NSMutableAttributedString(string: model.description ?? "", attributes: mainAttributes)
+            searchDescription.maximumNumberOfLines = 4
+        }
+        
         searchTitle.attributedText = textTitle
-        
-        
-        let text = NSMutableAttributedString(string: search.description ?? "", attributes: [.font: UIFont.systemFont(ofSize: 14)])
         searchDescription.attributedText = text
-        searchDescription.maximumNumberOfLines = 4
-        
+                
         bottomSeparator.backgroundColor = .lightGray
         bottomSeparator.style.height = .init(unit: .points, value: 1)
         bottomSeparator.style.width = .init(unit: .fraction, value: 1)
     }
+}
+
+enum TypeSearchCell {
+    case full, medium, short
     
-    private func downloadImage(urlString: String) {
-        let url = URL(string: urlString)
-        
-        SDWebImageDownloader.shared.downloadImage(with: url) { image, data, error, isOK in
-            
-            self.searchImage.image = image
+    var heightImage: CGFloat {
+        switch self {
+        case .full:
+            return 78
+        case .medium, .short:
+            return 48
         }
     }
     
+    var widthImage: CGFloat {
+        switch self {
+        case .full:
+            return 126
+        case .medium, .short:
+            return 32
+        }
+    }
     
+    var cornerRadius: CGFloat {
+        switch self {
+        case .full:
+            return 15
+        case .medium, .short:
+            return 5
+        }
+    }
+    
+    var font: UIFont {
+        switch self {
+        case .full:
+            return UIFont(name: FontConstants.openSansSemiBold, size: 24) ?? .boldSystemFont(ofSize: 24)
+        case .medium, .short:
+            return UIFont(name: FontConstants.openSansSemiBold, size: 18) ?? .boldSystemFont(ofSize: 18)
+        }
+    }
 }
+

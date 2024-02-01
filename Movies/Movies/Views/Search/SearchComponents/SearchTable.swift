@@ -7,11 +7,19 @@
 
 import AsyncDisplayKit
 
+protocol HeaderShowFullTable {
+    func didShowFullTable()
+}
+
 class SearchTable: ASTableNode {
     
-    var isSearch: Bool = false
+    var typeCell: TypeSearchCell = .short
+    var completionAction: ((MovieCellModel) -> Void)?
+    var searchs: [MovieCellModel] = []
+    var headerDelegate: HeaderShowFullTable?
     
-    init(movies: [MovieCellModel] = searchMain) {
+    init(movies: [MovieCellModel] = searchMain, typeCell: TypeSearchCell = .full) {
+        self.typeCell = typeCell
         super.init(style: .plain)
         searchs = movies
         self.delegate = self
@@ -21,26 +29,40 @@ class SearchTable: ASTableNode {
         self.style.height = .init(unit: .fraction, value: 1)
         self.style.flexShrink = 1
     }
-    
-    var searchs: [MovieCellModel] = []
-    
+
     func reload(isSearch: Bool) {
         searchs = !isSearch ? searchMain : searchSearch
-        self.isSearch = isSearch
+        self.typeCell = !isSearch ? .full : .short
         reloadData()
     }
-    
 }
 
 extension SearchTable: ASTableDelegate, ASTableDataSource {
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
-        4
+        if typeCell == .full || typeCell == .medium {
+            return 1
+        } else {
+            return 4
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = "Trending"
-        let header = HeaderInTable(title: title, isMain: !isSearch)
+        var header = UIView()
+        switch typeCell {
+            
+        case .full,.short:
+             header = HeaderInTable(title: title, type: typeCell)
+            
+        case .medium:
+             header = HeaderForSections(headerData: .init(title: "Acting", type: .simple)) { type in
+                print("see all")
+                 self.headerDelegate?.didShowFullTable()
+             } actionSegment: { _ in
+                 
+             }
+        }
         return header
     }
     
@@ -52,15 +74,15 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
         searchs.count
     }
     
-//    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
-//        let search = searchs[indexPath.row]
-//        return {SearchCell(search: search, isMain: !self.isSearch) }
-//    }
+    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+        let search = searchs[indexPath.row]
+        return { SearchCell(search: search, type: self.typeCell) }
+    }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        let cell = tableNode.nodeForRow(at: indexPath) as? SearchCell
-        print(cell?.search.title ?? "unknow")
+        guard let cell = tableNode.nodeForRow(at: indexPath) as? SearchCell else { return }
+        completionAction?(cell.model)
     }
     
 }

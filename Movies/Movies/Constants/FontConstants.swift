@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum FontsConstants {
+enum FontConstants {
     static let openSansRegular = "OpenSans-Regular"
     static let openSansSemiBold = "OpenSans-SemiBold"
     static let openSansExtraBold = "OpenSans-ExtraBold"
