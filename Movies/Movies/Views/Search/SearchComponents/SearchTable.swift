@@ -11,9 +11,9 @@ class SearchTable: ASTableNode {
     
     var isSearch: Bool = false
     
-    init() {
+    init(movies: [MovieCellModel] = searchMain) {
         super.init(style: .plain)
-        searchs = searchMain
+        searchs = movies
         self.delegate = self
         self.dataSource = self
         self.view.separatorStyle = .none
@@ -22,7 +22,7 @@ class SearchTable: ASTableNode {
         self.style.flexShrink = 1
     }
     
-    var searchs: [Search] = []
+    var searchs: [MovieCellModel] = []
     
     func reload(isSearch: Bool) {
         searchs = !isSearch ? searchMain : searchSearch
@@ -33,7 +33,6 @@ class SearchTable: ASTableNode {
 }
 
 extension SearchTable: ASTableDelegate, ASTableDataSource {
-    
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         4
@@ -53,10 +52,10 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
         searchs.count
     }
     
-    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
-        let search = searchs[indexPath.row]
-        return {SearchCell(search: search, isMain: !self.isSearch) }
-    }
+//    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+//        let search = searchs[indexPath.row]
+//        return {SearchCell(search: search, isMain: !self.isSearch) }
+//    }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)

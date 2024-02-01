@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     }
     
     private func sincToMoviesArray() {
-        homeViewModel.$moviesArray
+        homeViewModel.$popularMoviesArray
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink { type in

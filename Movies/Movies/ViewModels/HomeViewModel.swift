@@ -70,7 +70,7 @@ class HomeViewModel {
     let viewsPercent = ["90%", "75%", "8%", "55%", "90%", "75%", "8%", "55%","90%", "75%", "8%", "55%"]
     
     @Published var error: Error?
-    @Published var moviesArray: [MoviesCellModel] = []
+    @Published var popularMoviesArray: [MovieCellModel] = []
     @Published var segmentSectionsIndex: [String:Int] = [:]
     @Published var seeAllSectionDictionary: [String:Bool] = [:]
     @Published var seeAllSectionType: HomeSectionType = .categories
@@ -102,8 +102,8 @@ class HomeViewModel {
     private func createMoviesModelsArray(_ dataMovies: Movies) {
         let resultsArray = dataMovies.results
         resultsArray.forEach { item in
-            let cellModel = MoviesCellModel(posterUrlString: item.posterFullPath, nameMovie: item.title, percent: Int(item.voteAverage*10))
-            moviesArray.append(cellModel)
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            popularMoviesArray.append(cellModel)
         }
     }
        
@@ -116,8 +116,8 @@ class HomeViewModel {
         case 0:
             return categoriesTitle.count
         case 1: // what's Popular
-            print(self.moviesArray.count, "numberItemsInSections moviesArray.results.count")
-            return moviesArray.count
+            print(self.popularMoviesArray.count, "numberItemsInSections moviesArray.results.count")
+            return popularMoviesArray.count
         case 2:
             return 5
         case 3:

@@ -11,7 +11,7 @@ import UIKit
 class HomeCell: BaseHomeCell {
     
     static var identCell = "homeCell"
-    var model: MoviesCellModel? = nil {
+    var model: MovieCellModel? = nil {
         didSet {
             updateCell()
         }
@@ -64,13 +64,13 @@ class HomeCell: BaseHomeCell {
 
     private func updateCell() {
         guard let model else {return}
-        let urlPoster = URL(string: model.posterUrlString)
+        let urlPoster = URL(string: model.imageUrl)
         imageView.sd_setImage(with: urlPoster)
         DispatchQueue.main.async {
-            self.circleView.circleStrokeView(total: 100, current: model.percent)
+            self.circleView.circleStrokeView(total: 100, current: model.percent ?? 0)
         }
-        persentLabel.text = "\(model.percent) %"
-        moviesNameLabel.text = model.nameMovie
+        persentLabel.text = "\(model.percent ?? 0) %"
+        moviesNameLabel.text = model.title
     }
 }
  
