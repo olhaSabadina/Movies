@@ -40,11 +40,11 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
         super.loadView()
         setSearchController()
         navigationItem.backButtonTitle = ""
-//        tableSearch.completionAction = { search in
-//            let vc = DetailsViewController()
-//            vc.title = search.title
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
+        tableSearch.completionAction = { search in
+            let vc = DetailsViewController()
+            vc.title = search.title
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func setSearchController() {
