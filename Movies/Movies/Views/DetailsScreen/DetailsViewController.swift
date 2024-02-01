@@ -82,8 +82,8 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
 extension DetailsViewController: ActorInfo {
     func didOpenActorInfo(_ actor: ActorModel) {
         navigationItem.backButtonTitle = ""
-//        let actorVC = ActorsViewController(actorModel: actor)
-//        navigationController?.pushViewController(actorVC, animated: true)
+        let actorVC = ActorsViewController(actorModel: actor)
+        navigationController?.pushViewController(actorVC, animated: true)
     }
 }
 

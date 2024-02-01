@@ -73,6 +73,8 @@
 		20C1594E2B6BD4FC002E96CA /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C1594D2B6BD4FC002E96CA /* MovieCell.swift */; };
 		20C159502B6BD52B002E96CA /* RecomendationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C1594F2B6BD52B002E96CA /* RecomendationSection.swift */; };
 		20C159532B6BD747002E96CA /* ActorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C159522B6BD747002E96CA /* ActorsViewController.swift */; };
+		20C159552B6BD80D002E96CA /* ActorInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C159542B6BD80D002E96CA /* ActorInfoSection.swift */; };
+		20C159572B6BD841002E96CA /* ActingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C159562B6BD841002E96CA /* ActingSection.swift */; };
 		20C3119F2B4819D700936DBC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3119E2B4819D700936DBC /* HomeViewController.swift */; };
 		20C311A12B481A9D00936DBC /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C311A02B481A9D00936DBC /* Coordinator.swift */; };
 		20C311A32B481CEB00936DBC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C311A22B481CEB00936DBC /* AppCoordinator.swift */; };
@@ -187,6 +189,8 @@
 		20C1594D2B6BD4FC002E96CA /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		20C1594F2B6BD52B002E96CA /* RecomendationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendationSection.swift; sourceTree = "<group>"; };
 		20C159522B6BD747002E96CA /* ActorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorsViewController.swift; sourceTree = "<group>"; };
+		20C159542B6BD80D002E96CA /* ActorInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorInfoSection.swift; sourceTree = "<group>"; };
+		20C159562B6BD841002E96CA /* ActingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActingSection.swift; sourceTree = "<group>"; };
 		20C3119E2B4819D700936DBC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		20C311A02B481A9D00936DBC /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		20C311A22B481CEB00936DBC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 			isa = PBXGroup;
 			children = (
 				20C159522B6BD747002E96CA /* ActorsViewController.swift */,
+				20C159542B6BD80D002E96CA /* ActorInfoSection.swift */,
+				20C159562B6BD841002E96CA /* ActingSection.swift */,
 			);
 			path = ActorScreen;
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				209965D22B4983B900DB6634 /* AuthorizedManager.swift in Sources */,
 				20C158FE2B6BA1BF002E96CA /* SDWebImage+extension.swift in Sources */,
 				9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */,
+				20C159572B6BD841002E96CA /* ActingSection.swift in Sources */,
 				20C159472B6BD405002E96CA /* MediaSectionNode.swift in Sources */,
 				20C1590A2B6BA4EA002E96CA /* MediaModelCell.swift in Sources */,
 				20C1593F2B6BD187002E96CA /* ThirdTableSection.swift in Sources */,
@@ -932,6 +939,7 @@
 				209965D62B49853D00DB6634 /* AuthorizedError.swift in Sources */,
 				20C159122B6BC980002E96CA /* DetailsViewController.swift in Sources */,
 				20C159062B6BA464002E96CA /* HeaderData.swift in Sources */,
+				20C159552B6BD80D002E96CA /* ActorInfoSection.swift in Sources */,
 				201555612B46D293007A7423 /* LoginViewController.swift in Sources */,
 				20FD10742B4D524700D2297F /* HeaderCell.swift in Sources */,
 				20C159362B6BD027002E96CA /* SecondSection.swift in Sources */,
