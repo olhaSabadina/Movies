@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 import FirebaseCore
 import Firebase
 import FirebaseDatabase
+import UIKit
 
 final class DatabaseService {
     
@@ -29,7 +30,7 @@ final class DatabaseService {
     }
     
     ///Fetch users profile document from server FireStore
-    func fetchProfile(uid: String, completion: @escaping ((Result<UserProfile?,Error>)->Void)) {
+    func fetchProfile(uid: String, completion: @escaping (Result<UserProfile?,Error>)->Void) {
        
         Firestore.firestore().collection(TitleConstants.profileCollection).document(uid).getDocument {document, error in
             

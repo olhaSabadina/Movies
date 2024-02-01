@@ -150,8 +150,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .popular:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
-            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            cell.model = homeViewModel.popularMoviesArray[indexPath.item]
             return cell
             
         case .freeWatch:

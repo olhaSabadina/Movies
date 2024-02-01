@@ -14,7 +14,7 @@ class BaseHomeCell: UICollectionViewCell {
     var circleView = UIView()
     var persentLabel = UILabel()
     var moviesNameLabel = UILabel()
-    
+  
     override init(frame: CGRect) {
         super .init(frame: frame)
         setPersentLabel()
@@ -30,9 +30,9 @@ class BaseHomeCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        persentLabel.text = ""
-//        moviesNameLabel.text = ""
-//        imageView.image = nil
+        persentLabel.text = ""
+        moviesNameLabel.text = ""
+        imageView.image = nil
     }
     
     func setPersentLabel() {}
@@ -42,7 +42,7 @@ class BaseHomeCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         bacgroundView.setShadowWithCornerRadius(cornerRadius: 20, shadowColor: .black, shadowOffset: .zero, shadowOpacity: 0.5, shadowRadius: 2)
-        circleView.circleStrokeView(total: 50, current: 30)
+        
     }
     
     private func setImageView() {
