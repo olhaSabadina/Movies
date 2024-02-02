@@ -71,6 +71,8 @@ class HomeViewModel {
     
     @Published var error: Error?
     @Published var popularMoviesArray: [MovieCellModel] = []
+    @Published var trendingMoviesArray: [MovieCellModel] = []
+    @Published var upcomingMoviesArray: [MovieCellModel] = []
     @Published var segmentSectionsIndex: [String:Int] = [:]
     @Published var seeAllSectionDictionary: [String:Bool] = [:]
     @Published var seeAllSectionType: HomeSectionType = .categories
@@ -80,11 +82,15 @@ class HomeViewModel {
     
     init(_ networkManager: NetworkProtocol) {
         self.networkManager = networkManager
-        fatchMovies()
+        fatchPopularMovies()
+        fatchFreeToWatchMovies()
+        fatchTrendingMovies()
     }
     
-    private func fatchMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: Movies.self)
+    //MARK: - fatchPopularMovies
+    
+    private func fatchPopularMovies() {
+        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: PopularMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -99,14 +105,69 @@ class HomeViewModel {
                .store(in: &cancellable)
        }
     
-    private func createMoviesModelsArray(_ dataMovies: Movies) {
+    private func createMoviesModelsArray(_ dataMovies: PopularMovies) {
         let resultsArray = dataMovies.results
         resultsArray.forEach { item in
             let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
             popularMoviesArray.append(cellModel)
         }
     }
-       
+    
+    //MARK: - "free to watch" TMDB don't have (i use upcoming api)
+    
+    private func fatchFreeToWatchMovies() {
+        networkManager.fetchMovies(urlString: UrlCreator.upcomingMovies(), type: UpcomingMovies.self)
+               .sink { сompletion in
+                   switch сompletion {
+                   case .finished:
+                       break
+                   case .failure(let error):
+                       self.error = error
+                       print(error.localizedDescription, "parse error trending")
+                   }
+               } receiveValue: { movies in
+                   self.createMoviesModelsArray(movies)
+               }
+               .store(in: &cancellable)
+       }
+    
+    private func createMoviesModelsArray(_ dataMovies: UpcomingMovies) {
+        let resultsArray = dataMovies.results
+        resultsArray.forEach { item in
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            upcomingMoviesArray.append(cellModel)
+        }
+    }
+    
+    
+    //MARK: - fatchTrendingMovies
+    
+    private func fatchTrendingMovies() {
+        networkManager.fetchMovies(urlString: UrlCreator.trendingForDayMovies(), type: TrendingMovies.self)
+               .sink { сompletion in
+                   switch сompletion {
+                   case .finished:
+                       break
+                   case .failure(let error):
+                       self.error = error
+                       print(error.localizedDescription, "parse error trending")
+                   }
+               } receiveValue: { movies in
+                   self.createMoviesModelsArray(movies)
+               }
+               .store(in: &cancellable)
+       }
+    
+    private func createMoviesModelsArray(_ dataMovies: TrendingMovies) {
+        let resultsArray = dataMovies.results
+        resultsArray.forEach { item in
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            trendingMoviesArray.append(cellModel)
+        }
+    }
+    
+    //MARK: - builder of Sections
+    
     func nuberOfSection() -> Int {
         HomeSectionType.allCases.count
     }
@@ -119,11 +180,11 @@ class HomeViewModel {
             print(self.popularMoviesArray.count, "numberItemsInSections moviesArray.results.count")
             return popularMoviesArray.count
         case 2:
-            return 5
+            return upcomingMoviesArray.count
         case 3:
             return 7
         case 4:
-            return 5
+            return trendingMoviesArray.count
         default:
             return 0
         }

@@ -155,8 +155,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .freeWatch:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
-            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            cell.model = homeViewModel.upcomingMoviesArray[indexPath.item]
             return cell
             
         case .latestTrailers:
@@ -167,8 +166,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .trending:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.viewsPercent[indexPath.item]
-            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            cell.model = homeViewModel.trendingMoviesArray[indexPath.item]
             return cell
             
         default:
@@ -195,6 +193,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         header.segmentAction = { index in
+            
+            // TODO: - настройка экшинов по сегментам
+            
             print(index, "segment index", header.sectionType.headerTitle ?? "iop")
             self.homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] = index
         }

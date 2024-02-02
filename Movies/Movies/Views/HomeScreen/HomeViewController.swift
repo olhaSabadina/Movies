@@ -22,7 +22,9 @@ class HomeViewController: UIViewController {
         setConstraints()
         gradienLayer()
         sincToProperties()
-        sincToMoviesArray()
+        sincToPopularMoviesArray()
+        sincToUpcomingMoviesArray()
+        sincToTrendingMoviesArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +48,7 @@ class HomeViewController: UIViewController {
         .store(in: &cancellable)
     }
     
-    private func sincToMoviesArray() {
+    private func sincToPopularMoviesArray() {
         homeViewModel.$popularMoviesArray
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -55,6 +57,27 @@ class HomeViewController: UIViewController {
         }
         .store(in: &cancellable)
     }
+    
+    private func sincToUpcomingMoviesArray() {
+        homeViewModel.$upcomingMoviesArray
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { type in
+                self.reloadCollection()
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func sincToTrendingMoviesArray() {
+        homeViewModel.$trendingMoviesArray
+            .receive(on: DispatchQueue.main)
+            .dropFirst()
+            .sink { type in
+                self.reloadCollection()
+        }
+        .store(in: &cancellable)
+    }
+    
     
     func reloadCollection() {
         DispatchQueue.main.async {
