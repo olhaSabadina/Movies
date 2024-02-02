@@ -32,7 +32,7 @@ class CategoriesCell: UICollectionViewCell {
     
     private func setCategoriesButton() {
         categoriesButton.backgroundColor = .clear
-        categoriesButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
+        categoriesButton.titleLabel?.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
         categoriesButton.tintColor = .label
         categoriesButton.titleLabel?.textAlignment = .left
         categoriesButton.translatesAutoresizingMaskIntoConstraints = false

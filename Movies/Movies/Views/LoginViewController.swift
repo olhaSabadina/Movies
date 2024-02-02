@@ -230,9 +230,9 @@ extension LoginViewController {
             label.textColor = .white
         }
         titleLabel.text = TitleConstants.welcomeApp
-        titleLabel.font = UIFont(name: FontsConstants.openSansExtraBold, size: 42)
+        titleLabel.font = UIFont(name: FontConstants.openSansExtraBold, size: 42)
         descriptionLabel.text = TitleConstants.eventDescriptionApp
-        descriptionLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 24)
+        descriptionLabel.font = UIFont(name: FontConstants.openSansSemiBold, size: 24)
     }
     
     private func setTitlesStack() {
@@ -294,7 +294,7 @@ extension LoginViewController {
         logInButton.layer.cornerRadius = 10
         logInButton.layer.borderColor = UIColor.gray.cgColor
         logInButton.layer.borderWidth = 1
-        logInButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
+        logInButton.titleLabel?.font = UIFont(name: FontConstants.openSansSemiBold, size: 18)
         view.addSubview(logInButton)
     }
     
@@ -304,7 +304,7 @@ extension LoginViewController {
         
         signUpButton.tintColor = ColorConstans.logInColor
         signUpButton.addTarget(self, action: #selector(goToSignUp), for: .touchUpInside)
-        signUpButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 20)
+        signUpButton.titleLabel?.font = UIFont(name: FontConstants.openSansSemiBold, size: 20)
         
         signUpStack = UIStackView(arrangedSubviews: [signUpLabel, signUpButton])
         signUpStack.axis = .horizontal

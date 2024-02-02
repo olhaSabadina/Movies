@@ -48,7 +48,7 @@ class HeaderCell: UICollectionReusableView {
     }
     
     private func setHeaderLabelAndSegment() {
-        headerLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 18)
+        headerLabel.font = UIFont(name: FontConstants.openSansSemiBold, size: 18)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(headerLabel)
     }
@@ -56,7 +56,7 @@ class HeaderCell: UICollectionReusableView {
     private func setSeeAllButton() {
         seeAllButton.backgroundColor = .clear
         seeAllButton.setTitle("See All", for: .normal)
-        seeAllButton.titleLabel?.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
+        seeAllButton.titleLabel?.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
         seeAllButton.tintColor = .systemBlue
         seeAllButton.titleLabel?.textAlignment = .right
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false

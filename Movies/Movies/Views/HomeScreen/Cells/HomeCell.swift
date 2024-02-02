@@ -19,7 +19,7 @@ class HomeCell: BaseHomeCell {
     
     override func setPersentLabel() {
         persentLabel.textColor = ColorConstans.moviesName
-        persentLabel.font = UIFont(name: FontsConstants.openSansRegular, size: 14)
+        persentLabel.font = UIFont(name: FontConstants.openSansRegular, size: 14)
         persentLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(persentLabel)
         circleView.backgroundColor = .yellow
@@ -30,7 +30,7 @@ class HomeCell: BaseHomeCell {
     
     override func setMoviesNameLabel() {
         moviesNameLabel.textColor = ColorConstans.moviesName
-        moviesNameLabel.font = UIFont(name: FontsConstants.openSansSemiBold, size: 14)
+        moviesNameLabel.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
         moviesNameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(moviesNameLabel)
     }
