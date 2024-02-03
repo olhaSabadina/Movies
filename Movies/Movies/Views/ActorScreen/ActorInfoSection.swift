@@ -29,11 +29,11 @@ class ActorInfoSection: ASDisplayNode {
         
         let imageElement = ASRatioLayoutSpec(ratio: 1.38, child: photo)
         
-        imageElement.style.height = .init(unit: .points, value: 168)
+        imageElement.style.height = .init(unit: .points, value: 180)
         
         let mainStack = ASStackLayoutSpec(direction: .horizontal, spacing: 15, justifyContent: .start, alignItems: .start, children: [imageElement, rightTextStack])
         
-        return ASInsetLayoutSpec(insets: .init(top: 16, left: 16, bottom: 16, right: 16), child: mainStack)
+        return ASInsetLayoutSpec(insets: .init(top: 25, left: 16, bottom: 16, right: 16), child: mainStack)
     }
     
     override func didLoad() {

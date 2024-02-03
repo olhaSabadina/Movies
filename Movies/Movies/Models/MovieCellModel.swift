@@ -15,18 +15,20 @@ struct MovieCellModel {
     let percent: Int?
     let asHeroInFilm: String?
     let yearEnterMovie: Int?
+    let idMovie: Int?
     
     var percentTitle: String {
         guard let percent else {return ""}
         return "\(percent)%"
     }
         
-    init(imageUrl: String, title: String, description: String? = nil, percent: Int? = nil, asHeroInFilm: String? = nil, yearEnterMovie: Int? = nil) {
+    init(imageUrl: String, title: String, description: String? = nil, percent: Int? = nil, asHeroInFilm: String? = nil, yearEnterMovie: Int? = nil, idMovie: Int? = nil) {
         self.imageUrl = imageUrl
         self.title = title
         self.description = description
         self.percent = percent
         self.asHeroInFilm = asHeroInFilm
         self.yearEnterMovie = yearEnterMovie
+        self.idMovie = idMovie
     }
 }

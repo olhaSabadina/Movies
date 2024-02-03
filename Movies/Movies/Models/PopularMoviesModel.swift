@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Movies
-struct Movies: Codable {
+struct PopularMovies: Codable {
     let page: Int
     let results: [Results]
     let totalPages, totalResults: Int
@@ -48,25 +48,5 @@ struct Results: Codable {
         case title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
-    }
-}
-
-//https://image.tmdb.org/t/p/original/qhb1qOilapbapxWQn9jtRCMwXJF.jpg?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
-
-//"https://api.themoviedb.org/3/movie/popular?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
-
-enum UrlCreator: String {
-    case baseForPoster = "https://image.tmdb.org/t/p/original"
-    case apiKey = "?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
-    case base = "https://api.themoviedb.org/3/movie"
-    case popular = "/popular"
-    
-    static func imageUrl(_ posterPath: String) -> String {
-        var result = baseForPoster.rawValue + posterPath + apiKey.rawValue
-        return result
-    }
-    
-    static func popularMovies() -> String {
-        base.rawValue + popular.rawValue + apiKey.rawValue
     }
 }

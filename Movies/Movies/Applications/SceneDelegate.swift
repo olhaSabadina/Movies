@@ -25,6 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         appCoordinator = AppCoordinator.init(navigationVC, type: .app)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemBackground
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
+        
+        navigationVC.navigationBar.tintColor = .label
+        navigationVC.navigationBar.standardAppearance = appearance
+        navigationVC.navigationBar.compactAppearance = appearance
+        navigationVC.navigationBar.scrollEdgeAppearance = appearance
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

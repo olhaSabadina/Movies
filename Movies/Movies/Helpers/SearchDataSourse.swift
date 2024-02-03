@@ -7,7 +7,7 @@
 
 import Foundation
 
-let mocHeaderDataDetail = MainSectionModel(titleName: "Loki", durationTitle: "43m", channelTitle: "14-TV", percentTitle: "34%", yearMovie: " (2023)", videoURLString: "https://www.w3schools.com/html/mov_bbb.mp4", genteType: ["Action & Adventure","Sci-Fi & Fantasy"], descriptionHeader: "After stealing the Tesseract during the events of “Avengers: Endgame,” an alternate version of Loki is brought to the mysterious Time Variance Authority.", percent: 74)
+let mocHeaderDataDetail = MainSectionModel(titleName: "Loki", duration: 43, channelTitle: "14-TV", percentTitle: "34%", yearMovie: " (2023)", videoURLString: "https://www.w3schools.com/html/mov_bbb.mp4", genteType: ["Action & Adventure","Sci-Fi & Fantasy"], descriptionHeader: "After stealing the Tesseract during the events of “Avengers: Endgame,” an alternate version of Loki is brought to the mysterious Time Variance Authority.", percent: 74)
 
 let mocActorsDataModel = SecondSectionModel(titleSection: "Series Cast", actord: [
     ActorModel(name: "Tom Hiddleston", photo: "pencil.circle.fill", filmName: "Loki", description: "Gugulethu Sophia Mbatha-Raw MBE is an English actress, known for her role as Kelly in Black Mirror, Dido Elizabeth Belle in Belle, Noni Jean in Beyond the Lights, and Plumette in Beauty and the Beast.", actorGender: "Actor"),

@@ -8,6 +8,7 @@
 import AsyncDisplayKit
 import AVKit
 import AVFoundation
+import Combine
 
 class DetailsViewController: ASDKViewController<ASScrollNode> {
     
@@ -22,38 +23,37 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         return rootNode
     }()
     
-    let mainSection: MainSection
+    let viewModel: DetailViewModel
+    var mainSection: MainSection
     let secondSection: SecondSection
     let thirdSection: ThirdTableSection
     let socialsSection: SocialTable
     let mediaSection: MediaSectionNode
-    let recomendationSection: RecomendationSection
+    var recomendationSection: RecomendationSection
+    var cancellable = Set<AnyCancellable>()
     
-    override init() {
+    init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
+        self.viewModel = DetailViewModel(model: model)
         mainSection = MainSection(headerData: mocHeaderDataDetail)
         secondSection = SecondSection(typeBtn: .simple, sectionData: mocActorsDataModel)
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
         socialsSection = SocialTable(socials: mocForSocialSection)
         mediaSection = MediaSectionNode(media: mocForMedia)
-        recomendationSection = RecomendationSection(movies: mocForRecomendationSection)
+        recomendationSection = RecomendationSection(movies: viewModel.recommendations)
         super.init(node: rootNode)
 
-        title = "Yura"
+        title = viewModel.model.title
         
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
-            
-            let headerInset = ASInsetLayoutSpec(insets: .init(top: 0, left: 0, bottom: 8, right: 0), child: self.mainSection)
-
-            let result = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
-                headerInset,
+    
+            return ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
+                self.mainSection,
                 self.secondSection,
                 self.thirdSection,
                 self.socialsSection,
                 self.mediaSection,
                 self.recomendationSection
             ])
-            
-            return result
         }
     }
     
@@ -65,6 +65,8 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         super.loadView()
         playVideo()
         secondSection.collectionActor.openActorInfoDelegate = self
+        sinkToProperties()
+        
     }
     
     private func playVideo() {
@@ -76,6 +78,22 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
                 playerViewController.player!.play()
             }
         }
+    }
+    
+    private func sinkToProperties() {
+        viewModel.$headerData.sink { model in
+            guard let model else {return}
+            self.mainSection = MainSection(headerData: model)
+            self.rootNode.setNeedsLayout()
+        }
+        .store(in: &cancellable)
+        
+        viewModel.$isLoadData.sink { isLoad in
+            print(self.viewModel.recommendations.count)
+            self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations)
+            self.rootNode.setNeedsLayout()
+        }
+        .store(in: &cancellable)
     }
 }
 
