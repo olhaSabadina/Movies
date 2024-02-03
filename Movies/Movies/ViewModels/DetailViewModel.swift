@@ -26,7 +26,7 @@ class DetailViewModel {
     
     func fetchMovieModel() {
         print(UrlCreator.movie(id: model.idMovie ?? 0), "__--___--___--url model movie")
-        NetworkManager().fetchMovies(urlString: UrlCreator.movie(id: model.idMovie ?? 0), type: Movie.self)
+        networkManager.fetchMovies(urlString: UrlCreator.movie(id: model.idMovie ?? 0), type: Movie.self)
             .sink { сompletion in
                 switch сompletion {
                 case .finished:
@@ -43,8 +43,17 @@ class DetailViewModel {
     
     private func createMovieModel(_ movie: Movie ) {
         
-        let mainSectionModel = MainSectionModel(titleName: movie.title, duration: movie.runtime ?? 0, channelTitle: movie.nameChannel, percentTitle: model.percentTitle, yearMovie: movie.releaseDate ?? "", videoURLString: "https://www.w3schools.com/html/mov_bbb.mp4" /*UrlCreator.imageUrl(movie.posterPath)*/, genteType: movie.genresArray, descriptionHeader: movie.overview ?? "", percent: model.percent)
-        self.headerData = mainSectionModel
+        self.headerData = MainSectionModel(titleName: movie.title,
+                                           duration: movie.runtime,
+                                           channelTitle: movie.nameChannel,
+                                           percentTitle: model.percentTitle,
+                                           yearMovie: movie.releaseDate,
+                                           videoURLString: "https://www.w3schools.com/html/mov_bbb.mp4",
+                                           genteType: movie.genresArray,
+                                           descriptionHeader: movie.overview,
+                                           percent: model.percent,
+                                           imageURL: UrlCreator.imageUrl(movie.posterPath)
+        )
     }
     
     func fetchRecommendationMovies() {
@@ -70,5 +79,29 @@ class DetailViewModel {
             let model = MovieCellModel(imageUrl: UrlCreator.imageUrl(movie.posterPath ?? "") , title: movie.title , percent: Int((movie.voteAverage ?? 0)*10))
             self.recommendations.append(model)
         }
+    }
+    
+    func fetchVideoUrl(completion: @escaping (String)-> Void) {
+        
+        guard let id = model.idMovie else {return}
+        print(UrlCreator.videoKey(for: id), "URLVideo")
+        networkManager.fetchMovies(urlString: UrlCreator.videoKey(for: id), type: VideoModel.self)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.error = error
+                }
+            } receiveValue: { model in
+                let key = self.videoKeyUrl(model: model)
+                completion(key)
+            }
+            .store(in: &cancellable)
+    }
+    
+    func videoKeyUrl(model: VideoModel) -> String {
+        guard let key = model.results.first?.key else {return ""}
+        return key
     }
 }

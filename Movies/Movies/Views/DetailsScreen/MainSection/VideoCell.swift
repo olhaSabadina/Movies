@@ -4,58 +4,58 @@
 //
 //  Created by Olga Sabadina on 24.01.2024.
 //
-
+import SDWebImage
 import AsyncDisplayKit
+
+protocol PlayVideo {
+    func didTapPlayButton()
+}
 
 class VideoCell: ASDisplayNode {
     let videoUrl: String
-    let videoNode = ASVideoNode()
+    let imageNode = ASImageNode()
     let playButton = ASButtonNode()
+    var delegatePlayVideo: PlayVideo?
     
-    init(_ videoUrl: String, inMediaSection: Bool = false) {
-        self.videoUrl = videoUrl
+    init(_ videoUrl: String?, inMediaSection: Bool = false) {
+        self.videoUrl = videoUrl ?? ""
         super.init()
         self.automaticallyManagesSubnodes = true
         setVideo(inMediaSection)
         setButton()
     }
     
+    override func didLoad() {
+        super.didLoad()
+        guard !videoUrl.isEmpty else {return}
+        SDWebImageDownloader.shared.downloadImage(urlString: videoUrl) { self.imageNode.image = $0 }
+    }
+    
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
         let buttonIns = ASCenterLayoutSpec(centeringOptions: .XY, sizingOptions: .minimumXY, child: playButton)
         
-        return ASOverlayLayoutSpec(child: videoNode, overlay: buttonIns)
+        let image = ASOverlayLayoutSpec(child: imageNode, overlay: buttonIns)
+        
+        return ASInsetLayoutSpec(insets: .init(top: 5, left: 0, bottom: 10, right: 0), child: image)
     }
     
     private func setVideo(_ inMediaSection: Bool) {
-        guard let url = URL(string: videoUrl) else {return}
-        if inMediaSection {
-            videoNode.url = url
-        } else {
-            let asset = AVAsset(url: url)
-            videoNode.asset = asset
-        }
-        videoNode.shouldAutoplay = false
-        videoNode.shouldAutorepeat = false
-        videoNode.delegate = self
-        
-        videoNode.style.width = .init(unit: .fraction, value: 1)
-        videoNode.style.height = .init(unit: .points, value: 230)
-        videoNode.style.flexShrink = 1
+        imageNode.contentMode = .scaleAspectFill
+        imageNode.clipsToBounds = true
+        imageNode.style.width = .init(unit: .fraction, value: 1)
+        imageNode.style.height = .init(unit: .points, value: 230)
+        imageNode.style.flexShrink = 1
     }
     
     private func setButton() {
         playButton.cornerRadius = 30
         playButton.style.preferredSize = .init(width: 60, height: 60)
         playButton.setImage(UIImage(named: "play"), for: .normal)
+        playButton.addTarget(self, action: #selector(playVideo), forControlEvents: .touchUpInside)
     }
-        
-}
-
-extension VideoCell: ASVideoNodeDelegate {
-    func videoNode(_ videoNode: ASVideoNode, willChange state: ASVideoNodePlayerState, to toState: ASVideoNodePlayerState) {
-        
-        playButton.isHidden = videoNode.isPlaying()
-        
+    
+    @objc private func playVideo() {
+        delegatePlayVideo?.didTapPlayButton()
     }
 }

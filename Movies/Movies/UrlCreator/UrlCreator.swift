@@ -7,16 +7,6 @@
 
 import Foundation
 
-//https://image.tmdb.org/t/p/original/qhb1qOilapbapxWQn9jtRCMwXJF.jpg?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
-
-//"https://api.themoviedb.org/3/movie/popular?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
-
-//https://api.themoviedb.org/3/trending/movie/day?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
-
-//https://api.themoviedb.org/3/movie/upcoming?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
-
-//https://api.themoviedb.org/3/movie/787699/similar?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1  Similar
-
 enum UrlCreator: String {
     case api = "&api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
     case apiKey = "?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
@@ -24,12 +14,14 @@ enum UrlCreator: String {
     case popular = "/popular"
     case upcoming = "/upcoming"
     case recommendation = "/similar"
+    case videoPath = "/videos"
    
     
     case baseForPoster = "https://image.tmdb.org/t/p/original"
     case baseForTrending = "https://api.themoviedb.org/3/trending/movie"
     case trendingForDay = "/day"
     case trendingForWeek = "/week"
+    case youtube = "https://www.youtube.com/watch?v="
     
     static func imageUrl(_ posterPath: String?) -> String? {
         guard let posterPath else { return nil }
@@ -63,6 +55,15 @@ enum UrlCreator: String {
     static func findMovie(searchType: SearchCategories, query: String) -> String {
         searchType.searchHeader + "\(query)" + api.rawValue
     }
+    
+    static func videoKey(for idMovie: Int) -> String {
+        base.rawValue + "/\(idMovie)" + videoPath.rawValue + apiKey.rawValue
+    }
+    
+    static func youtubeLink(key: String) -> String {
+        youtube.rawValue + key
+    }
+    
 }
 
 enum SearchCategories: String, CaseIterable {

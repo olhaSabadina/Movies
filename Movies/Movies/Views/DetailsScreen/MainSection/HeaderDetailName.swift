@@ -45,15 +45,15 @@ class HeaderDetailName: ASDisplayNode {
         let mainAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15),
             .foregroundColor: UIColor.gray]
-        let titleText = NSMutableAttributedString(string: headerData.titleName, attributes: attributesBold)
-        let yearMovie: NSAttributedString = .init(string: " (\(headerData.yearMovie))", attributes: mainAttributes)
+        let titleText = NSMutableAttributedString(string: headerData.titleName ?? "Unknow", attributes: attributesBold)
+        let yearMovie: NSAttributedString = .init(string: " (\(headerData.yearMovie ?? "(nil)"))", attributes: mainAttributes)
         
         titleText.append(yearMovie)
         
         titleName.attributedText = titleText
         
-        channelTitle.attributedText = .init(string: headerData.channelTitle, attributes: mainAttributes)
-        percentTitle.attributedText = .init(string: headerData.percentTitle, attributes: mainAttributes)
+        channelTitle.attributedText = .init(string: headerData.channelTitle ?? "Movies", attributes: mainAttributes)
+        percentTitle.attributedText = .init(string: headerData.percentTitle ?? "%0" , attributes: mainAttributes)
         durationTitle.attributedText = .init(string: headerData.durationTitle, attributes: mainAttributes)
         
         circle.frame.size = .init(width: 15, height: 15)

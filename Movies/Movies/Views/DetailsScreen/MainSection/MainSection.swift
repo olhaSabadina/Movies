@@ -18,7 +18,7 @@ class MainSection: ASDisplayNode {
     init(headerData: MainSectionModel) {
         self.headerData = headerData
         headerDetail = HeaderDetailName(headerData: headerData)
-        videoCell = VideoCell(headerData.videoURLString)
+        videoCell = VideoCell(headerData.imageURL)
         genreLabels = GenreMovie(headerData)
        
         buttonStack = ButtonsStack(actionBtn: { btn in
