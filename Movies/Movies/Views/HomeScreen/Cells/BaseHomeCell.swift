@@ -14,6 +14,12 @@ class BaseHomeCell: UICollectionViewCell {
     var circleView = UIView()
     var persentLabel = UILabel()
     var moviesNameLabel = UILabel()
+    
+    var model: MovieCellModel? = nil {
+        didSet {
+            updateCell()
+        }
+    }
   
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -37,24 +43,30 @@ class BaseHomeCell: UICollectionViewCell {
     
     func setPersentLabel() {}
     func setMoviesNameLabel() {}
-    func setConstraints() {}
+    func updateCell() {}
+    
+    func setConstraints() {
+        let sizeCell = self.bounds.size
+        bacgroundView.frame = .init(x: 0, y: 0, width: sizeCell.width, height: sizeCell.height - 50)
+        imageView.frame = bacgroundView.bounds
+        persentLabel.frame = .init(x: 0, y: bacgroundView.frame.height + 7, width: sizeCell.width, height: 17)
+        moviesNameLabel.frame = .init(x: 0, y: bacgroundView.frame.height + 28, width: sizeCell.width, height: 17)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         bacgroundView.setShadowWithCornerRadius(cornerRadius: 20, shadowColor: .black, shadowOffset: .zero, shadowOpacity: 0.5, shadowRadius: 2)
-        
     }
     
     private func setImageView() {
         imageView.image = ImageConstants.home
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         bacgroundView.addSubview(imageView)
+        imageView.layer.cornerRadius = 20
     }
     
     private func setBackgroundView() {
-        bacgroundView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(bacgroundView)
         bacgroundView.backgroundColor = .white
     }

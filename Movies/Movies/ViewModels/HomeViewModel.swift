@@ -142,8 +142,10 @@ class HomeViewModel {
     
     //MARK: - fatchTrendingMovies
     
-    private func fatchTrendingMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.trendingForDayMovies(), type: TrendingMovies.self)
+    func fatchTrendingMovies(_ index: Int = 0) {
+        let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
+        print(urlString)
+        networkManager.fetchMovies(urlString: urlString, type: TrendingMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -160,6 +162,7 @@ class HomeViewModel {
     
     private func createMoviesModelsArray(_ dataMovies: TrendingMovies) {
         let resultsArray = dataMovies.results
+        trendingMoviesArray = []
         resultsArray.forEach { item in
             let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
             trendingMoviesArray.append(cellModel)
@@ -176,8 +179,7 @@ class HomeViewModel {
         switch section {
         case 0:
             return categoriesTitle.count
-        case 1: // what's Popular
-            print(self.popularMoviesArray.count, "numberItemsInSections moviesArray.results.count")
+        case 1:
             return popularMoviesArray.count
         case 2:
             return upcomingMoviesArray.count

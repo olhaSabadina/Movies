@@ -22,6 +22,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         return rootNode
     }()
     
+    let model: MovieCellModel
     let mainSection: MainSection
     let secondSection: SecondSection
     let thirdSection: ThirdTableSection
@@ -29,7 +30,8 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     let mediaSection: MediaSectionNode
     let recomendationSection: RecomendationSection
     
-    override init() {
+    init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
+        self.model = model
         mainSection = MainSection(headerData: mocHeaderDataDetail)
         secondSection = SecondSection(typeBtn: .simple, sectionData: mocActorsDataModel)
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
@@ -38,22 +40,18 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         recomendationSection = RecomendationSection(movies: mocForRecomendationSection)
         super.init(node: rootNode)
 
-        title = "Yura"
+        title = model.title
         
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
-            
-            let headerInset = ASInsetLayoutSpec(insets: .init(top: 0, left: 0, bottom: 8, right: 0), child: self.mainSection)
-
-            let result = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
-                headerInset,
+    
+            return ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
+                self.mainSection,
                 self.secondSection,
                 self.thirdSection,
                 self.socialsSection,
                 self.mediaSection,
                 self.recomendationSection
             ])
-            
-            return result
         }
     }
     

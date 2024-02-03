@@ -24,7 +24,7 @@ struct TrendingResult: Codable {
     let backdropPath: String
     let id: Int
     let title: String
-    let originalLanguage: OriginalLanguage
+    let originalLanguage: OriginalLanguage?
     let originalTitle, overview, posterPath: String
     let mediaType: MediaType
     let genreIDS: [Int]
@@ -65,4 +65,5 @@ enum OriginalLanguage: String, Codable {
     case fr = "fr"
     case ko = "ko"
     case nl = "nl"
+    case es = "es"
 }

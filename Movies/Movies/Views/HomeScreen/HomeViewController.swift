@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+       // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     override func viewWillLayoutSubviews() {

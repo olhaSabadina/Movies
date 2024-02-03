@@ -189,7 +189,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] = newState
             self.homeViewModel.seeAllSectionType = sectionType
             header.isStateSeeAll = newState
-            print(self.homeViewModel.seeAllSectionDictionary)
         }
         
         header.segmentAction = { index in
@@ -198,6 +197,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             print(index, "segment index", header.sectionType.headerTitle ?? "iop")
             self.homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] = index
+            
+            switch header.sectionType {
+            case .categories:
+                break
+            case .popular:
+                self.homeViewModel.popularMoviesArray.shuffle()
+            case .freeWatch:
+                self.homeViewModel.upcomingMoviesArray.shuffle()
+            case .latestTrailers:
+                break
+            case .trending:
+                self.homeViewModel.fatchTrendingMovies(index)
+            }
         }
         
         return header
@@ -210,17 +222,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch sectionType {
         case .categories:
-            guard let cell = collectionView.cellForItem(at: indexPath) as? CategoriesCell else { return }
-        case .popular:
-            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
-            navigationController?.pushViewController(ItemDetailsVC, animated: true)
+            break
             
-        case .freeWatch:
-            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
-        case .latestTrailers:
-            guard let cell = collectionView.cellForItem(at: indexPath) as? LatestTrailersCell else { return }
-        case .trending:
-            guard let cell = collectionView.cellForItem(at: indexPath) as? HomeCell else { return }
+        case .popular, .freeWatch, .trending, .latestTrailers:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BaseHomeCell,
+                  let model = cell.model
+            else { return }
+            
+            let detailVC = DetailsViewController(model: model)
+            navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     

@@ -14,7 +14,7 @@ class ActingSection: ASDisplayNode {
     let actingTable: SearchTable
     var isFullShow: Bool = false {
         didSet {
-            self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 480 : 240))
+            self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 500 : 300))
             
             self.setNeedsLayout()
         }
@@ -34,7 +34,7 @@ class ActingSection: ASDisplayNode {
     }
     
     private func setSection() {
-        actingTable.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(240))
+        actingTable.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(300))
         actingTable.style.flexShrink = 1
         actingTable.headerDelegate = self
     }

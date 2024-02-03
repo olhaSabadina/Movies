@@ -20,7 +20,7 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
         rootNode.scrollableDirections = [.down, .up]
         rootNode.automaticallyManagesContentSize = true
         rootNode.automaticallyRelayoutOnSafeAreaChanges = true
-        rootNode.insetsLayoutMarginsFromSafeArea = true
+        rootNode.insetsLayoutMarginsFromSafeArea = false
         return rootNode
     }()
     
@@ -40,8 +40,10 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
         
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
 
+            let headerInset = ASInsetLayoutSpec(insets: .init(top: 0, left: 0, bottom: 8, right: 0), child: self.actorInfoSection)
+            
             let result = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
-                self.actorInfoSection,
+                headerInset,
                 self.knownForSection,
                 self.actingSection
             ])
