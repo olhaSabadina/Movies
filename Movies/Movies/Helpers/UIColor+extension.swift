@@ -33,9 +33,9 @@ extension UIColor {
         switch progress {
         case 0...0.33:
             return UIColor.red.cgColor
-        case 0.34...0.67:
+        case 0.34...0.59:
             return ColorConstans.circleMediumPrimary
-        case 0.68...1.0:
+        case 0.60...1.0:
             return ColorConstans.circleFullPrimary
         default:
             return UIColor.green.cgColor

@@ -59,7 +59,8 @@ extension ASDisplayNode {
             clockwise: true
         )
         let multiplier = CGFloat((100.0 / Double(total)) * 0.01)
-
+        let progress = Double(current)/Double(total)
+        
         for i in 1...total {
             let circleNode = ASDisplayNode()
             circleNode.backgroundColor = .clear
@@ -68,9 +69,9 @@ extension ASDisplayNode {
             let circleShape = CAShapeLayer()
             circleShape.path = circlePath.cgPath
             if i <= current {
-                circleShape.strokeColor = UIColor.red.cgColor
+                circleShape.strokeColor = UIColor.primaryCircleColor(progress)
             } else {
-                circleShape.strokeColor = UIColor.yellow.cgColor
+                circleShape.strokeColor = UIColor.secondaryCircleColor(progress)
             }
 
             circleShape.fillColor = UIColor.clear.cgColor

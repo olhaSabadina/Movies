@@ -102,6 +102,7 @@
 		20FD10812B5063B800D2297F /* HomeItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10802B5063B800D2297F /* HomeItemDetailsViewController.swift */; };
 		618E4F9C70772938549E63A0 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB549ED953D0554B9695481 /* Pods_MoviesTests.framework */; };
 		7812CD4E1F773926E7B9CFF3 /* Pods_Movies_MoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A0D133C1E25B433FA5F377 /* Pods_Movies_MoviesUITests.framework */; };
+		9C1072D12B6E99D1003BBC98 /* MainResultsMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
 		9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5EFB202B5FB213000D7B0E /* SDWebImage */; };
@@ -226,6 +227,7 @@
 		3B5F5BD417045919CB1909C4 /* Pods-MoviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesTests.release.xcconfig"; path = "Target Support Files/Pods-MoviesTests/Pods-MoviesTests.release.xcconfig"; sourceTree = "<group>"; };
 		7A2793A65F0F762E4B3941C4 /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		8C19DA2F5966A901381944E4 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultsMovies.swift; sourceTree = "<group>"; };
 		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				20C159052B6BA464002E96CA /* HeaderData.swift */,
 				20C159072B6BA4C9002E96CA /* SocialCellModel.swift */,
 				20C159092B6BA4EA002E96CA /* MediaModelCell.swift */,
+				9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -948,6 +951,7 @@
 				20C1593F2B6BD187002E96CA /* ThirdTableSection.swift in Sources */,
 				20B3FEB32B48B31800566ACC /* ProfileViewController.swift in Sources */,
 				20C1590F2B6BB7FA002E96CA /* ButtonForSegment.swift in Sources */,
+				9C1072D12B6E99D1003BBC98 /* MainResultsMovies.swift in Sources */,
 				20C159382B6BD08E002E96CA /* ActorsCollection.swift in Sources */,
 				20C159492B6BD438002E96CA /* MediaCell.swift in Sources */,
 				20C159002B6BA389002E96CA /* MainSectionModel.swift in Sources */,

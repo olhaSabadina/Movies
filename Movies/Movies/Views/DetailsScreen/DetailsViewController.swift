@@ -29,7 +29,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     let thirdSection: ThirdTableSection
     let socialsSection: SocialTable
     let mediaSection: MediaSectionNode
-    let recomendationSection: RecomendationSection
+    var recomendationSection: RecomendationSection
     var cancellable = Set<AnyCancellable>()
     
     init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
@@ -39,7 +39,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
         socialsSection = SocialTable(socials: mocForSocialSection)
         mediaSection = MediaSectionNode(media: mocForMedia)
-        recomendationSection = RecomendationSection(movies: mocForRecomendationSection)
+        recomendationSection = RecomendationSection(movies: viewModel.recommendations)
         super.init(node: rootNode)
 
         title = viewModel.model.title
@@ -84,6 +84,13 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         viewModel.$headerData.sink { model in
             guard let model else {return}
             self.mainSection = MainSection(headerData: model)
+            self.rootNode.setNeedsLayout()
+        }
+        .store(in: &cancellable)
+        
+        viewModel.$isLoadData.sink { isLoad in
+            print(self.viewModel.recommendations.count)
+            self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations)
             self.rootNode.setNeedsLayout()
         }
         .store(in: &cancellable)

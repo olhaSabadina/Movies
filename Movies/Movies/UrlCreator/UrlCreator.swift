@@ -15,11 +15,14 @@ import Foundation
 
 //https://api.themoviedb.org/3/movie/upcoming?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
 
+//https://api.themoviedb.org/3/movie/787699/similar?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1  Similar
+
 enum UrlCreator: String {
     case apiKey = "?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
     case base = "https://api.themoviedb.org/3/movie"
     case popular = "/popular"
     case upcoming = "/upcoming"
+    case recommendation = "/similar"
    
     
     case baseForPoster = "https://image.tmdb.org/t/p/original"
@@ -50,6 +53,10 @@ enum UrlCreator: String {
     
     static func movie(id: Int) -> String {
         base.rawValue + "/\(id)" + apiKey.rawValue
+    }
+    
+    static func getRecommendationMovies(id movie: Int) -> String {
+        base.rawValue + "/\(movie)" + recommendation.rawValue + apiKey.rawValue
     }
     
 }
