@@ -69,24 +69,24 @@ struct BelongsToCollection: Codable {
 }
 
 // MARK: - Genre
-struct Genre: Codable {
-    let id: Int
-    let name: String
-}
+//struct Genre: Codable {
+//    let id: Int
+//    let name: String
+//}
 
-// MARK: - ProductionCompany
-struct ProductionCompany: Codable {
-    let id: Int
-    let logoPath: String?
-    let name, originCountry: String
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case logoPath = "logo_path"
-        case name
-        case originCountry = "origin_country"
-    }
-}
+//// MARK: - ProductionCompany
+//struct ProductionCompany: Codable {
+//    let id: Int
+//    let logoPath: String?
+//    let name, originCountry: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case logoPath = "logo_path"
+//        case name
+//        case originCountry = "origin_country"
+//    }
+//}
 
 // MARK: - ProductionCountry
 struct ProductionCountry: Codable {

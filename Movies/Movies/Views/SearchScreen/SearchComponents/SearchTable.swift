@@ -13,12 +13,16 @@ protocol HeaderShowFullTable {
 
 class SearchTable: ASTableNode {
     
-    var sourceDataForTable = [MovieCellModel]()
+    var sourceDataForTable = [[MovieCellModel]]() {
+        didSet {
+            reloadData()
+        }
+    }
     var typeCell: TypeSearchCell = .short
     var completionAction: ((MovieCellModel) -> Void)?
     var headerDelegate: HeaderShowFullTable?
     
-    init(source: [MovieCellModel] = [], typeCell: TypeSearchCell = .full) {
+    init(source: [[MovieCellModel]] = [], typeCell: TypeSearchCell = .full) {
         self.typeCell = typeCell
         super.init(style: .plain)
         self.delegate = self
@@ -28,22 +32,22 @@ class SearchTable: ASTableNode {
         self.style.height = .init(unit: .fraction, value: 1)
         self.style.flexShrink = 1
         sourceDataForTable = source
-        
-    }    
+    }
 }
 
 extension SearchTable: ASTableDelegate, ASTableDataSource {
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
-        if typeCell == .full || typeCell == .medium {
-            return 1
-        } else {
-            return 4
-        }
+        return sourceDataForTable.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let title = "Trending"
+        var title = ""
+        if sourceDataForTable.count > 1 {
+            title = SearchCategories.allCases[section].rawValue.capitalized
+        } else {
+            title = "Trending"
+        }
         var header = UIView()
         switch typeCell {
             
@@ -66,11 +70,11 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        sourceDataForTable.count
+        sourceDataForTable[section].count
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
-        let search = sourceDataForTable[indexPath.row]
+        let search = sourceDataForTable[indexPath.section][indexPath.row]
         return { SearchCell(search: search, type: self.typeCell) }
     }
     

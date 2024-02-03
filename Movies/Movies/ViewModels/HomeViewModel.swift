@@ -144,7 +144,7 @@ class HomeViewModel {
     
     func fatchTrendingMovies(_ index: Int = 0) {
         let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
-        networkManager.fetchMovies(urlString: urlString, type: TrendingMovies.self)
+        networkManager.fetchMovies(urlString: urlString, type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -159,11 +159,11 @@ class HomeViewModel {
                .store(in: &cancellable)
        }
     
-    private func createMoviesModelsArray(_ dataMovies: TrendingMovies) {
-        let resultsArray = dataMovies.results
+    private func createMoviesModelsArray(_ dataMovies: MainResultsMovies) {
+        guard let resultsArray = dataMovies.movies else {return}
         trendingMoviesArray = []
         resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int((item.voteAverage ?? 0)*10), idMovie: item.id)
             trendingMoviesArray.append(cellModel)
         }
     }

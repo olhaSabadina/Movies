@@ -53,9 +53,8 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
     }
     
     func reload(isSearch: Bool) {
-        tableSearch.sourceDataForTable = !isSearch ? viewModel.trendingArray : viewModel.models
-        tableSearch.typeCell = !isSearch ? .full : .short
-        tableSearch.reloadData()
+        tableSearch.typeCell = isSearch ? .short : .full
+        tableSearch.sourceDataForTable = isSearch ? viewModel.models: viewModel.trendingArray
     }
     
     private func setSearchController() {
@@ -86,7 +85,6 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
 extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //срабатывает каждый раз при вводе текста в сеарче
         filterContentForSearchText(searchText)
     }
     
@@ -97,6 +95,7 @@ extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate 
     func filterContentForSearchText(_ searchText: String) {
         if searchText.count >= 1 {
             isSearch = true
+            viewModel.findMovies(keyWord: searchText)
         } else{
             isSearch = false
         }

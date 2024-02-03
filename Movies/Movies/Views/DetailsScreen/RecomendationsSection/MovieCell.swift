@@ -32,7 +32,7 @@ class MovieCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl) { self.moviePhoto.image = $0 }
+        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl ?? "") { self.moviePhoto.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -67,7 +67,7 @@ class MovieCell: ASCellNode {
         moviePhoto.contentMode = .scaleAspectFill
         moviePhoto.cornerRadius = 15
         
-        movieName.attributedText = .init(string: model.title, attributes: attributesMovie)
+        movieName.attributedText = .init(string: model.title ?? "", attributes: attributesMovie)
         percentTitle.attributedText = .init(string: model.percentTitle, attributes: attributesPercent)
         
         circle.frame.size = .init(width: 15, height: 15)
