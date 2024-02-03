@@ -48,5 +48,8 @@ enum UrlCreator: String {
         base.rawValue + upcoming.rawValue + apiKey.rawValue
     }
     
+    static func movie(id: Int) -> String {
+        base.rawValue + "/\(id)" + apiKey.rawValue
+    }
     
 }

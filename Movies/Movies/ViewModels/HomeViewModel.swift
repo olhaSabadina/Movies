@@ -108,7 +108,7 @@ class HomeViewModel {
     private func createMoviesModelsArray(_ dataMovies: PopularMovies) {
         let resultsArray = dataMovies.results
         resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
             popularMoviesArray.append(cellModel)
         }
     }
@@ -134,7 +134,7 @@ class HomeViewModel {
     private func createMoviesModelsArray(_ dataMovies: UpcomingMovies) {
         let resultsArray = dataMovies.results
         resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
             upcomingMoviesArray.append(cellModel)
         }
     }
@@ -164,7 +164,7 @@ class HomeViewModel {
         let resultsArray = dataMovies.results
         trendingMoviesArray = []
         resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10))
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
             trendingMoviesArray.append(cellModel)
         }
     }

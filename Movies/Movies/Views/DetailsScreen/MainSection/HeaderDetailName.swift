@@ -46,7 +46,7 @@ class HeaderDetailName: ASDisplayNode {
             .font: UIFont.systemFont(ofSize: 15),
             .foregroundColor: UIColor.gray]
         let titleText = NSMutableAttributedString(string: headerData.titleName, attributes: attributesBold)
-        let yearMovie: NSAttributedString = .init(string: headerData.yearMovie, attributes: mainAttributes)
+        let yearMovie: NSAttributedString = .init(string: " (\(headerData.yearMovie))", attributes: mainAttributes)
         
         titleText.append(yearMovie)
         
@@ -57,6 +57,6 @@ class HeaderDetailName: ASDisplayNode {
         durationTitle.attributedText = .init(string: headerData.durationTitle, attributes: mainAttributes)
         
         circle.frame.size = .init(width: 15, height: 15)
-        circle.circleStrokeNode(headerData.percent)
+        circle.circleStrokeNode(headerData.percent ?? 0)
     }
 }

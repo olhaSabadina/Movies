@@ -8,6 +8,7 @@
 import AsyncDisplayKit
 import AVKit
 import AVFoundation
+import Combine
 
 class DetailsViewController: ASDKViewController<ASScrollNode> {
     
@@ -22,16 +23,17 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         return rootNode
     }()
     
-    let model: MovieCellModel
-    let mainSection: MainSection
+    let viewModel: DetailViewModel
+    var mainSection: MainSection
     let secondSection: SecondSection
     let thirdSection: ThirdTableSection
     let socialsSection: SocialTable
     let mediaSection: MediaSectionNode
     let recomendationSection: RecomendationSection
+    var cancellable = Set<AnyCancellable>()
     
     init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
-        self.model = model
+        self.viewModel = DetailViewModel(model: model)
         mainSection = MainSection(headerData: mocHeaderDataDetail)
         secondSection = SecondSection(typeBtn: .simple, sectionData: mocActorsDataModel)
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
@@ -40,7 +42,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         recomendationSection = RecomendationSection(movies: mocForRecomendationSection)
         super.init(node: rootNode)
 
-        title = model.title
+        title = viewModel.model.title
         
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
     
@@ -63,6 +65,8 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         super.loadView()
         playVideo()
         secondSection.collectionActor.openActorInfoDelegate = self
+        sinkToProperties()
+        
     }
     
     private func playVideo() {
@@ -74,6 +78,15 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
                 playerViewController.player!.play()
             }
         }
+    }
+    
+    private func sinkToProperties() {
+        viewModel.$headerData.sink { model in
+            guard let model else {return}
+            self.mainSection = MainSection(headerData: model)
+            self.rootNode.setNeedsLayout()
+        }
+        .store(in: &cancellable)
     }
 }
 
