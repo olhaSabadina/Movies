@@ -144,7 +144,6 @@ class HomeViewModel {
     
     func fatchTrendingMovies(_ index: Int = 0) {
         let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
-        print(urlString)
         networkManager.fetchMovies(urlString: urlString, type: TrendingMovies.self)
                .sink { сompletion in
                    switch сompletion {

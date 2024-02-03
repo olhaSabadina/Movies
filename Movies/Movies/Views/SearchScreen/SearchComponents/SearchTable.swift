@@ -13,28 +13,23 @@ protocol HeaderShowFullTable {
 
 class SearchTable: ASTableNode {
     
+    var sourceDataForTable = [MovieCellModel]()
     var typeCell: TypeSearchCell = .short
     var completionAction: ((MovieCellModel) -> Void)?
-    var searchs: [MovieCellModel] = []
     var headerDelegate: HeaderShowFullTable?
     
-    init(movies: [MovieCellModel] = searchMain, typeCell: TypeSearchCell = .full) {
+    init(source: [MovieCellModel] = [], typeCell: TypeSearchCell = .full) {
         self.typeCell = typeCell
         super.init(style: .plain)
-        searchs = movies
         self.delegate = self
         self.dataSource = self
         self.view.separatorStyle = .none
         self.style.width = .init(unit: .fraction, value: 1)
         self.style.height = .init(unit: .fraction, value: 1)
         self.style.flexShrink = 1
-    }
-
-    func reload(isSearch: Bool) {
-        searchs = !isSearch ? searchMain : searchSearch
-        self.typeCell = !isSearch ? .full : .short
-        reloadData()
-    }
+        sourceDataForTable = source
+        
+    }    
 }
 
 extension SearchTable: ASTableDelegate, ASTableDataSource {
@@ -71,11 +66,11 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        searchs.count
+        sourceDataForTable.count
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
-        let search = searchs[indexPath.row]
+        let search = sourceDataForTable[indexPath.row]
         return { SearchCell(search: search, type: self.typeCell) }
     }
     

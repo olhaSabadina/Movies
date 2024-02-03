@@ -22,7 +22,7 @@ class ActingSection: ASDisplayNode {
     
     init(movies: [MovieCellModel] = searchMain) {
         self.movies = movies
-        self.actingTable = SearchTable(movies: movies, typeCell: .medium)
+        self.actingTable = SearchTable(typeCell: .medium)
         super.init()
         self.automaticallyManagesSubnodes = true
         setSection()
