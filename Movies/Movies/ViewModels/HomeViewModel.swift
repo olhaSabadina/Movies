@@ -123,7 +123,7 @@ class HomeViewModel {
                        break
                    case .failure(let error):
                        self.error = error
-                       print(error.localizedDescription, "parse error trending")
+                       print(error.localizedDescription, "parse error upcomming")
                    }
                } receiveValue: { movies in
                    self.createMoviesModelsArray(movies)
@@ -182,6 +182,7 @@ class HomeViewModel {
         case 1:
             return popularMoviesArray.count
         case 2:
+            print(upcomingMoviesArray.count, "upcomingMoviesArray")
             return upcomingMoviesArray.count
         case 3:
             return 7
