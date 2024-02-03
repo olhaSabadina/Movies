@@ -14,10 +14,14 @@ class DetailViewModel {
     let model: MovieCellModel
     var cancellable = Set<AnyCancellable>()
     @Published var headerData: MainSectionModel?
+    @Published var recommendations = [MovieCellModel]()
+    @Published var isLoadData = false
+    private let networkManager = NetworkManager()
     
     init(model: MovieCellModel) {
         self.model = model
         fetchMovieModel()
+        fetchRecommendationMovies()
     }
     
     func fetchMovieModel() {
@@ -42,4 +46,28 @@ class DetailViewModel {
         self.headerData = mainSectionModel
     }
     
+    func fetchRecommendationMovies() {
+        print(UrlCreator.getRecommendationMovies(id: model.idMovie ?? 0), "yura")
+        networkManager.fetchMovies(urlString: UrlCreator.getRecommendationMovies(id: model.idMovie ?? 0), type: MainResultsMovies.self)
+            .sink { сompletion in
+                switch сompletion {
+                case .finished:
+                    self.isLoadData = true
+                case .failure(let error):
+                    self.error = error
+                    print(error.localizedDescription, "fetchMovieModel")
+                }
+            } receiveValue: { movies in
+                print(movies.movies?.count ?? 9999)
+                self.getAllRecommendations(movies)
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func getAllRecommendations(_ result: MainResultsMovies) {
+        result.movies?.forEach{ movie in
+            let model = MovieCellModel(imageUrl: UrlCreator.imageUrl(movie.posterPath ?? "") , title: movie.title ?? "", percent: Int((movie.voteAverage ?? 0)*10))
+            self.recommendations.append(model)
+        }
+    }
 }
