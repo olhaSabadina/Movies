@@ -66,7 +66,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         playVideo()
         secondSection.collectionActor.openActorInfoDelegate = self
         sinkToProperties()
-        mainSection.videoCell.delegatePlayVideo = self
+       // mainSection.videoCell.delegatePlayVideo = self
     }
     
     private func playVideo() {

@@ -11,14 +11,16 @@ class MainSection: ASDisplayNode {
  
     let headerData: MainSectionModel
     let headerDetail: HeaderDetailName
-    let videoCell: VideoCell
+   // let videoCell: VideoCell
+    let videoCell: YoutubeCell
     let genreLabels: GenreMovie
     let buttonStack: ButtonsStack
     
     init(headerData: MainSectionModel) {
         self.headerData = headerData
         headerDetail = HeaderDetailName(headerData: headerData)
-        videoCell = VideoCell(headerData.imageURL)
+       // videoCell = VideoCell(headerData.imageURL)
+        videoCell = YoutubeCell(headerData.videoURLString)
         genreLabels = GenreMovie(headerData)
        
         buttonStack = ButtonsStack(actionBtn: { btn in

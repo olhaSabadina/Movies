@@ -43,17 +43,21 @@ class DetailViewModel {
     
     private func createMovieModel(_ movie: Movie ) {
         
-        self.headerData = MainSectionModel(titleName: movie.title,
-                                           duration: movie.runtime,
-                                           channelTitle: movie.nameChannel,
-                                           percentTitle: model.percentTitle,
-                                           yearMovie: movie.releaseDate,
-                                           videoURLString: "https://www.w3schools.com/html/mov_bbb.mp4",
-                                           genteType: movie.genresArray,
-                                           descriptionHeader: movie.overview,
-                                           percent: model.percent,
-                                           imageURL: UrlCreator.imageUrl(movie.posterPath)
-        )
+        fetchVideoUrl { key in
+            print(key, "KEY!!!")
+            self.headerData = MainSectionModel(titleName: movie.title,
+                                               duration: movie.runtime,
+                                               channelTitle: movie.nameChannel,
+                                               percentTitle: self.model.percentTitle,
+                                               yearMovie: movie.releaseDate,
+                                               videoURLString: key /*"https://www.w3schools.com/html/mov_bbb.mp4"*/,
+                                               genteType: movie.genresArray,
+                                               descriptionHeader: movie.overview,
+                                               percent: self.model.percent,
+                                               imageURL: UrlCreator.imageUrl(movie.posterPath)
+            )
+        }
+        
     }
     
     func fetchRecommendationMovies() {
