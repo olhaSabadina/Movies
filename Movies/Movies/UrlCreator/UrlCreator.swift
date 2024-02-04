@@ -22,6 +22,11 @@ enum UrlCreator: String {
     case trendingForDay = "/day"
     case trendingForWeek = "/week"
     case youtube = "https://www.youtube.com/watch?v="
+    case nowPlaying = "/now_playing"
+   
+    static func nowPlayingMovies() -> String {
+            base.rawValue + nowPlaying.rawValue + apiKey.rawValue
+        }
     
     static func imageUrl(_ posterPath: String?) -> String? {
         guard let posterPath else { return nil }

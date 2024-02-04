@@ -8,71 +8,14 @@
 import UIKit
 import Combine
 
-class CustomSegment {}
-
-enum HomeSectionType: Int, CaseIterable {
-    case categories
-    case popular
-    case freeWatch
-    case latestTrailers
-    case trending
-    
-    var headerTitle: String? {
-        switch self {
-        case .categories:
-            return nil
-        case .popular:
-            return "What's Popular"
-        case .freeWatch:
-            return "Free To Watch"
-        case .latestTrailers:
-            return "Latest Trailers"
-        case .trending:
-            return "Trending"
-        }
-    }
-    
-    var headersSegments: [String] {
-        switch self {
-        case .categories:
-            return []
-        case .popular:
-            return ["Streming", "On TV", "For Rent", "In Theatres  "]
-        case .freeWatch:
-            return ["Movies", "TV Shows"]
-        case .latestTrailers:
-            return ["Streming", "On TV", "For Rent", "In Theatres "]
-        case .trending:
-            return ["Today", "This Week"]
-        }
-    }
-    
-    var segmentKeyForIndex: String {
-        switch self {
-        case .categories:
-            return ""
-        case .popular:
-            return "popular"
-        case .freeWatch:
-            return "freeWatch"
-        case .latestTrailers:
-            return "latestTrailers"
-        case .trending:
-            return "trending"
-        }
-    }
-}
-
 class HomeViewModel {
     
-    let categoriesTitle = ["Movies", "TV Shows", "People", "More"]
-    let moviesTitle = ["Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown", "Tom Clancy's wore", "Vanquish", "More", "Mare of Easttown"]
-    let viewsPercent = ["90%", "75%", "8%", "55%", "90%", "75%", "8%", "55%","90%", "75%", "8%", "55%"]
-    
     @Published var error: Error?
+    @Published var shouldReloadCollection = false
     @Published var popularMoviesArray: [MovieCellModel] = []
-    @Published var trendingMoviesArray: [MovieCellModel] = []
     @Published var upcomingMoviesArray: [MovieCellModel] = []
+    @Published var latestMoviesArray: [MovieCellModel] = []
+    @Published var trendingMoviesArray: [MovieCellModel] = []
     @Published var segmentSectionsIndex: [String:Int] = [:]
     @Published var seeAllSectionDictionary: [String:Bool] = [:]
     @Published var seeAllSectionType: HomeSectionType = .categories
@@ -83,6 +26,7 @@ class HomeViewModel {
     init(_ networkManager: NetworkProtocol) {
         self.networkManager = networkManager
         fatchPopularMovies()
+        fetchLatestMovies()
         fatchFreeToWatchMovies()
         fatchTrendingMovies()
     }
@@ -94,7 +38,7 @@ class HomeViewModel {
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
-                       break
+                       self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
                        print(error.localizedDescription, "parse error")
@@ -139,8 +83,40 @@ class HomeViewModel {
         }
     }
     
+    //MARK: - LatestTrailers Sections
     
-    //MARK: - fatchTrendingMovies
+    private func fetchLatestMovies() {
+        networkManager.fetchMovies(urlString: UrlCreator.nowPlayingMovies(), type: MainResultsMovies.self)
+               .sink { сompletion in
+                   switch сompletion {
+                   case .finished:
+                       break
+                   case .failure(let error):
+                       self.error = error
+                       print(error.localizedDescription, "parse error latest Trailers")
+                   }
+               } receiveValue: { movies in
+                   
+                   self.latestMoviesArray = self.createMoviesArrayModels(movies)
+               }
+               .store(in: &cancellable)
+       }
+    
+    private func createMoviesArrayModels(_ data: MainResultsMovies) -> [MovieCellModel] {
+        guard let resultsArray = data.movies else {return []}
+        
+        var arrayMovies = [MovieCellModel]()
+        
+        resultsArray.forEach { item in
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: item.percent, idMovie: item.id)
+            arrayMovies.append(cellModel)
+        }
+        
+        return arrayMovies
+    }
+    
+    
+    //MARK: - TrendingMovies
     
     func fatchTrendingMovies(_ index: Int = 0) {
         let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
@@ -177,23 +153,17 @@ class HomeViewModel {
     func numberItemsInSections(section: Int) -> Int {
         switch section {
         case 0:
-            return categoriesTitle.count
+            return HomeSectionType.categoriesTitle.count
         case 1:
             return popularMoviesArray.count
         case 2:
-            print(upcomingMoviesArray.count, "upcomingMoviesArray")
             return upcomingMoviesArray.count
         case 3:
-            return 7
+            return latestMoviesArray.count
         case 4:
             return trendingMoviesArray.count
         default:
             return 0
         }
     }
-    
-    
-    
-    
-    
 }

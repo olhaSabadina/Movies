@@ -88,7 +88,7 @@ class DetailViewModel {
     func fetchVideoUrl(completion: @escaping (String)-> Void) {
         
         guard let id = model.idMovie else {return}
-        print(UrlCreator.videoKey(for: id), "URLVideo")
+
         networkManager.fetchMovies(urlString: UrlCreator.videoKey(for: id), type: VideoModel.self)
             .sink { completion in
                 switch completion {
@@ -98,14 +98,9 @@ class DetailViewModel {
                     self.error = error
                 }
             } receiveValue: { model in
-                let key = self.videoKeyUrl(model: model)
+                guard let key = model.results.first?.key else {return}
                 completion(key)
             }
             .store(in: &cancellable)
-    }
-    
-    func videoKeyUrl(model: VideoModel) -> String {
-        guard let key = model.results.first?.key else {return ""}
-        return key
     }
 }

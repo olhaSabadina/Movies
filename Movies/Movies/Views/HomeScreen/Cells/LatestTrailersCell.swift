@@ -10,6 +10,7 @@ import UIKit
 class LatestTrailersCell: BaseHomeCell {
     
     static var identCell = "latestTrailersCell"
+    let playButtonImage = UIImageView()
     
     override func setPersentLabel() {
         persentLabel.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
@@ -28,5 +29,12 @@ class LatestTrailersCell: BaseHomeCell {
         imageView.sd_setImage(with: urlPoster)
         persentLabel.text = model.title
         moviesNameLabel.text = model.title
+    }
+    
+    override func setPlayButton() {
+        addSubview(playButtonImage)
+        let cellSize = self.bounds.size
+        playButtonImage.frame = .init(x: 15, y: cellSize.height - 105, width: 45, height: 45)
+        playButtonImage.image = .play
     }
 }

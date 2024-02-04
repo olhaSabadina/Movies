@@ -27,6 +27,7 @@ class BaseHomeCell: UICollectionViewCell {
         setMoviesNameLabel()
         setBackgroundView()
         setImageView()
+        setPlayButton()
         setConstraints()
     }
     
@@ -44,6 +45,7 @@ class BaseHomeCell: UICollectionViewCell {
     func setPersentLabel() {}
     func setMoviesNameLabel() {}
     func updateCell() {}
+    func setPlayButton() {}
     
     func setConstraints() {
         let sizeCell = self.bounds.size

@@ -41,6 +41,9 @@ struct Movie: Codable {
     let genres: [Genre]?
     let productionCompanies: [ProductionCompany]?
     
+    var percent: Int {
+        Int((voteAverage ?? 0)*10)
+    }
     
     var genresArray: [String] {
         var result = [String]()
