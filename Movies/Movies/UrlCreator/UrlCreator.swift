@@ -22,6 +22,11 @@ enum UrlCreator: String {
     case trendingForWeek = "/week"
     case youtube = "https://www.youtube.com/watch?v="
     case nowPlaying = "/now_playing"
+    case castInMovie = "/credits"
+    
+    static func castMovie(id: Int) -> String {
+        base.rawValue + "/\(id)" + castInMovie.rawValue + apiKey.rawValue
+        }
    
     static func nowPlayingMovies() -> String {
             base.rawValue + nowPlaying.rawValue + apiKey.rawValue

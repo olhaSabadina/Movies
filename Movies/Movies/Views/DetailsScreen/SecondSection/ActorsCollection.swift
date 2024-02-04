@@ -13,7 +13,6 @@ protocol ActorInfo {
 
 class ActorsCollection: ASCollectionNode {
     
-    
     var openActorInfoDelegate: ActorInfo?
     
     private let collectionFlowLayout: UICollectionViewFlowLayout = {

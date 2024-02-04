@@ -15,6 +15,7 @@ class DetailViewModel {
     var cancellable = Set<AnyCancellable>()
     @Published var headerData: MainSectionModel?
     @Published var recommendations = [MovieCellModel]()
+    @Published var castArray = [MovieCellModel]()
     @Published var isLoadData = false
     private let networkManager = NetworkManager()
     
@@ -103,4 +104,35 @@ class DetailViewModel {
             }
             .store(in: &cancellable)
     }
+    
+    
+    func fetchCastMovies() {
+        
+        guard let id = model.idMovie else {return}
+        
+        networkManager.fetchMovies(urlString: UrlCreator.castMovie(id: id), type: CastModel.self)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    self.isLoadData = true
+                case .failure( let error):
+                    print(error.localizedDescription, "fetchCastMovie error")
+                    self.error = error
+                }
+            } receiveValue: { cast in
+                self.castArray =  self.getAllCast(cast)
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func getAllCast(_ result: CastModel) -> [MovieCellModel] {
+        var arrayCasts = [MovieCellModel]()
+        for item in result.cast {
+            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character)
+            arrayCasts.append(cellModel)
+        }
+        return arrayCasts
+    }
+    
+    
 }
