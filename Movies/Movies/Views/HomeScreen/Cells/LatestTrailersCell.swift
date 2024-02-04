@@ -24,7 +24,7 @@ class LatestTrailersCell: BaseHomeCell {
     
     override func updateCell() {
         guard let model else {return}
-        let urlPoster = URL(string: model.imageUrl)
+        let urlPoster = URL(string: model.imageUrl ?? "")
         imageView.sd_setImage(with: urlPoster)
         persentLabel.text = model.title
         moviesNameLabel.text = model.title

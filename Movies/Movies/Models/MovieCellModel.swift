@@ -9,8 +9,8 @@ import Foundation
 
 
 struct MovieCellModel {
-    let imageUrl: String
-    let title: String
+    let imageUrl: String?
+    let title: String?
     let description: String?
     let percent: Int?
     let asHeroInFilm: String?
@@ -22,7 +22,7 @@ struct MovieCellModel {
         return "\(percent)%"
     }
         
-    init(imageUrl: String, title: String, description: String? = nil, percent: Int? = nil, asHeroInFilm: String? = nil, yearEnterMovie: Int? = nil, idMovie: Int? = nil) {
+    init(imageUrl: String? = nil, title: String? = nil, description: String? = nil, percent: Int? = nil, asHeroInFilm: String? = nil, yearEnterMovie: Int? = nil, idMovie: Int? = nil) {
         self.imageUrl = imageUrl
         self.title = title
         self.description = description

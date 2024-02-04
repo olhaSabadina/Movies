@@ -33,7 +33,10 @@ class SearchCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl) { self.searchImage.image = $0 }
+        guard let urlPoster = model.imageUrl else {
+            self.searchImage.backgroundColor = .gray
+            return}
+        SDWebImageDownloader.shared.downloadImage(urlString: urlPoster) { self.searchImage.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -78,7 +81,7 @@ class SearchCell: ASCellNode {
             .font: UIFont.systemFont(ofSize: 14),
             .foregroundColor: UIColor.gray]
         
-        let textTitle = NSMutableAttributedString(string: model.title, attributes: attributesBold)
+        let textTitle = NSMutableAttributedString(string: model.title ?? "", attributes: attributesBold)
         
         let yearMovie: NSAttributedString = .init(string: " | \(model.yearEnterMovie ?? 0)", attributes: mainAttributes)
         

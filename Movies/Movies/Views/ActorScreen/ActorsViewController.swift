@@ -63,7 +63,7 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
     
     private func didSelectActingMovies() {
         actingSection.actingTable.completionAction = {model in
-            print(model.title)
+            print(model.title ?? "")
         }
     }
 }

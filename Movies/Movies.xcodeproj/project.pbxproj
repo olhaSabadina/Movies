@@ -99,10 +99,12 @@
 		20FD10782B4D7ACC00D2297F /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */; };
 		20FD107C2B4FE26300D2297F /* LatestTrailersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */; };
 		20FD107E2B4FE4BD00D2297F /* BaseHomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD107D2B4FE4BD00D2297F /* BaseHomeCell.swift */; };
-		20FD10812B5063B800D2297F /* HomeItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD10802B5063B800D2297F /* HomeItemDetailsViewController.swift */; };
 		618E4F9C70772938549E63A0 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB549ED953D0554B9695481 /* Pods_MoviesTests.framework */; };
 		7812CD4E1F773926E7B9CFF3 /* Pods_Movies_MoviesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A0D133C1E25B433FA5F377 /* Pods_Movies_MoviesUITests.framework */; };
 		9C1072D12B6E99D1003BBC98 /* MainResultsMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */; };
+		9C1072D32B6EF1B8003BBC98 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D22B6EF1B8003BBC98 /* VideoModel.swift */; };
+		9C1072D82B6F70A7003BBC98 /* YoutubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D72B6F70A7003BBC98 /* YoutubeCell.swift */; };
+		9C1072DB2B6F7368003BBC98 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
 		9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5EFB202B5FB213000D7B0E /* SDWebImage */; };
@@ -221,13 +223,14 @@
 		20FD10772B4D7ACC00D2297F /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTrailersCell.swift; sourceTree = "<group>"; };
 		20FD107D2B4FE4BD00D2297F /* BaseHomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHomeCell.swift; sourceTree = "<group>"; };
-		20FD10802B5063B800D2297F /* HomeItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemDetailsViewController.swift; sourceTree = "<group>"; };
 		238BC02579C6D176D4483A58 /* Pods-Movies-MoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies-MoviesUITests.debug.xcconfig"; path = "Target Support Files/Pods-Movies-MoviesUITests/Pods-Movies-MoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		32A0D133C1E25B433FA5F377 /* Pods_Movies_MoviesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies_MoviesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5F5BD417045919CB1909C4 /* Pods-MoviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesTests.release.xcconfig"; path = "Target Support Files/Pods-MoviesTests/Pods-MoviesTests.release.xcconfig"; sourceTree = "<group>"; };
 		7A2793A65F0F762E4B3941C4 /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
 		8C19DA2F5966A901381944E4 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultsMovies.swift; sourceTree = "<group>"; };
+		9C1072D22B6EF1B8003BBC98 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		9C1072D72B6F70A7003BBC98 /* YoutubeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeCell.swift; sourceTree = "<group>"; };
 		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -253,6 +256,7 @@
 				209965C62B497F5700DB6634 /* FirebaseAuth in Frameworks */,
 				209965D02B497F5700DB6634 /* FirebaseStorage in Frameworks */,
 				185734AC286C7EE5D8BBEE4D /* Pods_Movies.framework in Frameworks */,
+				9C1072DB2B6F7368003BBC98 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +393,7 @@
 				20C159142B6BCBD6002E96CA /* MainSection.swift */,
 				20C159222B6BCE66002E96CA /* HeaderDetailName.swift */,
 				20C159242B6BCE74002E96CA /* VideoCell.swift */,
+				9C1072D72B6F70A7003BBC98 /* YoutubeCell.swift */,
 				20C159262B6BCE81002E96CA /* GenreMovie.swift */,
 				20C1592A2B6BCEA6002E96CA /* ButtonsStack.swift */,
 				20C1592C2B6BCEB3002E96CA /* ConvenieceButton.swift */,
@@ -507,6 +512,7 @@
 				20C159052B6BA464002E96CA /* HeaderData.swift */,
 				20C159072B6BA4C9002E96CA /* SocialCellModel.swift */,
 				20C159092B6BA4EA002E96CA /* MediaModelCell.swift */,
+				9C1072D22B6EF1B8003BBC98 /* VideoModel.swift */,
 				9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */,
 			);
 			path = Models;
@@ -542,7 +548,6 @@
 				201555602B46D293007A7423 /* LoginViewController.swift */,
 				20C1590D2B6BB7D4002E96CA /* Headers */,
 				20FD106A2B4D43E300D2297F /* HomeScreen */,
-				20FD107F2B50635700D2297F /* HomeItemDetails */,
 				20A0420F2B5FC4390021647F /* SearchScreen */,
 				20C159102B6BC912002E96CA /* DetailsScreen */,
 				20C159512B6BD6B7002E96CA /* ActorScreen */,
@@ -609,14 +614,6 @@
 				20FD107B2B4FE26300D2297F /* LatestTrailersCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		20FD107F2B50635700D2297F /* HomeItemDetails */ = {
-			isa = PBXGroup;
-			children = (
-				20FD10802B5063B800D2297F /* HomeItemDetailsViewController.swift */,
-			);
-			path = HomeItemDetails;
 			sourceTree = "<group>";
 		};
 		85B8F1D85478E43826E36468 /* Pods */ = {
@@ -686,6 +683,7 @@
 				209965CD2B497F5700DB6634 /* FirebaseFirestoreSwift */,
 				209965CF2B497F5700DB6634 /* FirebaseStorage */,
 				9C5EFB202B5FB213000D7B0E /* SDWebImage */,
+				9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Movies;
 			productReference = 201555592B46D293007A7423 /* Movies.app */;
@@ -765,6 +763,7 @@
 			packageReferences = (
 				209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 2015555A2B46D293007A7423 /* Products */;
 			projectDirPath = "";
@@ -974,12 +973,12 @@
 				20C159362B6BD027002E96CA /* SecondSection.swift in Sources */,
 				20FD107E2B4FE4BD00D2297F /* BaseHomeCell.swift in Sources */,
 				20C159422B6BD26B002E96CA /* SocialTable.swift in Sources */,
+				9C1072D32B6EF1B8003BBC98 /* VideoModel.swift in Sources */,
 				20FD10712B4D505F00D2297F /* CompositionalLayout.swift in Sources */,
 				20C1592D2B6BCEB4002E96CA /* ConvenieceButton.swift in Sources */,
 				20C1595E2B6D1670002E96CA /* UpcomingMoviesModel.swift in Sources */,
 				209965D42B49843A00DB6634 /* UserProfile.swift in Sources */,
 				20C159022B6BA3B7002E96CA /* SecondSectionModel.swift in Sources */,
-				20FD10812B5063B800D2297F /* HomeItemDetailsViewController.swift in Sources */,
 				20FD106E2B4D4E7C00D2297F /* HomeVC+CollectionView.swift in Sources */,
 				20A042162B5FC5D30021647F /* SearchCell.swift in Sources */,
 				20C159252B6BCE74002E96CA /* VideoCell.swift in Sources */,
@@ -994,6 +993,7 @@
 				20FD10762B4D52C500D2297F /* HomeCell.swift in Sources */,
 				20C159042B6BA3E8002E96CA /* ThirdSectionModel.swift in Sources */,
 				2015555F2B46D293007A7423 /* SceneDelegate.swift in Sources */,
+				9C1072D82B6F70A7003BBC98 /* YoutubeCell.swift in Sources */,
 				20E409052B6E91D10021672D /* SearchViewModel.swift in Sources */,
 				20C159082B6BA4C9002E96CA /* SocialCellModel.swift in Sources */,
 				20C3119F2B4819D700936DBC /* HomeViewController.swift in Sources */,
@@ -1352,6 +1352,14 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
@@ -1392,6 +1400,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 		9C5EFB202B5FB213000D7B0E /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

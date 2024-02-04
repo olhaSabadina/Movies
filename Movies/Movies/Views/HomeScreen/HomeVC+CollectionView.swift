@@ -218,7 +218,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let sectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
-        let ItemDetailsVC = HomeItemDetailsViewController()
         
         switch sectionType {
         case .categories:

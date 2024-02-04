@@ -31,7 +31,7 @@ class TableSectionCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl) { self.image.image = $0 }
+        SDWebImageDownloader.shared.downloadImage(urlString: model.imageUrl ?? "") { self.image.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -57,7 +57,7 @@ class TableSectionCell: ASCellNode {
         image.style.height = .init(unit: .points, value: 48)
         image.cornerRadius = 5
         
-        let textTitle = NSMutableAttributedString(string: model.title, attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        let textTitle = NSMutableAttributedString(string: model.title ?? "", attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
         title.attributedText = textTitle
         
         let text = NSMutableAttributedString(string: model.description ?? "", attributes: [.font: UIFont.systemFont(ofSize: 14)])

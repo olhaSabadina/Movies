@@ -41,20 +41,23 @@ class GenreMovie: ASDisplayNode {
         let mainAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 15),
             .foregroundColor: UIColor.gray]
-        
-        headerData.genteType.forEach { label in
-            let labelGenre = ASButtonNode()
-            labelGenre.setTitle(label, with: .systemFont(ofSize: 15), with: .gray, for: .normal)
-            labelGenre.style.height = .init(unit: .points, value: 32)
-            labelGenre.borderColor = UIColor.gray.cgColor
-            labelGenre.borderWidth = 1
-            labelGenre.cornerRadius = 7
-            labelGenre.style.flexGrow = 1
-            labelGenre.style.flexShrink = 1
-            labels.append(labelGenre)
+        if let genre = headerData.genteType {
+            genre.forEach { label in
+                let labelGenre = ASButtonNode()
+                labelGenre.setTitle(label, with: .systemFont(ofSize: 15), with: .gray, for: .normal)
+                labelGenre.style.height = .init(unit: .points, value: 32)
+                labelGenre.borderColor = UIColor.gray.cgColor
+                labelGenre.borderWidth = 1
+                labelGenre.cornerRadius = 7
+                labelGenre.style.flexGrow = 1
+                labelGenre.style.flexShrink = 1
+                labels.append(labelGenre)
+            }
         }
         
-        descriptionLabel.attributedText = .init(string: headerData.descriptionHeader, attributes: mainAttributes)
+        if let description = headerData.descriptionHeader {
+            descriptionLabel.attributedText = .init(string: description, attributes: mainAttributes)
+        }
     }
     
 }

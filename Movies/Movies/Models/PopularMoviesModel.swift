@@ -32,7 +32,7 @@ struct Results: Codable {
     let voteCount: Int
     
     var posterFullPath: String {
-        UrlCreator.imageUrl(posterPath)
+        UrlCreator.imageUrl(posterPath) ?? ""
     }
 
     enum CodingKeys: String, CodingKey {

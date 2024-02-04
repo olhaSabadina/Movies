@@ -66,7 +66,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         playVideo()
         secondSection.collectionActor.openActorInfoDelegate = self
         sinkToProperties()
-        
+       // mainSection.videoCell.delegatePlayVideo = self
     }
     
     private func playVideo() {
@@ -102,6 +102,23 @@ extension DetailsViewController: ActorInfo {
         navigationItem.backButtonTitle = ""
         let actorVC = ActorsViewController(actorModel: actor)
         navigationController?.pushViewController(actorVC, animated: true)
+    }
+}
+
+extension DetailsViewController: PlayVideo {
+    func didTapPlayButton() {
+        viewModel.fetchVideoUrl { youtubeId in
+        
+            if let youtubeURL = URL(string: "youtube://\(youtubeId)"),
+               UIApplication.shared.canOpenURL(youtubeURL) {
+                // redirect to app
+                UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
+            } else if let youtubeURL = URL(string: "https://www.youtube.com/watch?v=\(youtubeId)") {
+                // redirect through safari
+                UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
+            }
+            
+        }
     }
 }
 
