@@ -11,9 +11,9 @@ import Combine
 class SearchViewModel {
     
     @Published var error: Error?
+    @Published var isShouldReloadTable = false
     var trendingArray = [[MovieCellModel]]()
     var models = [[MovieCellModel]]()
-    @Published var isShouldReloadTable = false
     var cancellable = Set<AnyCancellable>()
     let networkManager = NetworkManager()
     
@@ -22,7 +22,7 @@ class SearchViewModel {
     }
     
     func fetchTrendingMovies() {
-        NetworkManager().fetchMovies(urlString: UrlCreator.trendingForWeekMovies(), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: UrlCreator.trendingForWeekMovies(), type: MainResultsMovies.self)
             .sink { сompletion in
                 switch сompletion {
                 case .finished:
@@ -32,7 +32,12 @@ class SearchViewModel {
                     print(error.localizedDescription, "SearchMovie")
                 }
             } receiveValue: { movie in
-                self.trendingArray.append(self.createArrayMovieModels(movie, isTrending: true))
+                Task {
+                    let result = try await self.createMoviesArrayModels(movie)
+                    self.trendingArray.append(result)
+                    self.isShouldReloadTable = true
+                }
+               // self.trendingArray.append(self.createArrayMovieModels(movie, isTrending: true))
             }
             .store(in: &cancellable)
     }
@@ -78,10 +83,37 @@ class SearchViewModel {
             if !isTrending {
                 guard index < 3  else { return }
             }
-                let searchModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, description: item.overview, percent: Int((item.voteAverage ?? 0)*10), idMovie: item.id)
+                let searchModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, description: item.overview, percent: item.percent, idMovie: item.id)
                 tempArray.append(searchModel)
         }
         return tempArray
     }
     
+    private func createMoviesArrayModels(_ data: MainResultsMovies) async throws -> [MovieCellModel] {
+        guard let resultsArray = data.movies else {return []}
+        
+        var arrayMovies = [MovieCellModel]()
+        
+        for item in resultsArray {
+            
+            let imageUrl = try await getImageURLPath(id: item.id)
+            
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, description: item.overview, percent: item.percent, idMovie: item.id, imageFullHDUrl: imageUrl, releaseData: item.releaseDate)
+            
+            arrayMovies.append(cellModel)
+        }
+        return arrayMovies
+    }
+    
+    private func getImageURLPath(id: Int?) async throws -> String? {
+        
+        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
+        let (data, _) = try await URLSession.shared.data(from: urlString)
+        
+        let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
+        let item = imageModels.backdrops.first { item in
+            item.height < 1100
+        }
+        return UrlCreator.imageUrl(item?.filePath)
+    }
 }

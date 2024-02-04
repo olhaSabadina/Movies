@@ -12,9 +12,9 @@ class RecomendationSection: ASDisplayNode {
     let headerTitle = ASTextNode()
     let collectionMovies: RecomendationCollection
         
-    init(movies: [MovieCellModel], isRecomendation: Bool = true) {
+    init(movies: [MovieCellModel], isRecomendation: Bool = true, delegate: DetailMovieDelegate? = nil) {
         //self.isRecomendation = isRecomendation
-        self.collectionMovies = RecomendationCollection(movies: movies, isRecomendation: isRecomendation)
+        self.collectionMovies = RecomendationCollection(movies: movies, isRecomendation: isRecomendation, delegate: delegate)
         super.init()
         self.automaticallyManagesSubnodes = true
         setHeader()

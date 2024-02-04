@@ -9,10 +9,10 @@ import AsyncDisplayKit
 
 class MediaSectionNode: ASTableNode {
     
-    var media: [MediaModelCell] = []
-    var completionAction: ((URL) -> Void)?
+    var media: [MovieCellModel] = []
+    var completionAction: ((Int) -> Void)?
     
-    init(media: [MediaModelCell], completion: ((URL) -> Void)? = nil) {
+    init(media: [MovieCellModel], completion: ((Int) -> Void)? = nil) {
         self.media = media
         self.completionAction = completion
         super.init(style: .plain)
@@ -62,10 +62,9 @@ extension MediaSectionNode: ASTableDelegate, ASTableDataSource {
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        let mediaModel = media[indexPath.row].movieUrl
-        guard let url = URL(string: mediaModel) else {return}
-        completionAction?(url)
-        print(url)
+        guard let videoId = media[indexPath.row].idMovie else {return}
+        completionAction?(videoId)
+        print(videoId)
         }
 }
     

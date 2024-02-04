@@ -33,7 +33,7 @@ class SearchCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        guard let urlPoster = model.imageUrl else {
+        guard let urlPoster = model.imageFullHDUrl else {
             self.searchImage.backgroundColor = .gray
             return}
         SDWebImageDownloader.shared.downloadImage(urlString: urlPoster) { self.searchImage.image = $0 }
