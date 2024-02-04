@@ -9,11 +9,11 @@ import AsyncDisplayKit
 
 class MediaCell: ASCellNode {
     
-    var model: MediaModelCell
+    var model: MovieCellModel
     var imageNode: ASNetworkImageNode
     let playButton = ASImageNode()
     
-    init(model: MediaModelCell) {
+    init(model: MovieCellModel) {
         self.model = model
         imageNode = ASNetworkImageNode()
         super.init()
@@ -38,7 +38,7 @@ class MediaCell: ASCellNode {
         imageNode.shouldRenderProgressImages = true
         imageNode.contentMode = .scaleAspectFill
         imageNode.clipsToBounds = true
-        guard let poster = model.moviePoster else {return}
+        guard let poster = model.imageFullHDUrl else {return}
         imageNode.url = URL(string: poster)
     }
     

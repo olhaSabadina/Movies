@@ -28,7 +28,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     let secondSection: SecondSection
     let thirdSection: ThirdTableSection
     let socialsSection: SocialTable
-    let mediaSection: MediaSectionNode
+    var mediaSection: MediaSectionNode
     var recomendationSection: RecomendationSection
     var cancellable = Set<AnyCancellable>()
     
@@ -38,7 +38,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         secondSection = SecondSection(typeBtn: .simple, sectionData: mocActorsDataModel)
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
         socialsSection = SocialTable(socials: mocForSocialSection)
-        mediaSection = MediaSectionNode(media: mocForMedia)
+        mediaSection = MediaSectionNode(media: mocForActingSection)
         recomendationSection = RecomendationSection(movies: viewModel.recommendations)
         super.init(node: rootNode)
 
@@ -63,33 +63,27 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     
     override func loadView() {
         super.loadView()
-        playVideo()
         secondSection.collectionActor.openActorInfoDelegate = self
         sinkToProperties()
     }
     
     private func playVideo() {
-        mediaSection.completionAction = { url in
-            let player = AVPlayer(url: url)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-            }
+        mediaSection.completionAction = { id in
+            let vc = VideoViewController(movieID: id)
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(vc, animated: true)
         }
     }
     
     private func sinkToProperties() {
-        viewModel.$headerData.sink { model in
-            guard let model else {return}
-            self.mainSection = MainSection(headerData: model)
-            self.rootNode.setNeedsLayout()
-        }
-        .store(in: &cancellable)
-        
-        viewModel.$isLoadData.sink { isLoad in
-            print(self.viewModel.recommendations.count)
-            self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations)
+        viewModel.$isLoadData
+            .receive(on: DispatchQueue.main)
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .sink { isLoad in
+            self.mainSection = MainSection(headerData: self.viewModel.headerData)
+            self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations, delegate: self)
+            self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
+            self.playVideo()
             self.rootNode.setNeedsLayout()
         }
         .store(in: &cancellable)
@@ -118,6 +112,13 @@ extension DetailsViewController: PlayVideo {
             }
             
         }
+    }
+}
+
+extension DetailsViewController: DetailMovieDelegate {
+    func openDetailScreen(_ model: MovieCellModel) {
+        let vc = DetailsViewController(model: model)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
