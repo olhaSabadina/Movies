@@ -10,16 +10,23 @@ import AsyncDisplayKit
 
 class ActorCell: ASCellNode {
     
-    let actorModel: ActorModel
+    let actorModel: MovieCellModel
     let actorPhoto = ASImageNode()
     let actorName = ASTextNode()
     let filmName = ASTextNode()
     
-    init(actorModel: ActorModel) {
+    init(actorModel: MovieCellModel) {
         self.actorModel = actorModel
         super.init()
-        setCell()
         self.automaticallyManagesSubnodes = true
+    }
+    
+    override func didLoad() {
+        super.didLoad()
+        setCell()
+        SDWebImageDownloader.shared.downloadImage(urlString: actorModel.imageUrl ?? "") { 
+            print(self.actorModel.imageUrl ?? "mmm")
+            self.actorPhoto.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -46,16 +53,13 @@ class ActorCell: ASCellNode {
             .foregroundColor: UIColor.gray,
             .paragraphStyle: paragraphStyle]
         
-        //TODO: загрузку используя вебимедж
-        actorPhoto.image = UIImage(systemName: actorModel.photo)
-        actorPhoto.backgroundColor = .yellow
+        actorPhoto.backgroundColor = .gray
         actorPhoto.style.height = .init(unit: .points, value: 113)
         actorPhoto.style.width = .init(unit: .points, value: 82)
         actorPhoto.contentMode = .scaleAspectFill
         actorPhoto.cornerRadius = 3
-        actorName.attributedText = .init(string: actorModel.name, attributes: attributesName)
-        filmName.attributedText = .init(string: actorModel.filmName, attributes: attributesFilm)
-        
+        actorName.attributedText = .init(string: actorModel.title ?? "Unknow", attributes: attributesName)
+        filmName.attributedText = .init(string: actorModel.asHeroInFilm ?? "None", attributes: attributesFilm)
     }
 }
 

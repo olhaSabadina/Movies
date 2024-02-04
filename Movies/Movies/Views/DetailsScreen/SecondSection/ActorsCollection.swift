@@ -8,7 +8,7 @@
 import AsyncDisplayKit
 
 protocol ActorInfo {
-    func didOpenActorInfo(_ actor: ActorModel)
+    func didOpenActorInfo(_ actor: MovieCellModel)
 }
 
 class ActorsCollection: ASCollectionNode {
@@ -23,9 +23,9 @@ class ActorsCollection: ASCollectionNode {
     }()
     
     var isFull: Bool = false
-    private let actors: [ActorModel]
+    private let actors: [MovieCellModel]
     
-    init(actors: [ActorModel]) {
+    init(actors: [MovieCellModel]) {
         self.actors = actors
         super.init(frame: .zero, collectionViewLayout: collectionFlowLayout, layoutFacilitator: nil)
         self.automaticallyManagesSubnodes = true
@@ -47,9 +47,7 @@ extension ActorsCollection: ASCollectionDelegate, ASCollectionDataSource {
     
     func collectionNode(_ collectionNode: ASCollectionNode, nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         let actor = actors[indexPath.item]
-        return {
-            ActorCell(actorModel: actor)
-        }
+        return { ActorCell(actorModel: actor) }
     }
     
     func collectionNode(_ collectionNode: ASCollectionNode, constrainedSizeForItemAt indexPath: IndexPath) -> ASSizeRange {

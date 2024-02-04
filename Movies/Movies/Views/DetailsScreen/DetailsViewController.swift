@@ -25,7 +25,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     
     let viewModel: DetailViewModel
     var mainSection: MainSection
-    let secondSection: SecondSection
+    var secondSection: SecondSection
     let thirdSection: ThirdTableSection
     let socialsSection: SocialTable
     var mediaSection: MediaSectionNode
@@ -35,7 +35,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
         self.viewModel = DetailViewModel(model: model)
         mainSection = MainSection(headerData: mocHeaderDataDetail)
-        secondSection = SecondSection(typeBtn: .simple, sectionData: mocActorsDataModel)
+        secondSection = SecondSection(typeBtn: .simple, sectionData: mocForActingSection)
         thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
         socialsSection = SocialTable(socials: mocForSocialSection)
         mediaSection = MediaSectionNode(media: mocForActingSection)
@@ -80,18 +80,19 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
             .receive(on: DispatchQueue.main)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink { isLoad in
-            self.mainSection = MainSection(headerData: self.viewModel.headerData)
-            self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations, delegate: self)
-            self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
-            self.playVideo()
-            self.rootNode.setNeedsLayout()
-        }
-        .store(in: &cancellable)
+                self.mainSection = MainSection(headerData: self.viewModel.headerData)
+                self.secondSection = SecondSection(typeBtn: .simple, sectionData: self.viewModel.castArray)
+                self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations, delegate: self)
+                self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
+                self.playVideo()
+                self.rootNode.setNeedsLayout()
+            }
+            .store(in: &cancellable)
     }
 }
 
 extension DetailsViewController: ActorInfo {
-    func didOpenActorInfo(_ actor: ActorModel) {
+    func didOpenActorInfo(_ actor: MovieCellModel) {
         navigationItem.backButtonTitle = ""
         let actorVC = ActorsViewController(actorModel: actor)
         navigationController?.pushViewController(actorVC, animated: true)

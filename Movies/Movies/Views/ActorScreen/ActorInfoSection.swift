@@ -10,13 +10,13 @@ import SDWebImage
 
 class ActorInfoSection: ASDisplayNode {
     
-    private let actorModel: ActorModel
+    private let actorModel: MovieCellModel
     private let name = ASTextNode()
     private let gender = ASTextNode()
     private let actorDescription = ASTextNode()
     private let photo = ASImageNode()
     
-    init(model: ActorModel) {
+    init(model: MovieCellModel) {
         self.actorModel = model
         super.init()
         self.automaticallyManagesSubnodes = true
@@ -39,7 +39,7 @@ class ActorInfoSection: ASDisplayNode {
     override func didLoad() {
         super.didLoad()
         setSection()
-        SDWebImageDownloader.shared.downloadImage(urlString: actorModel.photo ) { self.photo.image = $0 }
+        SDWebImageDownloader.shared.downloadImage(urlString: actorModel.imageUrl ?? "" ) { self.photo.image = $0 }
     }
     
     private func setSection() {
@@ -51,9 +51,9 @@ class ActorInfoSection: ASDisplayNode {
             .font: UIFont.systemFont(ofSize: 14),
             .foregroundColor: UIColor.gray]
         
-        let actorName = NSMutableAttributedString(string: actorModel.name, attributes: attributesBold)
-        let genderTitle: NSAttributedString = .init(string: actorModel.actorGender, attributes: mainAttributes)
-        let description: NSAttributedString = .init(string: actorModel.description, attributes: mainAttributes)
+        let actorName = NSMutableAttributedString(string: actorModel.title ?? "None", attributes: attributesBold)
+        let genderTitle: NSAttributedString = .init(string: "actorModel.actorGender", attributes: mainAttributes)
+        let description: NSAttributedString = .init(string: actorModel.description ?? "description", attributes: mainAttributes)
 
         name.attributedText = actorName
         gender.attributedText = genderTitle

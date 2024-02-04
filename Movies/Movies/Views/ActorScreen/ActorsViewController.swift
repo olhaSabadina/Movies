@@ -11,7 +11,7 @@ import AVFoundation
 
 class ActorsViewController: ASDKViewController<ASScrollNode> {
 
-    private let actorModel: ActorModel
+    private let actorModel: MovieCellModel
     
     private let rootNode: ASScrollNode = {
        let rootNode = ASScrollNode()
@@ -28,7 +28,7 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
     let knownForSection: RecomendationSection
     let actingSection: ActingSection
     
-    init(actorModel: ActorModel) {
+    init(actorModel: MovieCellModel) {
         self.actorModel = actorModel
         actorInfoSection = ActorInfoSection(model: actorModel)
         knownForSection = RecomendationSection(movies: mocForRecomendationSection, isRecomendation: false)
@@ -36,7 +36,7 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
         
         super.init(node: rootNode)
         
-        title = actorModel.name
+        title = actorModel.title
         
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
 

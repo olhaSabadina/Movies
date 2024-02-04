@@ -28,6 +28,7 @@ class DetailViewModel {
         self.model = model
         fetchMovieModel()
         fetchRecommendationMovies()
+        fetchCastMovies()
         Task{
            try await createMoviesArrayModels()
         }
@@ -78,16 +79,23 @@ class DetailViewModel {
                     print(error.localizedDescription, "fetchMovieModel")
                 }
             } receiveValue: { movies in
-                self.getAllRecommendations(movies)
+                self.recommendations = self.createMoviesArrayModels(movies)
             }
             .store(in: &cancellable)
     }
     
-    private func getAllRecommendations(_ result: MainResultsMovies) {
-        result.movies?.forEach{ movie in
-            let model = MovieCellModel(imageUrl: UrlCreator.imageUrl(movie.posterPath), title: movie.title, percent: movie.percent, idMovie: movie.id)
-            self.recommendations.append(model)
+    private func createMoviesArrayModels(_ data: MainResultsMovies) -> [MovieCellModel] {
+        guard let resultsArray = data.movies else {return []}
+        
+        var arrayMovies = [MovieCellModel]()
+        
+        for item in resultsArray {
+            
+            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.posterPath), title: item.title, description: item.overview, percent: item.percent, idMovie: item.id, releaseData: item.releaseDate)
+            
+            arrayMovies.append(cellModel)
         }
+        return arrayMovies
     }
     
     func fetchVideoUrl(completion: @escaping (String)-> Void) {
@@ -130,8 +138,11 @@ class DetailViewModel {
     
     private func getAllCast(_ result: CastModel) -> [MovieCellModel] {
         var arrayCasts = [MovieCellModel]()
+        
         for item in result.cast {
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character)
+            
+            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character, idMovie: item.id)
+            
             arrayCasts.append(cellModel)
         }
         return arrayCasts

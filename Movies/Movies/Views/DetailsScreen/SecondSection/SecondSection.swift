@@ -14,7 +14,7 @@ class SecondSection: ASDisplayNode {
     var buttonSeeAll: ASButtonNode
     var actionBtn: ((HeaderType) -> Void)?
     let typeBtn: HeaderType
-    let sectionData: SecondSectionModel
+    let sectionData: [MovieCellModel]
     let collectionActor: ActorsCollection
     var isFullShow: Bool = false {
         didSet {
@@ -27,9 +27,9 @@ class SecondSection: ASDisplayNode {
     private var collectionHeightConstraint: ASLayoutElementSize?
     
     
-    init(typeBtn: HeaderType, sectionData: SecondSectionModel, actionBtn: ( (HeaderType) -> Void)? = nil) {
+    init(typeBtn: HeaderType, sectionData: [MovieCellModel], actionBtn: ( (HeaderType) -> Void)? = nil) {
         self.buttonSeeAll = ASButtonNode()
-        self.collectionActor = ActorsCollection(actors: sectionData.actord)
+        self.collectionActor = ActorsCollection(actors: sectionData)
         self.actionBtn = actionBtn
         self.typeBtn = typeBtn
         self.sectionData = sectionData
@@ -59,7 +59,7 @@ class SecondSection: ASDisplayNode {
             .font: UIFont.boldSystemFont(ofSize: 18),
             .foregroundColor: UIColor.black]
         
-        headerTitle.attributedText = .init(string: sectionData.titleSection, attributes: attributesBold)
+        headerTitle.attributedText = .init(string: "Series Cast", attributes: attributesBold)
         
         buttonSeeAll.setTitle("See All", with: .systemFont(ofSize: 14), with: nil, for: .normal)
 
