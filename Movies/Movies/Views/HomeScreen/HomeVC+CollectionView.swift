@@ -202,7 +202,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case .freeWatch:
                 self.homeViewModel.upcomingMoviesArray.shuffle()
             case .latestTrailers:
-                break
+                self.homeViewModel.latestMoviesArray.shuffle()
             case .trending:
                 self.homeViewModel.fatchTrendingMovies(index)
             }

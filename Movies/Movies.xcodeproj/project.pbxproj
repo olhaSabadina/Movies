@@ -107,6 +107,7 @@
 		9C1072DB2B6F7368003BBC98 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */; };
 		9C1072DD2B6F82A7003BBC98 /* HomeSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072DC2B6F82A7003BBC98 /* HomeSectionType.swift */; };
 		9C1072DF2B6F9338003BBC98 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072DE2B6F9338003BBC98 /* VideoViewController.swift */; };
+		9C1072E12B6F9F1C003BBC98 /* ImageFullModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072E02B6F9F1C003BBC98 /* ImageFullModel.swift */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
 		9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5EFB202B5FB213000D7B0E /* SDWebImage */; };
@@ -235,6 +236,7 @@
 		9C1072D72B6F70A7003BBC98 /* YoutubeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeCell.swift; sourceTree = "<group>"; };
 		9C1072DC2B6F82A7003BBC98 /* HomeSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionType.swift; sourceTree = "<group>"; };
 		9C1072DE2B6F9338003BBC98 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		9C1072E02B6F9F1C003BBC98 /* ImageFullModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFullModel.swift; sourceTree = "<group>"; };
 		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				9C1072D22B6EF1B8003BBC98 /* VideoModel.swift */,
 				9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */,
 				9C1072DC2B6F82A7003BBC98 /* HomeSectionType.swift */,
+				9C1072E02B6F9F1C003BBC98 /* ImageFullModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				20C159252B6BCE74002E96CA /* VideoCell.swift in Sources */,
 				20C1593A2B6BD0C3002E96CA /* ActorCell.swift in Sources */,
 				9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */,
+				9C1072E12B6F9F1C003BBC98 /* ImageFullModel.swift in Sources */,
 				20C311B02B48300000936DBC /* ImageConstants.swift in Sources */,
 				20C159592B6CF36F002E96CA /* TrendingMoviesModel.swift in Sources */,
 				20B3FEAF2B48B2CE00566ACC /* SearchViewController.swift in Sources */,

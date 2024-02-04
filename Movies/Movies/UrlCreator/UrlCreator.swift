@@ -15,8 +15,7 @@ enum UrlCreator: String {
     case upcoming = "/upcoming"
     case recommendation = "/similar"
     case videoPath = "/videos"
-   
-    
+    case images = "/images"
     case baseForPoster = "https://image.tmdb.org/t/p/original"
     case baseForTrending = "https://api.themoviedb.org/3/trending/movie"
     case trendingForDay = "/day"
@@ -26,6 +25,10 @@ enum UrlCreator: String {
    
     static func nowPlayingMovies() -> String {
             base.rawValue + nowPlaying.rawValue + apiKey.rawValue
+        }
+    
+    static func imageMovie(id: Int) -> String {
+        base.rawValue + "/\(id)" + images.rawValue + apiKey.rawValue
         }
     
     static func imageUrl(_ posterPath: String?) -> String? {

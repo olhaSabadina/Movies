@@ -12,16 +12,17 @@ class HomeViewModel {
     
     @Published var error: Error?
     @Published var shouldReloadCollection = false
-    @Published var popularMoviesArray: [MovieCellModel] = []
-    @Published var upcomingMoviesArray: [MovieCellModel] = []
-    @Published var latestMoviesArray: [MovieCellModel] = []
-    @Published var trendingMoviesArray: [MovieCellModel] = []
     @Published var segmentSectionsIndex: [String:Int] = [:]
     @Published var seeAllSectionDictionary: [String:Bool] = [:]
     @Published var seeAllSectionType: HomeSectionType = .categories
+    
+    var popularMoviesArray: [MovieCellModel] = []
+    var upcomingMoviesArray: [MovieCellModel] = []
+    var latestMoviesArray: [MovieCellModel] = []
+    var trendingMoviesArray: [MovieCellModel] = []
+    
     private let networkManager: NetworkProtocol
     private var cancellable = Set<AnyCancellable>()
-    
     
     init(_ networkManager: NetworkProtocol) {
         self.networkManager = networkManager
@@ -34,7 +35,7 @@ class HomeViewModel {
     //MARK: - fatchPopularMovies
     
     private func fatchPopularMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: PopularMovies.self)
+        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -44,44 +45,28 @@ class HomeViewModel {
                        print(error.localizedDescription, "parse error")
                    }
                } receiveValue: { movies in
-                   self.createMoviesModelsArray(movies)
+                   self.popularMoviesArray = self.createArrayModels(movies)
                }
                .store(in: &cancellable)
        }
-    
-    private func createMoviesModelsArray(_ dataMovies: PopularMovies) {
-        let resultsArray = dataMovies.results
-        resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
-            popularMoviesArray.append(cellModel)
-        }
-    }
-    
+
     //MARK: - "free to watch" TMDB don't have (i use upcoming api)
     
     private func fatchFreeToWatchMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.upcomingMovies(), type: UpcomingMovies.self)
+        networkManager.fetchMovies(urlString: UrlCreator.upcomingMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
-                       break
+                       self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
                        print(error.localizedDescription, "parse error upcomming")
                    }
                } receiveValue: { movies in
-                   self.createMoviesModelsArray(movies)
+                   self.upcomingMoviesArray = self.createArrayModels(movies)
                }
                .store(in: &cancellable)
        }
-    
-    private func createMoviesModelsArray(_ dataMovies: UpcomingMovies) {
-        let resultsArray = dataMovies.results
-        resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int(item.voteAverage*10), idMovie: item.id)
-            upcomingMoviesArray.append(cellModel)
-        }
-    }
     
     //MARK: - LatestTrailers Sections
     
@@ -90,31 +75,20 @@ class HomeViewModel {
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
-                       break
+                       self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
                        print(error.localizedDescription, "parse error latest Trailers")
                    }
                } receiveValue: { movies in
-                   
-                   self.latestMoviesArray = self.createMoviesArrayModels(movies)
+                   Task {
+                       
+                       self.latestMoviesArray = try await self.createMoviesArrayModels(movies)
+                       self.shouldReloadCollection = true
+                   }
                }
                .store(in: &cancellable)
        }
-    
-    private func createMoviesArrayModels(_ data: MainResultsMovies) -> [MovieCellModel] {
-        guard let resultsArray = data.movies else {return []}
-        
-        var arrayMovies = [MovieCellModel]()
-        
-        resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: item.percent, idMovie: item.id)
-            arrayMovies.append(cellModel)
-        }
-        
-        return arrayMovies
-    }
-    
     
     //MARK: - TrendingMovies
     
@@ -124,24 +98,59 @@ class HomeViewModel {
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
-                       break
+                       self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
                        print(error.localizedDescription, "parse error trending")
                    }
                } receiveValue: { movies in
-                   self.createMoviesModelsArray(movies)
+                   self.trendingMoviesArray = self.createArrayModels(movies)
                }
                .store(in: &cancellable)
        }
     
-    private func createMoviesModelsArray(_ dataMovies: MainResultsMovies) {
-        guard let resultsArray = dataMovies.movies else {return}
-        trendingMoviesArray = []
-        resultsArray.forEach { item in
-            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: Int((item.voteAverage ?? 0)*10), idMovie: item.id)
-            trendingMoviesArray.append(cellModel)
+    //MARK: - Helpers functions
+    
+    private func createArrayModels(_ data: MainResultsMovies) -> [MovieCellModel] {
+        guard let resultsArray = data.movies else {return []}
+        
+        var arrayMovies = [MovieCellModel]()
+        
+        for item in resultsArray {
+            
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: item.percent, idMovie: item.id, releaseData: item.releaseDate)
+            
+            arrayMovies.append(cellModel)
         }
+        return arrayMovies
+    }
+    
+    private func createMoviesArrayModels(_ data: MainResultsMovies) async throws -> [MovieCellModel] {
+        guard let resultsArray = data.movies else {return []}
+        
+        var arrayMovies = [MovieCellModel]()
+        
+        for item in resultsArray {
+            
+            let imageUrl = try await getImageURLPath(id: item.id)
+            
+            let cellModel = MovieCellModel(imageUrl: item.posterFullPath, title: item.title, percent: item.percent, idMovie: item.id, imageFullHDUrl: imageUrl, releaseData: item.releaseDate)
+            
+            arrayMovies.append(cellModel)
+        }
+        return arrayMovies
+    }
+    
+    private func getImageURLPath(id: Int?) async throws -> String? {
+        
+        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
+        let (data, _) = try await URLSession.shared.data(from: urlString)
+        
+        let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
+        let item = imageModels.backdrops.first { item in
+            item.height < 1100
+        }
+        return UrlCreator.imageUrl(item?.filePath)
     }
     
     //MARK: - builder of Sections
