@@ -7,6 +7,10 @@
 
 import AsyncDisplayKit
 
+protocol DetailMovieDelegate {
+    func openDetailScreen(_ model: MovieCellModel)
+}
+
 class RecomendationCollection: ASCollectionNode {
     
     private let isRecomendation: Bool
@@ -17,11 +21,13 @@ class RecomendationCollection: ASCollectionNode {
         return collectionViewFlowLayout
     }()
     
+    var detailDelegate: DetailMovieDelegate?
     private let movies: [MovieCellModel]
     
-    init(movies: [MovieCellModel], isRecomendation: Bool = true ) {
+    init(movies: [MovieCellModel], isRecomendation: Bool = true, delegate: DetailMovieDelegate?) {
         self.movies = movies
         self.isRecomendation = isRecomendation
+        self.detailDelegate = delegate
         super.init(frame: .zero, collectionViewLayout: collectionFlowLayout, layoutFacilitator: nil)
         self.automaticallyManagesSubnodes = true
         self.delegate = self
@@ -58,6 +64,6 @@ extension RecomendationCollection: ASCollectionDelegate, ASCollectionDataSource 
     
     func collectionNode(_ collectionNode: ASCollectionNode, didSelectItemAt indexPath: IndexPath) {
         let movie = movies[indexPath.item]
-        print(movie.title)
+        detailDelegate?.openDetailScreen(movie)
     }
 }

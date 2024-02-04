@@ -204,7 +204,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case .latestTrailers:
                 self.homeViewModel.latestMoviesArray.shuffle()
             case .trending:
-                self.homeViewModel.fatchTrendingMovies(index)
+                self.homeViewModel.fetchTrendingMovies(index)
             }
         }
         
@@ -236,7 +236,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-    func playVideo(id: Int) {
+    private func playVideo(id: Int) {
         let vc = VideoViewController(movieID: id)
         vc.modalPresentationStyle = .fullScreen
         navigationController?.present(vc, animated: true)

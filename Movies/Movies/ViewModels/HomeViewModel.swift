@@ -29,7 +29,7 @@ class HomeViewModel {
         fatchPopularMovies()
         fetchLatestMovies()
         fatchFreeToWatchMovies()
-        fatchTrendingMovies()
+        fetchTrendingMovies()
     }
     
     //MARK: - fatchPopularMovies
@@ -75,14 +75,13 @@ class HomeViewModel {
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
-                       self.shouldReloadCollection = true
+                      break
                    case .failure(let error):
                        self.error = error
                        print(error.localizedDescription, "parse error latest Trailers")
                    }
                } receiveValue: { movies in
                    Task {
-                       
                        self.latestMoviesArray = try await self.createMoviesArrayModels(movies)
                        self.shouldReloadCollection = true
                    }
@@ -92,7 +91,7 @@ class HomeViewModel {
     
     //MARK: - TrendingMovies
     
-    func fatchTrendingMovies(_ index: Int = 0) {
+    func fetchTrendingMovies(_ index: Int = 0) {
         let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
         networkManager.fetchMovies(urlString: urlString, type: MainResultsMovies.self)
                .sink { сompletion in
@@ -145,7 +144,7 @@ class HomeViewModel {
         
         guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
         let (data, _) = try await URLSession.shared.data(from: urlString)
-        
+
         let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
         let item = imageModels.backdrops.first { item in
             item.height < 1100
