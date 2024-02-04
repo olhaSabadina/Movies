@@ -11,10 +11,12 @@ class RecomendationSection: ASDisplayNode {
     
     let headerTitle = ASTextNode()
     let collectionMovies: RecomendationCollection
+    var isRecommendation = true
         
     init(movies: [MovieCellModel], isRecomendation: Bool = true, delegate: DetailMovieDelegate? = nil) {
         //self.isRecomendation = isRecomendation
         self.collectionMovies = RecomendationCollection(movies: movies, isRecomendation: isRecomendation, delegate: delegate)
+        self.isRecommendation = isRecomendation
         super.init()
         self.automaticallyManagesSubnodes = true
         setHeader()
@@ -38,8 +40,8 @@ class RecomendationSection: ASDisplayNode {
         let attributesBold: [NSAttributedString.Key: Any] = [
             .font: UIFont.boldSystemFont(ofSize: 18),
             .foregroundColor: UIColor.black]
-        
-        headerTitle.attributedText = .init(string: "Recomendations", attributes: attributesBold)
+        let title = isRecommendation ? "Recomendations" : "Known For"
+        headerTitle.attributedText = .init(string: title, attributes:  attributesBold)
         collectionMovies.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(240))
     }
 }

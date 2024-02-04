@@ -21,6 +21,7 @@ class SearchTable: ASTableNode {
     var typeCell: TypeSearchCell = .short
     var completionAction: ((MovieCellModel) -> Void)?
     var headerDelegate: HeaderShowFullTable?
+    var openDetailDelegate: DetailMovieDelegate?
     
     init(source: [[MovieCellModel]] = [], typeCell: TypeSearchCell = .full) {
         self.typeCell = typeCell
@@ -58,9 +59,7 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
              header = HeaderForSections(headerData: .init(title: "Acting", type: .simple)) { type in
                 print("see all")
                  self.headerDelegate?.didShowFullTable()
-             } actionSegment: { _ in
-                 
-             }
+             } actionSegment: { _ in }
         }
         return header
     }
@@ -81,7 +80,8 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
         guard let cell = tableNode.nodeForRow(at: indexPath) as? SearchCell else { return }
-        completionAction?(cell.model)
+      //  completionAction?(cell.model)
+        openDetailDelegate?.openDetailScreen(cell.model)
     }
     
 }

@@ -23,6 +23,24 @@ enum UrlCreator: String {
     case youtube = "https://www.youtube.com/watch?v="
     case nowPlaying = "/now_playing"
     case castInMovie = "/credits"
+    case persone = "https://api.themoviedb.org/3/person/"
+    case biography = "/translations"
+    case acting = "/movie_credits?language=en-US"
+    case knownFor = "/combined_credits?language=en-US"
+    
+    //https://api.themoviedb.org/3/person/1729/combined_credits?language=en-US&api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1
+    
+    static func knownFor(id: Int) -> String {
+        persone.rawValue + "\(id)" + knownFor.rawValue + api.rawValue
+        }
+    
+    static func acting(id: Int) -> String {
+        persone.rawValue + "\(id)" + acting.rawValue + api.rawValue
+        }
+    
+    static func biography(id: Int) -> String {
+        persone.rawValue + "\(id)" + biography.rawValue + apiKey.rawValue
+        }
     
     static func castMovie(id: Int) -> String {
         base.rawValue + "/\(id)" + castInMovie.rawValue + apiKey.rawValue

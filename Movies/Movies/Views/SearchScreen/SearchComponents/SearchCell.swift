@@ -33,10 +33,20 @@ class SearchCell: ASCellNode {
     override func didLoad() {
         super.didLoad()
         setCell()
-        guard let urlPoster = model.imageFullHDUrl else {
+        var urlPoster: String? = ""
+        switch typeCell {
+        case .full:
+            urlPoster = model.imageFullHDUrl
+        case .medium:
+            urlPoster = model.imageUrl
+        case .short:
+            urlPoster = model.imageUrl
+        }
+        guard let imageMovie = urlPoster else {
             self.searchImage.backgroundColor = .gray
             return}
-        SDWebImageDownloader.shared.downloadImage(urlString: urlPoster) { self.searchImage.image = $0 }
+        
+        SDWebImageDownloader.shared.downloadImage(urlString: imageMovie) { self.searchImage.image = $0 }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -83,13 +93,13 @@ class SearchCell: ASCellNode {
         
         let textTitle = NSMutableAttributedString(string: model.title ?? "", attributes: attributesBold)
         
-        let yearMovie: NSAttributedString = .init(string: " | \(model.yearEnterMovie ?? 0)", attributes: mainAttributes)
+        let yearMovie: NSAttributedString = .init(string: " | \(model.releaseData?.prefix(4) ?? "n/d")", attributes: mainAttributes)
         
         var text = NSMutableAttributedString()
         
         if typeCell == .medium {
             textTitle.append(yearMovie)
-            text = NSMutableAttributedString(string: model.asHeroInFilm ?? "", attributes: mainAttributes)
+            text = NSMutableAttributedString(string: "as \(model.asHeroInFilm ?? "n/d")", attributes: mainAttributes)
             searchDescription.maximumNumberOfLines = 1
             
         } else if typeCell == .full {

@@ -14,7 +14,7 @@ class ActingSection: ASDisplayNode {
     let actingTable: SearchTable
     var isFullShow: Bool = false {
         didSet {
-            self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 500 : 300))
+            self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 600 : 300))
             
             self.setNeedsLayout()
         }
@@ -22,7 +22,7 @@ class ActingSection: ASDisplayNode {
     
     init(movies: [MovieCellModel] = searchMain) {
         self.movies = movies
-        self.actingTable = SearchTable(typeCell: .medium)
+        self.actingTable = SearchTable(source: [movies],typeCell: .medium)
         super.init()
         self.automaticallyManagesSubnodes = true
         setSection()

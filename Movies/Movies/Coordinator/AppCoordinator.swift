@@ -15,21 +15,12 @@ class AppCoordinator: BaseCoordinator {
     
     required init(_ navigationController: UINavigationController, type: CoordinatorType) {
         super.init(navigationController, type: type)
-//        let appearance = UINavigationBarAppearance()
-//        appearance.backgroundColor = .systemBackground
-//        appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
-//        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
-//        
-//        navigationController.navigationBar.tintColor = .label
-//        navigationController.navigationBar.standardAppearance = appearance
-//        navigationController.navigationBar.compactAppearance = appearance
-//        navigationController.navigationBar.scrollEdgeAppearance = appearance
         start()
     }
     
     override func start() {
-     //   sinkToSessionState()
-        coordinatorDidFinish(childCoordinator: .login)
+        sinkToSessionState()
+//        coordinatorDidFinish(childCoordinator: .login)
     }
     
     func sinkToSessionState() {

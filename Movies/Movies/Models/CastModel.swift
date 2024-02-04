@@ -27,6 +27,10 @@ struct Cast: Codable {
     let order: Int?
     let department: Department?
     let job: String?
+    
+    var genderCast: String {
+        Gender(rawValue: gender)?.title ?? "Unknow"
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult, gender, id
@@ -55,4 +59,26 @@ enum Department: String, Codable {
     case sound = "Sound"
     case visualEffects = "Visual Effects"
     case writing = "Writing"
+}
+
+// MARK: - ActorModel
+struct BiographyModel: Codable {
+    let id: Int
+    let translations: [Translation]
+}
+
+// MARK: - Translation
+struct Translation: Codable {
+    let name: String
+    let data: DataClass
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case data
+    }
+}
+
+// MARK: - DataClass
+struct DataClass: Codable {
+    let biography: String
 }

@@ -15,6 +15,8 @@ class ActorInfoSection: ASDisplayNode {
     private let gender = ASTextNode()
     private let actorDescription = ASTextNode()
     private let photo = ASImageNode()
+    let buttonSeeMore = ASButtonNode()
+    var isSeeMore = false
     
     init(model: MovieCellModel) {
         self.actorModel = model
@@ -24,7 +26,7 @@ class ActorInfoSection: ASDisplayNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
       
-        let rightTextStack = ASStackLayoutSpec(direction: .vertical, spacing: 5, justifyContent: .start, alignItems: .start, children: [name, gender, actorDescription])
+        let rightTextStack = ASStackLayoutSpec(direction: .vertical, spacing: 5, justifyContent: .start, alignItems: .start, children: [name, gender, actorDescription, buttonSeeMore])
         rightTextStack.style.flexShrink = 1
         
         let imageElement = ASRatioLayoutSpec(ratio: 1.38, child: photo)
@@ -52,12 +54,21 @@ class ActorInfoSection: ASDisplayNode {
             .foregroundColor: UIColor.gray]
         
         let actorName = NSMutableAttributedString(string: actorModel.title ?? "None", attributes: attributesBold)
-        let genderTitle: NSAttributedString = .init(string: "actorModel.actorGender", attributes: mainAttributes)
-        let description: NSAttributedString = .init(string: actorModel.description ?? "description", attributes: mainAttributes)
-
+        let genderTitle: NSAttributedString = .init(string: actorModel.gender ?? "None", attributes: mainAttributes)
+        let description: NSAttributedString = .init(string: actorModel.biography ?? "description", attributes: mainAttributes)
+        buttonSeeMore.setTitle("See More", with: .systemFont(ofSize: 14), with: .blue, for: .normal)
         name.attributedText = actorName
         gender.attributedText = genderTitle
         actorDescription.attributedText = description
+        buttonSeeMore.addTarget(self, action: #selector(seeMore), forControlEvents: .touchUpInside)
+        actorDescription.maximumNumberOfLines = 6
+    }
+    
+    @objc func seeMore() {
+        isSeeMore.toggle()
+        buttonSeeMore.setTitle(isSeeMore ? "See Less" : "See More", with: .systemFont(ofSize: 13), with: isSeeMore ? .red : .blue, for: .normal)
+        actorDescription.maximumNumberOfLines = isSeeMore ? 0 : 7
+        self.setNeedsLayout()
     }
 }
 

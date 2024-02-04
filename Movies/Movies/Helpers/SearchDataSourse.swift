@@ -26,12 +26,6 @@ let mocForSocialSection = [
     SocialCellModel(text: "There are no discussions for Loki. Login to be first!")
 ]
 
-let mocForMedia = [
-    MediaModelCell(movieUrl: "https://www.w3schools.com/html/mov_bbb.mp4", moviePoster: "https://www.shutterstock.com/shutterstock/photos/2394491791/display_1500/stock-photo-welcome-the-new-year-with-a-realistic-gold-ribbon-on-a-black-background-explore-our-greeting-2394491791.jpg"),
-    MediaModelCell(movieUrl: "https://www.w3schools.com/html/mov_bbb.mp4" , moviePoster: "https://image.tmdb.org/t/p/original/qhb1qOilapbapxWQn9jtRCMwXJF.jpg?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"),
-//    MediaModelCell(movieUrl: "https://www.shutterstock.com/shutterstock/photos/2394491791/display_1500/stock-photo-welcome-the-new-year-with-a-realistic-gold-ribbon-on-a-black-background-explore-our-greeting-2394491791.jpg")
-]
-
 let mocForRecomendationSection = [
 MovieCellModel(imageUrl: "https://www.shutterstock.com/shutterstock/photos/2394491791/display_1500/stock-photo-welcome-the-new-year-with-a-realistic-gold-ribbon-on-a-black-background-explore-our-greeting-2394491791.jpg", title: "Ragnarok", description: nil, percent: 67),
 MovieCellModel(imageUrl: "https://www.shutterstock.com/shutterstock/photos/2394491791/display_1500/stock-photo-welcome-the-new-year-with-a-realistic-gold-ribbon-on-a-black-background-explore-our-greeting-2394491791.jpg", title: "Jupiter's Legacy", description: nil, percent: 35),

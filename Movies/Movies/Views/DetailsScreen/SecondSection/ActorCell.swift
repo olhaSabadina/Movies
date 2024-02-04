@@ -19,14 +19,13 @@ class ActorCell: ASCellNode {
         self.actorModel = actorModel
         super.init()
         self.automaticallyManagesSubnodes = true
+        setCell()
     }
     
     override func didLoad() {
         super.didLoad()
-        setCell()
-        SDWebImageDownloader.shared.downloadImage(urlString: actorModel.imageUrl ?? "") { 
-            print(self.actorModel.imageUrl ?? "mmm")
-            self.actorPhoto.image = $0 }
+        
+        
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -60,6 +59,9 @@ class ActorCell: ASCellNode {
         actorPhoto.cornerRadius = 3
         actorName.attributedText = .init(string: actorModel.title ?? "Unknow", attributes: attributesName)
         filmName.attributedText = .init(string: actorModel.asHeroInFilm ?? "None", attributes: attributesFilm)
+        
+        SDWebImageDownloader.shared.downloadImage(urlString: actorModel.imageUrl ?? "") {
+            self.actorPhoto.image = $0 }
     }
 }
 

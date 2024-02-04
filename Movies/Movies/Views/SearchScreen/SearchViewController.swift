@@ -46,10 +46,7 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
         setSearchController()
         sinkToIsShouldReloadTable()
         navigationItem.backButtonTitle = ""
-        tableSearch.completionAction = { search in
-            let vc = DetailsViewController(model: search)
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        tableSearch.openDetailDelegate = self
     }
     
     func reload(isSearch: Bool) {
@@ -99,5 +96,12 @@ extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate 
         } else{
             isSearch = false
         }
+    }
+}
+
+extension SearchViewController: DetailMovieDelegate {
+    func openDetailScreen(_ model: MovieCellModel) {
+        let vc = DetailsViewController(model: model)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

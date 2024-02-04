@@ -8,10 +8,12 @@
 import AsyncDisplayKit
 import AVKit
 import AVFoundation
+import Combine
 
 class ActorsViewController: ASDKViewController<ASScrollNode> {
-
-    private let actorModel: MovieCellModel
+    
+    private let viewModel: ActorViewModel
+    private var cancellable = Set<AnyCancellable>()
     
     private let rootNode: ASScrollNode = {
        let rootNode = ASScrollNode()
@@ -24,12 +26,12 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
         return rootNode
     }()
     
-    let actorInfoSection: ActorInfoSection
-    let knownForSection: RecomendationSection
-    let actingSection: ActingSection
+    var actorInfoSection: ActorInfoSection
+    var knownForSection: RecomendationSection
+    var actingSection: ActingSection
     
     init(actorModel: MovieCellModel) {
-        self.actorModel = actorModel
+        self.viewModel = ActorViewModel(model: actorModel)
         actorInfoSection = ActorInfoSection(model: actorModel)
         knownForSection = RecomendationSection(movies: mocForRecomendationSection, isRecomendation: false)
         actingSection = ActingSection(movies: mocForActingSection)
@@ -58,13 +60,27 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
     
     override func loadView() {
         super.loadView()
-        didSelectActingMovies()
+        sinkToProperties()
     }
     
-    private func didSelectActingMovies() {
-        actingSection.actingTable.completionAction = {model in
-            print(model.title ?? "")
-        }
+    private func sinkToProperties() {
+        viewModel.$shouldReload
+            .receive(on: DispatchQueue.main)
+            .sink { isLoad in
+                self.actorInfoSection = ActorInfoSection(model: self.viewModel.model)
+                self.knownForSection = RecomendationSection(movies: self.viewModel.recommendationsArray, isRecomendation: false, delegate: self)
+                self.actingSection = ActingSection(movies: self.viewModel.actingArray)
+                self.actingSection.actingTable.openDetailDelegate = self
+                self.rootNode.setNeedsLayout()
+            }
+            .store(in: &cancellable)
+    }
+}
+
+extension ActorsViewController: DetailMovieDelegate {
+    func openDetailScreen(_ model: MovieCellModel) {
+        let vc = DetailsViewController(model: model)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

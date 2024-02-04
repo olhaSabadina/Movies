@@ -27,7 +27,7 @@ class SecondSection: ASDisplayNode {
     private var collectionHeightConstraint: ASLayoutElementSize?
     
     
-    init(typeBtn: HeaderType, sectionData: [MovieCellModel], actionBtn: ( (HeaderType) -> Void)? = nil) {
+    init(typeBtn: HeaderType, sectionData: [MovieCellModel], actionBtn: ( (HeaderType) -> Void)? = nil, delegate: ActorInfo? = nil) {
         self.buttonSeeAll = ASButtonNode()
         self.collectionActor = ActorsCollection(actors: sectionData)
         self.actionBtn = actionBtn
@@ -35,6 +35,7 @@ class SecondSection: ASDisplayNode {
         self.sectionData = sectionData
         
         super.init()
+        collectionActor.openActorInfoDelegate = delegate
         self.automaticallyManagesSubnodes = true
         setHeader()
         

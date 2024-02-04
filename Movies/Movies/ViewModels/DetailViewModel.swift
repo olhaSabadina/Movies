@@ -140,8 +140,7 @@ class DetailViewModel {
         var arrayCasts = [MovieCellModel]()
         
         for item in result.cast {
-            
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character, idMovie: item.id)
+            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character, genderPersone: item.genderCast, idPersone: item.id)
             
             arrayCasts.append(cellModel)
         }

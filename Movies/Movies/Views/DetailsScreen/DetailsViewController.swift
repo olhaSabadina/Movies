@@ -81,7 +81,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink { isLoad in
                 self.mainSection = MainSection(headerData: self.viewModel.headerData)
-                self.secondSection = SecondSection(typeBtn: .simple, sectionData: self.viewModel.castArray)
+                self.secondSection = SecondSection(typeBtn: .simple, sectionData: self.viewModel.castArray, delegate: self)
                 self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations, delegate: self)
                 self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
                 self.playVideo()
