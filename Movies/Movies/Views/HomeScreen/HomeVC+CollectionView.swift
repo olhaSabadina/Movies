@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YouTubeiOSPlayerHelper
 
 extension HomeViewController {
     
@@ -101,7 +102,7 @@ extension HomeViewController {
             
             let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(0.5), spacing: 0)
             item.contentInsets.bottom = 10
-            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.5)), items: [item, item])
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.65), height: .fractionalHeight((0.5)), items: [item, item])
             
             itemsGroup = group
             
@@ -109,7 +110,7 @@ extension HomeViewController {
             
             let item = CompositionalLayout.createItem(width: .fractionalWidth(1), height: .fractionalHeight(1), spacing: 0)
             item.contentInsets.bottom = 10
-            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.75), height: .fractionalHeight((0.25)), items: [item])
+            let group = CompositionalLayout.createGroupeItems(aligment: .vertical, width: .fractionalWidth(0.65), height: .fractionalHeight((0.25)), items: [item])
             
             itemsGroup = group
         }
@@ -145,7 +146,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .categories:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identCell, for: indexPath) as? CategoriesCell else { return UICollectionViewCell()}
-            cell.categoriesButton.setTitle(homeViewModel.categoriesTitle[indexPath.item], for: .normal)
+            cell.categoriesButton.setTitle(HomeSectionType.categoriesTitle[indexPath.item], for: .normal)
             return cell
             
         case .popular:
@@ -160,8 +161,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .latestTrailers:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LatestTrailersCell.identCell, for: indexPath) as? LatestTrailersCell else { return UICollectionViewCell()}
-            cell.persentLabel.text = homeViewModel.moviesTitle[indexPath.item]
-            cell.moviesNameLabel.text = homeViewModel.moviesTitle[indexPath.item]
+            cell.model = homeViewModel.latestMoviesArray[indexPath.item]
             return cell
             
         case .trending:
@@ -192,10 +192,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         header.segmentAction = { index in
-            
-            // TODO: - настройка экшинов по сегментам
-            
-            print(index, "segment index", header.sectionType.headerTitle ?? "iop")
             self.homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] = index
             
             switch header.sectionType {
@@ -206,7 +202,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case .freeWatch:
                 self.homeViewModel.upcomingMoviesArray.shuffle()
             case .latestTrailers:
-                break
+                self.homeViewModel.latestMoviesArray.shuffle()
             case .trending:
                 self.homeViewModel.fatchTrendingMovies(index)
             }
@@ -223,14 +219,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             break
             
-        case .popular, .freeWatch, .trending, .latestTrailers:
+        case .popular, .freeWatch, .trending:
             guard let cell = collectionView.cellForItem(at: indexPath) as? BaseHomeCell,
                   let model = cell.model
             else { return }
             
             let detailVC = DetailsViewController(model: model)
             navigationController?.pushViewController(detailVC, animated: true)
+            
+        case .latestTrailers:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BaseHomeCell,
+                  let movieID = cell.model?.idMovie
+            else { return }
+            
+            self.playVideo(id: movieID)
         }
     }
     
+    func playVideo(id: Int) {
+        let vc = VideoViewController(movieID: id)
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
+    }
 }

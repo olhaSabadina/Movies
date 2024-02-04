@@ -21,24 +21,23 @@ class HomeViewController: UIViewController {
         setCollectionView()
         setConstraints()
         gradienLayer()
-        sincToProperties()
-        sincToPopularMoviesArray()
-        sincToUpcomingMoviesArray()
-        sincToTrendingMoviesArray()
+        sinkToPopularMoviesArray()
+        sinkToProperties()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
     }
     
     //MARK: - private Functions:
     
-    private func sincToProperties() {
+    private func sinkToProperties() {
         homeViewModel.$seeAllSectionType
             .receive(on: DispatchQueue.main)
             .dropFirst()
@@ -46,38 +45,26 @@ class HomeViewController: UIViewController {
                 self.reloadCollection()
         }
         .store(in: &cancellable)
-    }
-    
-    private func sincToPopularMoviesArray() {
-        homeViewModel.$popularMoviesArray
+        
+        homeViewModel.$segmentSectionsIndex
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink { type in
                 self.reloadCollection()
         }
         .store(in: &cancellable)
+        
     }
     
-    private func sincToUpcomingMoviesArray() {
-        homeViewModel.$upcomingMoviesArray
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
+    private func sinkToPopularMoviesArray() {
+        
+        homeViewModel.$shouldReloadCollection
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink { type in
                 self.reloadCollection()
             }
             .store(in: &cancellable)
     }
-    
-    private func sincToTrendingMoviesArray() {
-        homeViewModel.$trendingMoviesArray
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink { type in
-                self.reloadCollection()
-        }
-        .store(in: &cancellable)
-    }
-    
     
     func reloadCollection() {
         DispatchQueue.main.async {
