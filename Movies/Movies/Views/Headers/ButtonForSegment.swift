@@ -9,8 +9,8 @@ import UIKit
 
 class ButtonForSegment: UIView {
     
-    let titleLabel = UILabel()
-    let bottomLine = UIView()
+    private let titleLabel = UILabel()
+    private let bottomLine = UIView()
     var isSelected = false {
         didSet {
             changeStateButton()

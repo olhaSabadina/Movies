@@ -31,7 +31,7 @@ final class AuthorizedManager: NSObject {
     private var handle: AuthStateDidChangeListenerHandle?
     
     func setupFirebaseAuth() {
-        handle = Auth.auth().addStateDidChangeListener {[weak self] auth, user in
+        handle = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             guard let self = self else { return }
             self.sessionState = user == nil ? .loggedOut : .loggedIn
             guard let user = user else { return }

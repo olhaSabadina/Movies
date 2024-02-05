@@ -2,7 +2,7 @@
 //  UIImage+extension.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 10.01.2024.
+//  Created by Olga Sabadina on 10.01.2024.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ extension UIImage {
     static func getPersonImage() -> UIImage? {
         if let imageData = UserDefaults.standard.data(forKey: TitleConstants.userImage) {
             let image = UIImage(data: imageData)
-            
             return image
         } else {
             return ImageConstants.person
@@ -32,7 +31,6 @@ extension UIImage {
             if resizeSize.height > newSize.height {
                 middle.y -= (resizeSize.height-newSize.height)/1.0
             }
-            
             draw(in: CGRect(origin: .zero, size: resizeSize))
         }
     }

@@ -55,7 +55,6 @@ class AppCoordinator: BaseCoordinator {
         tabCoordinator.appCoordinator = self
         tabCoordinator.start()
         childCoordinators.append(tabCoordinator)
-        
     }
 }
 

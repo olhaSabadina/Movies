@@ -2,7 +2,7 @@
 //  HeaderDetailName.swift
 //  Movies
 //
-//  Created by Olga Sabadinaon 24.01.2024.
+//  Created by Olga Sabadina on 24.01.2024.
 //
 
 import AsyncDisplayKit

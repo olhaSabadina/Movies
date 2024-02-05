@@ -9,10 +9,10 @@ import AsyncDisplayKit
 
 class ConvenieceButton: ASDisplayNode {
     
-    let title = ASTextNode()
-    let image = ASImageNode()
-    let typeBtn: ButtonsConvenienе
-    let actionCompletion: ((ButtonsConvenienе) -> Void)?
+    private let title = ASTextNode()
+    private let image = ASImageNode()
+    private let typeBtn: ButtonsConvenienе
+    private let actionCompletion: ((ButtonsConvenienе) -> Void)?
     
     init(type: ButtonsConvenienе, actionCompletion: ((ButtonsConvenienе) -> Void)?) {
         self.typeBtn = type

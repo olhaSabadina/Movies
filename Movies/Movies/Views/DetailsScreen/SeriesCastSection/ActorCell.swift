@@ -10,22 +10,16 @@ import AsyncDisplayKit
 
 class ActorCell: ASCellNode {
     
-    let actorModel: MovieCellModel
-    let actorPhoto = ASImageNode()
-    let actorName = ASTextNode()
-    let filmName = ASTextNode()
+    private let actorModel: MovieCellModel
+    private let actorPhoto = ASImageNode()
+    private let actorName = ASTextNode()
+    private let filmName = ASTextNode()
     
     init(actorModel: MovieCellModel) {
         self.actorModel = actorModel
         super.init()
         self.automaticallyManagesSubnodes = true
         setCell()
-    }
-    
-    override func didLoad() {
-        super.didLoad()
-        
-        
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

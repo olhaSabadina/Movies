@@ -14,6 +14,8 @@ protocol ActorInfo {
 class ActorsCollection: ASCollectionNode {
     
     var openActorInfoDelegate: ActorInfo?
+    var isFull: Bool = false
+    private let actors: [MovieCellModel]
     
     private let collectionFlowLayout: UICollectionViewFlowLayout = {
         let collectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -21,9 +23,6 @@ class ActorsCollection: ASCollectionNode {
         collectionViewFlowLayout.minimumInteritemSpacing = 0
         return collectionViewFlowLayout
     }()
-    
-    var isFull: Bool = false
-    private let actors: [MovieCellModel]
     
     init(actors: [MovieCellModel]) {
         self.actors = actors
@@ -64,4 +63,3 @@ extension ActorsCollection: ASCollectionDelegate, ASCollectionDataSource {
         openActorInfoDelegate?.didOpenActorInfo(actor)
     }
 }
-

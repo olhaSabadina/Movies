@@ -18,7 +18,7 @@ class SocialTable: ASTableNode {
         }
     }
     
-    init(socials: [SocialCellModel]) {
+    init(socials: [SocialCellModel] = []) {
         self.socials = socials
         super.init(style: .plain)
         self.dataSource = self

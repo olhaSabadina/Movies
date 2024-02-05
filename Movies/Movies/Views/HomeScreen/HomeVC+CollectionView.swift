@@ -95,7 +95,6 @@ extension HomeViewController {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
-        
         let itemsGroup: NSCollectionLayoutGroup
         
         if seeAll {
@@ -123,7 +122,6 @@ extension HomeViewController {
         
         return section
     }
-    
 }
     
 //  MARK: - CollectionViewDelegate,DataSours:

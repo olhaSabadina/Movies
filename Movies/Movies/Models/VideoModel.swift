@@ -2,7 +2,7 @@
 //  VideoModel.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 04.02.2024.
+//  Created by Olga Sabadina on 04.02.2024.
 //
 import Foundation
 

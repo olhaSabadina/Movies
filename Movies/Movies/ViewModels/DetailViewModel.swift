@@ -85,7 +85,7 @@ class DetailViewModel {
     }
     
     private func createMoviesArrayModels(_ data: MainResultsMovies) -> [MovieCellModel] {
-        guard let resultsArray = data.movies else {return []}
+        guard let resultsArray = data.movies else { return [] }
         
         var arrayMovies = [MovieCellModel]()
         
@@ -100,7 +100,7 @@ class DetailViewModel {
     
     func fetchVideoUrl(completion: @escaping (String)-> Void) {
         
-        guard let id = model.idMovie else {return}
+        guard let id = model.idMovie else { return }
 
         networkManager.fetchMovies(urlString: UrlCreator.videoKey(for: id), type: VideoModel.self)
             .sink { completion in
@@ -111,7 +111,7 @@ class DetailViewModel {
                     self.error = error
                 }
             } receiveValue: { model in
-                guard let key = model.results.first?.key else {return}
+                guard let key = model.results.first?.key else { return }
                 completion(key)
             }
             .store(in: &cancellable)
@@ -119,7 +119,7 @@ class DetailViewModel {
     
     func fetchCastMovies() {
         
-        guard let id = model.idMovie else {return}
+        guard let id = model.idMovie else { return }
         
         networkManager.fetchMovies(urlString: UrlCreator.castMovie(id: id), type: CastModel.self)
             .sink { completion in
@@ -149,7 +149,7 @@ class DetailViewModel {
     
     private func createMoviesArrayModels() async throws {
         
-        guard let id = model.idMovie else {return}
+        guard let id = model.idMovie else { return }
         
         var arrayMovies = [MovieCellModel]()
         
@@ -165,7 +165,7 @@ class DetailViewModel {
     
     private func getImageURLPath(id: Int?) async throws -> String? {
         
-        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
+        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL) }
         let (data, _) = try await URLSession.shared.data(from: urlString)
         
         let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)

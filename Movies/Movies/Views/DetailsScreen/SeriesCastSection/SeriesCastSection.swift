@@ -5,16 +5,16 @@
 //  Created by Olga Sabadina on 24.01.2024.
 //
 
-
 import AsyncDisplayKit
 
-class SecondSection: ASDisplayNode {
+class SeriesCastSection: ASDisplayNode {
     
-    let headerTitle = ASTextNode()
-    var buttonSeeAll: ASButtonNode
-    var actionBtn: ((HeaderType) -> Void)?
-    let typeBtn: HeaderType
-    let sectionData: [MovieCellModel]
+    private var buttonSeeAll: ASButtonNode
+    private var actionBtn: ((HeaderType) -> Void)?
+    private var collectionHeightConstraint: ASLayoutElementSize?
+    private let headerTitle = ASTextNode()
+    private let typeBtn: HeaderType
+    private let sectionData: [MovieCellModel]
     let collectionActor: ActorsCollection
     var isFullShow: Bool = false {
         didSet {
@@ -24,10 +24,7 @@ class SecondSection: ASDisplayNode {
         }
     }
     
-    private var collectionHeightConstraint: ASLayoutElementSize?
-    
-    
-    init(typeBtn: HeaderType, sectionData: [MovieCellModel], actionBtn: ( (HeaderType) -> Void)? = nil, delegate: ActorInfo? = nil) {
+    init(typeBtn: HeaderType = .simple, sectionData: [MovieCellModel] = [], actionBtn: ( (HeaderType) -> Void)? = nil, delegate: ActorInfo? = nil) {
         self.buttonSeeAll = ASButtonNode()
         self.collectionActor = ActorsCollection(actors: sectionData)
         self.actionBtn = actionBtn

@@ -68,7 +68,7 @@ class HomeViewModel {
                .store(in: &cancellable)
        }
     
-    //MARK: - LatestTrailers Sections
+    //MARK: - LatestTrailers Sections (i use nowPlayingMovies api)
     
     private func fetchLatestMovies() {
         networkManager.fetchMovies(urlString: UrlCreator.nowPlayingMovies(), type: MainResultsMovies.self)

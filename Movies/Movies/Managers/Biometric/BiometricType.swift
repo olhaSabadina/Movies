@@ -2,7 +2,7 @@
 //  BiometricType.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 14.01.2024.
+//  Created by Olga Sabadina on 14.01.2024.
 //
 
 import Foundation

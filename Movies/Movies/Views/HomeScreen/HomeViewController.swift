@@ -11,9 +11,9 @@ import Combine
 class HomeViewController: UIViewController {
     
     var didSendEventClosure: ((TabBarPage) -> Void)?
-    private var cancellable = Set<AnyCancellable>()
     var collectionView: UICollectionView?
     let homeViewModel = HomeViewModel(NetworkManager())
+    private var cancellable = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +53,9 @@ class HomeViewController: UIViewController {
                 self.reloadCollection()
         }
         .store(in: &cancellable)
-        
     }
     
     private func sinkToPopularMoviesArray() {
-        
         homeViewModel.$shouldReloadCollection
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink { type in

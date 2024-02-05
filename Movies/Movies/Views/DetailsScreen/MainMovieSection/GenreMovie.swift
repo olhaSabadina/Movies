@@ -9,9 +9,9 @@ import AsyncDisplayKit
 
 class GenreMovie: ASDisplayNode {
     
-    var labels: [ASButtonNode] = []
-    let headerData: MainSectionModel
-    let descriptionLabel = ASTextNode()
+    private var labels: [ASButtonNode] = []
+    private let headerData: MainSectionModel
+    private let descriptionLabel = ASTextNode()
     
     init(_ headerData: MainSectionModel) {
         self.headerData = headerData
@@ -59,5 +59,4 @@ class GenreMovie: ASDisplayNode {
             descriptionLabel.attributedText = .init(string: description, attributes: mainAttributes)
         }
     }
-    
 }

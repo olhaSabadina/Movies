@@ -7,7 +7,6 @@
 import SDWebImage
 import UIKit
 
-
 class HomeCell: BaseHomeCell {
     
     static var identCell = "homeCell"

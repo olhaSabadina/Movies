@@ -2,7 +2,7 @@
 //  MainResultsMovies.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 03.02.2024.
+//  Created by Olga Sabadina on 03.02.2024.
 //
 
 struct MainResultsMovies: Codable {

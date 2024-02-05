@@ -42,6 +42,8 @@ extension UIView {
     }
 }
 
+// MARK: - circleStrokeView for ASDisplayNode
+
 import AsyncDisplayKit
 
 extension ASDisplayNode {

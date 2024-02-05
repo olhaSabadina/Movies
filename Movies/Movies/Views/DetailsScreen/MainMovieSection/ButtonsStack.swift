@@ -9,8 +9,8 @@ import AsyncDisplayKit
 
 class ButtonsStack: ASDisplayNode {
     
-    var buttonsArray: [ASDisplayNode] = []
-    var actionBtn: ((ButtonsConvenienе) -> Void)?
+    private var buttonsArray: [ASDisplayNode] = []
+    private var actionBtn: ((ButtonsConvenienе) -> Void)?
     
     init(actionBtn: ((ButtonsConvenienе) -> Void)?) {
         self.actionBtn = actionBtn
@@ -44,7 +44,6 @@ class ButtonsStack: ASDisplayNode {
             buttonsArray.append(buttonConvenient)
         }
     }
-    
 }
 
 enum ButtonsConvenienе: CaseIterable {

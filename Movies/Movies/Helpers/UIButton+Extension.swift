@@ -2,7 +2,7 @@
 //  UIButton+Extension.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 09.01.2024.
+//  Created by Olga Sabadina on 09.01.2024.
 //
 
 import UIKit

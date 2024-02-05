@@ -2,7 +2,7 @@
 //  ActorViewModel.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 04.02.2024.
+//  Created by Olga Sabadina on 04.02.2024.
 //
 import Combine
 import Foundation
@@ -21,7 +21,6 @@ class ActorViewModel {
     }
     
     func prepareForShowData() {
-        print("Init")
         Task {
             model.biography = try await getBiography(idPersone: model.idPersone)
             let recommendActing = try await getActing(urlString: UrlCreator.knownFor(id: model.idPersone ?? 0))
@@ -34,7 +33,7 @@ class ActorViewModel {
     
     private func getBiography(idPersone: Int?) async throws -> String? {
         
-        guard let idPersone, let urlString = URL(string: UrlCreator.biography(id: idPersone)) else { throw URLError(.badURL)}
+        guard let idPersone, let urlString = URL(string: UrlCreator.biography(id: idPersone)) else { throw URLError(.badURL) }
         let (data, _) = try await URLSession.shared.data(from: urlString)
         
         let biographyModels = try JSONDecoder().decode(BiographyModel.self, from: data)

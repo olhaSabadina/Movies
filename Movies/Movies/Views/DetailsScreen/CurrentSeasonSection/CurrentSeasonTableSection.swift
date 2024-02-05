@@ -1,5 +1,5 @@
 //
-//  ThirdTableSection.swift
+//  CurrentSeasonSection.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 26.01.2024.
@@ -7,7 +7,7 @@
 
 import AsyncDisplayKit
 
-class ThirdTableSection: ASTableNode {
+class CurrentSeasonTableSection: ASTableNode {
     
     var movies: [MovieCellModel] = []
     var completionAction: ((MovieCellModel) -> Void)?
@@ -20,7 +20,7 @@ class ThirdTableSection: ASTableNode {
         }
     }
     
-    init(movies: [MovieCellModel], sectionTitle: String) {
+    init(movies: [MovieCellModel] = [], sectionTitle: String) {
         self.movies = movies
         self.sectionTitle = sectionTitle
         super.init(style: .plain)
@@ -32,7 +32,7 @@ class ThirdTableSection: ASTableNode {
     }
 }
 
-extension ThirdTableSection: ASTableDelegate, ASTableDataSource {
+extension CurrentSeasonTableSection: ASTableDelegate, ASTableDataSource {
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         1
@@ -59,12 +59,12 @@ extension ThirdTableSection: ASTableDelegate, ASTableDataSource {
     
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         let movie = movies[indexPath.row]
-        return { TableSectionCell(model: movie) }
+        return { CurrentSeasonTableCell(model: movie) }
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        guard let cell = tableNode.nodeForRow(at: indexPath) as? TableSectionCell else {return}
+        guard let cell = tableNode.nodeForRow(at: indexPath) as? CurrentSeasonTableCell else {return}
         completionAction?(cell.model)
         print(cell.model.title)
     }

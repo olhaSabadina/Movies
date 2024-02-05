@@ -125,8 +125,6 @@ class TabCoordinator: BaseCoordinator {
             
         case .search:
             let searchVC = SearchViewController()
-            
-            
             searchVC.title = page.title
             navController.pushViewController(searchVC, animated: true)
             
@@ -144,14 +142,14 @@ class TabCoordinator: BaseCoordinator {
             
         case .profile:
             let profileVC = ProfileViewController()
-            
             navController.pushViewController(profileVC, animated: true)
         }
-        
         return navController
     }
     
-    func currentPage() -> TabBarPage? { TabBarPage.init(index: tabBarController.selectedIndex) }
+    func currentPage() -> TabBarPage? {
+        TabBarPage.init(index: tabBarController.selectedIndex)
+    }
     
     func selectPage(_ page: TabBarPage) {
         tabBarController.selectedIndex = page.pageOrderNumber()
@@ -159,12 +157,12 @@ class TabCoordinator: BaseCoordinator {
     
     func setSelectedIndex(_ index: Int) {
         guard let page = TabBarPage.init(index: index) else { return }
-        
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
 }
 
 // MARK: - UITabBarControllerDelegate
+
 extension TabCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {

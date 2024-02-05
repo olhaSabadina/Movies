@@ -33,8 +33,8 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
     init(actorModel: MovieCellModel) {
         self.viewModel = ActorViewModel(model: actorModel)
         actorInfoSection = ActorInfoSection(model: actorModel)
-        knownForSection = RecomendationSection(movies: mocForRecomendationSection, isRecomendation: false)
-        actingSection = ActingSection(movies: mocForActingSection)
+        knownForSection = RecomendationSection(isRecomendation: false)
+        actingSection = ActingSection()
         
         super.init(node: rootNode)
         

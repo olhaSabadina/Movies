@@ -12,10 +12,10 @@ class HeaderCell: UICollectionReusableView {
     
     static let identCell = "headerCell"
     
-    var actionSeeAll: (()->Void)?
-    var segmentAction: ((Int)->Void)?
     private var headerLabel = UILabel()
     private let seeAllButton = UIButton(type: .system)
+    var actionSeeAll: (()->Void)?
+    var segmentAction: ((Int)->Void)?
     var selectedSegmentIndex = 0
     var isStateSeeAll: Bool = false {
         didSet {

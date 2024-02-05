@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class CategoriesCell: UICollectionViewCell {
     
     static var identCell = "categoriesCell"
@@ -52,5 +50,4 @@ class CategoriesCell: UICollectionViewCell {
             categoriesButton.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
-    
 }

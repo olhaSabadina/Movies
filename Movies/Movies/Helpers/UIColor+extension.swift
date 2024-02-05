@@ -2,7 +2,7 @@
 //  UIColor+extension.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 09.01.2024.
+//  Created by Olga Sabadina on 09.01.2024.
 //
 
 import Foundation
@@ -44,12 +44,6 @@ extension UIColor {
     
     static func secondaryCircleColor(_ progress: Double) -> CGColor {
         switch progress {
-//        case 0...0.33:
-//            return UIColor.systemYellow.cgColor
-//        case 0.34...0.67:
-//            return UIColor.yellow.cgColor
-//        case 0.68...1.0:
-//            return UIColor.systemGreen.cgColor
         default:
             return UIColor.systemGray5.cgColor
         }

@@ -9,7 +9,7 @@ import SDWebImage
 import AsyncDisplayKit
 import UIKit
 
-class TableSectionCell: ASCellNode {
+class CurrentSeasonTableCell: ASCellNode {
     
     let model: MovieCellModel
     

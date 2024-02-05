@@ -12,7 +12,7 @@ class MediaSectionNode: ASTableNode {
     var media: [MovieCellModel] = []
     var completionAction: ((Int) -> Void)?
     
-    init(media: [MovieCellModel], completion: ((Int) -> Void)? = nil) {
+    init(media: [MovieCellModel] = [], completion: ((Int) -> Void)? = nil) {
         self.media = media
         self.completionAction = completion
         super.init(style: .plain)

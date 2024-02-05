@@ -23,23 +23,23 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         return rootNode
     }()
     
-    let viewModel: DetailViewModel
-    var mainSection: MainSection
-    var secondSection: SecondSection
-    let thirdSection: ThirdTableSection
-    let socialsSection: SocialTable
-    var mediaSection: MediaSectionNode
-    var recomendationSection: RecomendationSection
-    var cancellable = Set<AnyCancellable>()
+    private let viewModel: DetailViewModel
+    private var mainMovieSection: MainMovieSection
+    private var seriesCastSection: SeriesCastSection
+    private let currentSeasonSection: CurrentSeasonTableSection
+    private let socialsSection: SocialTable
+    private var mediaSection: MediaSectionNode
+    private var recomendationSection: RecomendationSection
+    private var cancellable = Set<AnyCancellable>()
     
     init(model: MovieCellModel = .init(imageUrl: "", title: "Empty")) {
         self.viewModel = DetailViewModel(model: model)
-        mainSection = MainSection(headerData: mocHeaderDataDetail)
-        secondSection = SecondSection(typeBtn: .simple, sectionData: mocForActingSection)
-        thirdSection = ThirdTableSection(movies: dataForThirdSection, sectionTitle: "Current Season")
+        mainMovieSection = MainMovieSection()
+        seriesCastSection = SeriesCastSection()
+        currentSeasonSection = CurrentSeasonTableSection(movies: mocDataForCurrentSeasonSection , sectionTitle: "Current Season")
         socialsSection = SocialTable(socials: mocForSocialSection)
-        mediaSection = MediaSectionNode(media: mocForActingSection)
-        recomendationSection = RecomendationSection(movies: viewModel.recommendations)
+        mediaSection = MediaSectionNode()
+        recomendationSection = RecomendationSection()
         super.init(node: rootNode)
 
         title = viewModel.model.title
@@ -47,9 +47,9 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         rootNode.layoutSpecBlock = { _,_ -> ASLayoutSpec in
     
             return ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [
-                self.mainSection,
-                self.secondSection,
-                self.thirdSection,
+                self.mainMovieSection,
+                self.seriesCastSection,
+                self.currentSeasonSection,
                 self.socialsSection,
                 self.mediaSection,
                 self.recomendationSection
@@ -63,7 +63,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     
     override func loadView() {
         super.loadView()
-        secondSection.collectionActor.openActorInfoDelegate = self
+        seriesCastSection.collectionActor.openActorInfoDelegate = self
         sinkToProperties()
     }
     
@@ -80,8 +80,8 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
             .receive(on: DispatchQueue.main)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .sink { isLoad in
-                self.mainSection = MainSection(headerData: self.viewModel.headerData)
-                self.secondSection = SecondSection(typeBtn: .simple, sectionData: self.viewModel.castArray, delegate: self)
+                self.mainMovieSection = MainMovieSection(headerData: self.viewModel.headerData)
+                self.seriesCastSection = SeriesCastSection(typeBtn: .simple, sectionData: self.viewModel.castArray, delegate: self)
                 self.recomendationSection = RecomendationSection(movies: self.viewModel.recommendations, delegate: self)
                 self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
                 self.playVideo()
@@ -105,13 +105,10 @@ extension DetailsViewController: PlayVideo {
         
             if let youtubeURL = URL(string: "youtube://\(youtubeId)"),
                UIApplication.shared.canOpenURL(youtubeURL) {
-                // redirect to app
                 UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
             } else if let youtubeURL = URL(string: "https://www.youtube.com/watch?v=\(youtubeId)") {
-                // redirect through safari
                 UIApplication.shared.open(youtubeURL, options: [:], completionHandler: nil)
             }
-            
         }
     }
 }

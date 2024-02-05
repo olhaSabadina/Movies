@@ -1,19 +1,18 @@
-////
-////  YoutubeCell.swift
-////  Movies
-////
-////  Created by Yura Sabadin on 04.02.2024.
-////
-///
-///
-///
+//
+//  YoutubeCell.swift
+//  Movies
+//
+//  Created by Olga Sabadina on 04.02.2024.
+//
+
+
 import YouTubeiOSPlayerHelper
 import AsyncDisplayKit
 
 class YoutubeCell: ASDisplayNode {
-    let videoUrl: String
-    let youTubePlayer = ASDisplayNode(viewBlock: { YTPlayerView() })
-    let isMain: Bool
+    private let videoUrl: String
+    private let youTubePlayer = ASDisplayNode(viewBlock: { YTPlayerView() })
+    private let isMain: Bool
     
     init(_ videoUrl: String?, isMain: Bool = true) {
         self.videoUrl = videoUrl ?? ""

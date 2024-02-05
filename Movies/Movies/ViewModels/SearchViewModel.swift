@@ -37,7 +37,6 @@ class SearchViewModel {
                     self.trendingArray.append(result)
                     self.isShouldReloadTable = true
                 }
-               // self.trendingArray.append(self.createArrayMovieModels(movie, isTrending: true))
             }
             .store(in: &cancellable)
     }

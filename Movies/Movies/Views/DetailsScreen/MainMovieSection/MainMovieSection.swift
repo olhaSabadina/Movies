@@ -7,15 +7,15 @@
 
 import AsyncDisplayKit
 
-class MainSection: ASDisplayNode {
+class MainMovieSection: ASDisplayNode {
  
-    let headerData: MainSectionModel
-    let headerDetail: HeaderDetailName
-    let videoCell: YoutubeCell
-    let genreLabels: GenreMovie
-    let buttonStack: ButtonsStack
+    private let headerData: MainSectionModel
+    private let headerDetail: HeaderDetailName
+    private let videoCell: YoutubeCell
+    private let genreLabels: GenreMovie
+    private let buttonStack: ButtonsStack
     
-    init(headerData: MainSectionModel) {
+    init(headerData: MainSectionModel = .init()) {
         self.headerData = headerData
         headerDetail = HeaderDetailName(headerData: headerData)
         videoCell = YoutubeCell(headerData.videoURLString)

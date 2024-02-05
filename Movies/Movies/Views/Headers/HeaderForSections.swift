@@ -9,9 +9,9 @@ import UIKit
 
 class HeaderForSections: UIView {
     
-    var actionBtn: ((HeaderType) -> Void)?
-    var actionSegment: ((Int) -> Void)?
-    let headerData: HeaderData
+    private var actionBtn: ((HeaderType) -> Void)?
+    private var actionSegment: ((Int) -> Void)?
+    private let headerData: HeaderData
     var selectedButton = 0 {
         didSet {
             changeSelectSegment()
@@ -55,7 +55,6 @@ class HeaderForSections: UIView {
     private func setHeader() {
         headerTitle.text = headerData.title
         addSubview(headerTitle)
-        
         configureStack()
         configureHeader()
     }
@@ -73,7 +72,7 @@ class HeaderForSections: UIView {
     
     func configSimpleHeader() {
         let action = UIAction { [weak self] _ in
-            guard let self else {return}
+            guard let self else { return }
             self.actionBtn?(self.headerData.type)
         }
         
@@ -173,4 +172,3 @@ class HeaderForSections: UIView {
         }
     }
 }
-

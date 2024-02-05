@@ -4,6 +4,7 @@
 //
 //  Created by Olga Sabadina on 24.01.2024.
 //
+
 import SDWebImage
 import AsyncDisplayKit
 
@@ -12,10 +13,10 @@ protocol PlayVideo {
 }
 
 class VideoCell: ASDisplayNode {
-    let videoUrl: String
-    let imageNode = ASImageNode()
-    let playButton = ASButtonNode()
-    var delegatePlayVideo: PlayVideo?
+    private let videoUrl: String
+    private let imageNode = ASImageNode()
+    private let playButton = ASButtonNode()
+    private var delegatePlayVideo: PlayVideo?
     
     init(_ videoUrl: String?, inMediaSection: Bool = false) {
         self.videoUrl = videoUrl ?? ""

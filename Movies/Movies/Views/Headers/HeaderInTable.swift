@@ -9,8 +9,8 @@ import UIKit
 
 class HeaderInTable: UIView {
     
-    var typeCell: TypeSearchCell
-    let headerTitle = UILabel()
+    private var typeCell: TypeSearchCell
+    private let headerTitle = UILabel()
     
     init(title: String, type: TypeSearchCell = .short) {
         self.typeCell = type
@@ -26,7 +26,6 @@ class HeaderInTable: UIView {
     private func setHeaderTitle(_ title: String) {
         headerTitle.text = title
         headerTitle.frame = .init(x: 5, y: 2, width: 200, height: 45)
-        
         headerTitle.font = typeCell.font
         addSubview(headerTitle)
     }

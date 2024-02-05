@@ -19,11 +19,9 @@ struct MainSectionModel {
     let percent: Int?
     let imageURL: String?
     
-    
     var durationTitle: String {
         timeDuration(duration)
     }
-    
     
     init(titleName: String? = nil,
          duration: Int? = nil,

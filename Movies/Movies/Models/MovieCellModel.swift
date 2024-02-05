@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct MovieCellModel {
     let imageUrl: String?
     let title: String?
@@ -41,7 +40,6 @@ struct MovieCellModel {
         self.biography = biography
         self.idPersone = idPersone
     }
-    
 }
 
 enum Gender: Int {

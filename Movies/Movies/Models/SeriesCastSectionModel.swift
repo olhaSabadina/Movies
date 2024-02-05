@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SecondSectionModel {
+struct SeriesCastSectionModel {
     let titleSection: String
     let actord: [ActorModel]
 }

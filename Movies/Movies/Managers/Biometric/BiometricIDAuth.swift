@@ -2,7 +2,7 @@
 //  BiometricIDAuth.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 14.01.2024.
+//  Created by Olga Sabadina on 14.01.2024.
 //
 
 import UIKit
@@ -46,7 +46,6 @@ class BiometricIDAuth {
         context.evaluatePolicy(policy, localizedReason: localizedReason) { [weak self] success, error in
             DispatchQueue.main.async {
                 if success {
-                    
                     completion(true, nil)
                     
                 } else {
