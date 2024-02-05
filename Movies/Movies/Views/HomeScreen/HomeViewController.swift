@@ -98,7 +98,7 @@ class HomeViewController: UIViewController {
     //MARK: - constraints:
     
     private func setConstraints() {
-        guard let collView = collectionView else {return}
+        guard let collView = collectionView else { return }
         NSLayoutConstraint.activate([
             collView.topAnchor.constraint(equalTo: view.topAnchor),
             collView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

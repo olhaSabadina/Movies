@@ -9,7 +9,7 @@ import AsyncDisplayKit
 
 class MediaSectionNode: ASTableNode {
     
-    var media: [MovieCellModel] = []
+    private var media: [MovieCellModel] = []
     var completionAction: ((Int) -> Void)?
     
     init(media: [MovieCellModel] = [], completion: ((Int) -> Void)? = nil) {
@@ -62,7 +62,7 @@ extension MediaSectionNode: ASTableDelegate, ASTableDataSource {
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        guard let videoId = media[indexPath.row].idMovie else {return}
+        guard let videoId = media[indexPath.row].idMovie else { return }
         completionAction?(videoId)
         print(videoId)
         }

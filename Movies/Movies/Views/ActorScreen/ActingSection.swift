@@ -20,7 +20,7 @@ class ActingSection: ASDisplayNode {
         }
     }
     
-    init(movies: [MovieCellModel] = searchMain) {
+    init(movies: [MovieCellModel] = []) {
         self.movies = movies
         self.actingTable = SearchTable(source: [movies],typeCell: .medium)
         super.init()

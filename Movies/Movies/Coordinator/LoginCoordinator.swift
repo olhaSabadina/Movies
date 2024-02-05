@@ -16,10 +16,6 @@ class LoginCoordinator: BaseCoordinator {
         showLoginViewController()
     }
     
-    deinit {
-        print("LoginCoordinator deinit")
-    }
-    
     func showLoginViewController() {
         let loginVC: LoginViewController = .init()
         loginVC.didSendEventClosure = { [weak self] event in
@@ -36,9 +32,6 @@ class LoginCoordinator: BaseCoordinator {
                 self?.appCoordinator?.authorizedManager.signUp(email, password, profile: user, errorHandler: { [weak loginVC] error in
                     loginVC?.presentAlert(with: "Error", message: error?.localizedDescription, buttonTitles: "OK", styleActionArray: [.default], alertStyle: .alert, completion: nil)
                 })
-                
-            case .remindLater:
-                print("remindLater")
             }
         }
         navigationController.pushViewController(loginVC, animated: true)

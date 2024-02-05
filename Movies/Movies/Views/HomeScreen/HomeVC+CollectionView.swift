@@ -12,7 +12,7 @@ extension HomeViewController {
     
     func setCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        guard let collectionView = collectionView else {return}
+        guard let collectionView = collectionView else { return }
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false

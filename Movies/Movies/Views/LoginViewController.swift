@@ -319,7 +319,7 @@ extension LoginViewController {
     enum Event {
         case logIn(String, String)
         case signUp(String, String)
-        case remindLater
+//        case remindLater
     }
 }
 

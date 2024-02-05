@@ -9,7 +9,7 @@ import AsyncDisplayKit
 
 class SocialTable: ASTableNode {
     
-    var socials: [SocialCellModel] = []
+    private var socials: [SocialCellModel] = []
     var isFullShow: Bool = false {
         didSet {
             self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 400 : 120))
@@ -59,11 +59,7 @@ extension SocialTable: ASTableDelegate, ASTableDataSource {
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        guard let cell = tableNode.nodeForRow(at: indexPath) as? SocialCellNode else {return}
+        guard let cell = tableNode.nodeForRow(at: indexPath) as? SocialCellNode else { return }
         print(cell.title.attributedText?.string ?? "nil")
     }
-    
-    
 }
-
-

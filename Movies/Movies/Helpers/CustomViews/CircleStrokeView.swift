@@ -9,7 +9,7 @@ import UIKit
 
 extension UIView {
     
-    func circleStrokeView(total : Int, current : Int){
+    func circleStrokeView(total : Int, current : Int) {
         self.layer.sublayers?.forEach{$0.removeFromSuperlayer()}
         self.layer.cornerRadius = self.frame.size.width / 2
         self.backgroundColor = .clear

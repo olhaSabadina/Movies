@@ -94,7 +94,7 @@ class HeaderForSections: UIView {
     func configureMiddleHeader() {
         
         let action = UIAction { [weak self] _ in
-            guard let self else {return}
+            guard let self else { return }
             self.actionBtn?(self.headerData.type)
         }
         buttonSeeAll.addAction(action, for: .touchUpInside)
@@ -167,7 +167,7 @@ class HeaderForSections: UIView {
     private func changeSelectSegment() {
         let buttons = buttonsStack.arrangedSubviews
         buttons.forEach { btn in
-            guard let btn = btn as? ButtonForSegment else {return}
+            guard let btn = btn as? ButtonForSegment else { return }
             btn.isSelected = btn.tagButton == selectedButton
         }
     }

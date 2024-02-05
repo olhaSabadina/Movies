@@ -28,7 +28,7 @@ class VideoCell: ASDisplayNode {
     
     override func didLoad() {
         super.didLoad()
-        guard !videoUrl.isEmpty else {return}
+        guard !videoUrl.isEmpty else { return }
         SDWebImageDownloader.shared.downloadImage(urlString: videoUrl) { self.imageNode.image = $0 }
     }
     

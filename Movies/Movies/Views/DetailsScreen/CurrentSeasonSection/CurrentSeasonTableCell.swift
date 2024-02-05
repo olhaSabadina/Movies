@@ -13,10 +13,10 @@ class CurrentSeasonTableCell: ASCellNode {
     
     let model: MovieCellModel
     
-    let bottomSeparator: ASDisplayNode
-    let image: ASImageNode
-    let title: ASTextNode
-    let moviesDescription: ASTextNode
+    private let bottomSeparator: ASDisplayNode
+    private let image: ASImageNode
+    private let title: ASTextNode
+    private let moviesDescription: ASTextNode
     
     init(model: MovieCellModel) {
         self.model = model

@@ -9,12 +9,11 @@ import AsyncDisplayKit
 
 class RecomendationSection: ASDisplayNode {
     
-    let headerTitle = ASTextNode()
-    let collectionMovies: RecomendationCollection
+    private let headerTitle = ASTextNode()
+    private let collectionMovies: RecomendationCollection
     var isRecommendation = true
         
     init(movies: [MovieCellModel] = [], isRecomendation: Bool = true, delegate: DetailMovieDelegate? = nil) {
-        //self.isRecomendation = isRecomendation
         self.collectionMovies = RecomendationCollection(movies: movies, isRecomendation: isRecomendation, delegate: delegate)
         self.isRecommendation = isRecomendation
         super.init()

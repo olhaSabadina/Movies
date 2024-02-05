@@ -80,7 +80,6 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
         guard let cell = tableNode.nodeForRow(at: indexPath) as? SearchCell else { return }
-      //  completionAction?(cell.model)
         openDetailDelegate?.openDetailScreen(cell.model)
     }
     

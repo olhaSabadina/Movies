@@ -85,7 +85,7 @@ class UITextFieldPadding: UITextField {
     
     func setActivityIndicator() {
         activityIndicator = UIActivityIndicatorView()
-        guard let activityIndicator = activityIndicator else {return}
+        guard let activityIndicator = activityIndicator else { return }
         addSubview(activityIndicator)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.stopAnimating()

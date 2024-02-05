@@ -2,7 +2,7 @@
 //  VideoViewController.swift
 //  Movies
 //
-//  Created by Yura Sabadin on 04.02.2024.
+//  Created by Olga Sabadina on 04.02.2024.
 //
 
 import YouTubeiOSPlayerHelper
@@ -67,7 +67,7 @@ class VideoViewController: UIViewController {
                     print(error.localizedDescription)
                 }
             } receiveValue: { model in
-                guard let key = model.results.first?.key else {return}
+                guard let key = model.results.first?.key else { return }
                 completion(key)
             }
             .store(in: &cancellable)

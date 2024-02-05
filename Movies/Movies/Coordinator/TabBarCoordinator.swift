@@ -5,7 +5,6 @@
 //  Created by Olga Sabadina on 05.01.2024.
 //
 
-
 import UIKit
 
 enum TabBarPage {
@@ -84,13 +83,9 @@ class TabCoordinator: BaseCoordinator {
         prepareTabBarController(withTabControllers: controllers)
     }
     
-    deinit {
-        print("TabCoordinator deinit")
-    }
-    
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
         
-        tabBarController.delegate = self
+        //tabBarController.delegate = self
         tabBarController.setViewControllers(tabControllers, animated: true)
         
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
@@ -163,10 +158,10 @@ class TabCoordinator: BaseCoordinator {
 
 // MARK: - UITabBarControllerDelegate
 
-extension TabCoordinator: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController,
-                          didSelect viewController: UIViewController) {
-        
-        print(viewController.tabBarItem.title ?? "")
-    }
-}
+//extension TabCoordinator: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController,
+//                          didSelect viewController: UIViewController) {
+//        
+//        print(viewController.tabBarItem.title ?? "")
+//    }
+//}

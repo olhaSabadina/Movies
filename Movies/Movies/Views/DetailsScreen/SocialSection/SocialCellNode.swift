@@ -9,7 +9,7 @@ import AsyncDisplayKit
 
 class SocialCellNode: ASCellNode {
     
-    let model: SocialCellModel
+    private let model: SocialCellModel
     
     let title: ASTextNode
     

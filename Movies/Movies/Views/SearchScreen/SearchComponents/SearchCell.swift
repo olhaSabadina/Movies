@@ -12,12 +12,12 @@ import UIKit
 class SearchCell: ASCellNode {
     
     let model: MovieCellModel
-    var typeCell: TypeSearchCell
+    private var typeCell: TypeSearchCell
     
-    let bottomSeparator: ASDisplayNode
-    let searchImage: ASImageNode
-    let searchTitle: ASTextNode
-    let searchDescription: ASTextNode
+    private let bottomSeparator: ASDisplayNode
+    private let searchImage: ASImageNode
+    private let searchTitle: ASTextNode
+    private let searchDescription: ASTextNode
     
     init(search: MovieCellModel, type: TypeSearchCell) {
         self.model = search

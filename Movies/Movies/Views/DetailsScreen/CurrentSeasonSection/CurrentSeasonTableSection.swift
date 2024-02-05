@@ -9,9 +9,9 @@ import AsyncDisplayKit
 
 class CurrentSeasonTableSection: ASTableNode {
     
-    var movies: [MovieCellModel] = []
-    var completionAction: ((MovieCellModel) -> Void)?
-    var sectionTitle: String
+    private var movies: [MovieCellModel] = []
+    private var completionAction: ((MovieCellModel) -> Void)?
+    private var sectionTitle: String
     var isFullShow: Bool = false {
         didSet {
             self.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(isFullShow ? 400 : 140))
@@ -64,8 +64,7 @@ extension CurrentSeasonTableSection: ASTableDelegate, ASTableDataSource {
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
-        guard let cell = tableNode.nodeForRow(at: indexPath) as? CurrentSeasonTableCell else {return}
+        guard let cell = tableNode.nodeForRow(at: indexPath) as? CurrentSeasonTableCell else { return }
         completionAction?(cell.model)
-        print(cell.model.title)
     }
 }

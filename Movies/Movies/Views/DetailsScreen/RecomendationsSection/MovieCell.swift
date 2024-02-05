@@ -28,7 +28,6 @@ class MovieCell: ASCellNode {
         self.automaticallyManagesSubnodes = true
     }
     
-    
     override func didLoad() {
         super.didLoad()
         setCell()

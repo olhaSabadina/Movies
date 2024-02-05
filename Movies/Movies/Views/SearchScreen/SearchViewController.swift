@@ -17,8 +17,8 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
     }
     
     private var tableSearch: SearchTable
-    let viewModel: SearchViewModel
-    var cancellable = Set<AnyCancellable>()
+    private let viewModel: SearchViewModel
+    private var cancellable = Set<AnyCancellable>()
     
     private let rootNode: ASDisplayNode = {
         let root = ASDisplayNode()

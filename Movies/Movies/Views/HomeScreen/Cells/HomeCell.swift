@@ -34,7 +34,7 @@ class HomeCell: BaseHomeCell {
     }
 
     override func updateCell() {
-        guard let model else {return}
+        guard let model else { return }
         let urlPoster = URL(string: model.imageUrl ?? "")
         imageView.sd_setImage(with: urlPoster)
         DispatchQueue.main.async {

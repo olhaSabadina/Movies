@@ -46,8 +46,8 @@ class CreateViewController: UIViewController {
         }
         let button = UIButton(type: .system, primaryAction: action)
         view.addSubview(button)
-        button.frame = .init(x: 90, y: 500, width: 100, height: 45)
-        button.setTitle("Delete profile", for: .normal)
+        button.frame = .init(x: 110, y: 500, width: 100, height: 45)
+        button.setTitle("Create circle", for: .normal)
     }
 
 }

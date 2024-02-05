@@ -151,8 +151,8 @@ extension ProfileViewController {
 //MARK: - UIImagePickerControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate,  UINavigationControllerDelegate {
     
-    func openCamera(){
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
+    func openCamera() {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             let imgPicker = UIImagePickerController()
             imgPicker.delegate = self
             imgPicker.sourceType = UIImagePickerController.SourceType.camera
@@ -165,7 +165,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate,  UINavigationC
         }
     }
     
-    func openGallery(){
+    func openGallery() {
         let imgPicker = UIImagePickerController()
         imgPicker.delegate = self
         imgPicker.sourceType = UIImagePickerController.SourceType.photoLibrary
