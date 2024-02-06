@@ -85,7 +85,6 @@ class TabCoordinator: BaseCoordinator {
     
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
         
-        //tabBarController.delegate = self
         tabBarController.setViewControllers(tabControllers, animated: true)
         
         tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
@@ -155,13 +154,3 @@ class TabCoordinator: BaseCoordinator {
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
 }
-
-// MARK: - UITabBarControllerDelegate
-
-//extension TabCoordinator: UITabBarControllerDelegate {
-//    func tabBarController(_ tabBarController: UITabBarController,
-//                          didSelect viewController: UIViewController) {
-//        
-//        print(viewController.tabBarItem.title ?? "")
-//    }
-//}

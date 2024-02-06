@@ -33,7 +33,7 @@ extension MediaSectionNode: ASTableDelegate, ASTableDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = HeaderForSections(headerData: .init(title: "Media", type: .full), actionSegment: { segmentIndex in
-            print(segmentIndex, "segmentIndex Media")
+            print(segmentIndex, "segmentIndex Media") // left to see action
         })
         return header
     }
@@ -64,7 +64,6 @@ extension MediaSectionNode: ASTableDelegate, ASTableDataSource {
         tableNode.deselectRow(at: indexPath, animated: true)
         guard let videoId = media[indexPath.row].idMovie else { return }
         completionAction?(videoId)
-        print(videoId)
         }
 }
     

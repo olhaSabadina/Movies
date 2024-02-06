@@ -39,7 +39,7 @@ extension SocialTable: ASTableDelegate, ASTableDataSource {
         let header = HeaderForSections(headerData: .init(title: "Social", type: .middle)) { type in
             self.isFullShow.toggle()
         } actionSegment: { segmentIndex in
-            print(segmentIndex, "segmentIndex")
+            print(segmentIndex, "segmentIndex") // left to see the working out of the segment action
         }
         return header
     }
@@ -60,6 +60,6 @@ extension SocialTable: ASTableDelegate, ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         tableNode.deselectRow(at: indexPath, animated: true)
         guard let cell = tableNode.nodeForRow(at: indexPath) as? SocialCellNode else { return }
-        print(cell.title.attributedText?.string ?? "nil")
+        print(cell.title.attributedText?.string ?? "nil") // left to see action
     }
 }

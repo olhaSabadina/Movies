@@ -57,7 +57,6 @@ extension SearchTable: ASTableDelegate, ASTableDataSource {
             
         case .medium:
              header = HeaderForSections(headerData: .init(title: "Acting", type: .simple)) { type in
-                print("see all")
                  self.headerDelegate?.didShowFullTable()
              } actionSegment: { _ in }
         }

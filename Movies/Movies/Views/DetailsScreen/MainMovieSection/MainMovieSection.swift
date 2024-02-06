@@ -22,7 +22,7 @@ class MainMovieSection: ASDisplayNode {
         genreLabels = GenreMovie(headerData)
        
         buttonStack = ButtonsStack(actionBtn: { btn in
-            print(btn.title)
+            print(btn.title) // left to see the working out of the button action
         })
         
         super.init()

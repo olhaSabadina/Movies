@@ -42,7 +42,6 @@ class DetailViewModel {
                    break
                 case .failure(let error):
                     self.error = error
-                    print(error.localizedDescription, "fetchMovieModel")
                 }
             } receiveValue: { movie in
                 self.createMovieModel(movie)
@@ -76,7 +75,6 @@ class DetailViewModel {
                     self.isLoadData = true
                 case .failure(let error):
                     self.error = error
-                    print(error.localizedDescription, "fetchMovieModel")
                 }
             } receiveValue: { movies in
                 self.recommendations = self.createMoviesArrayModels(movies)
@@ -127,7 +125,6 @@ class DetailViewModel {
                 case .finished:
                     self.isLoadData = true
                 case .failure( let error):
-                    print(error.localizedDescription, "fetchCastMovie error")
                     self.error = error
                 }
             } receiveValue: { cast in

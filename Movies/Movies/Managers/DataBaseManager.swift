@@ -56,7 +56,6 @@ final class DatabaseService {
     func deleteProfileAsync() async {
         let uid = UserDefaults.standard.string(forKey: TitleConstants.uid) ?? ""
         let path = FirebaseRefferencies.profile.ref.document(uid).path
-        print(path)
         try? await FirebaseRefferencies.profile.ref.document(uid).delete()
     }
     

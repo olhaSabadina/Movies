@@ -29,7 +29,6 @@ class SearchViewModel {
                     self.isShouldReloadTable = true
                 case .failure(let error):
                     self.error = error
-                    print(error.localizedDescription, "SearchMovie")
                 }
             } receiveValue: { movie in
                 Task {

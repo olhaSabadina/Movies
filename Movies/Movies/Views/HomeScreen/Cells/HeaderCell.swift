@@ -19,7 +19,6 @@ class HeaderCell: UICollectionReusableView {
     var selectedSegmentIndex = 0
     var isStateSeeAll: Bool = false {
         didSet {
-            print(isStateSeeAll, "in header cell")
             seeAllButton.setTitle(isStateSeeAll ? "See less" : "See All", for: .normal)
             setNeedsDisplay()
         }

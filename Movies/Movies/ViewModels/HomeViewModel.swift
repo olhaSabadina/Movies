@@ -42,7 +42,6 @@ class HomeViewModel {
                        self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
-                       print(error.localizedDescription, "parse error")
                    }
                } receiveValue: { movies in
                    self.popularMoviesArray = self.createArrayModels(movies)
@@ -60,7 +59,6 @@ class HomeViewModel {
                        self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
-                       print(error.localizedDescription, "parse error upcomming")
                    }
                } receiveValue: { movies in
                    self.upcomingMoviesArray = self.createArrayModels(movies)
@@ -78,7 +76,6 @@ class HomeViewModel {
                       break
                    case .failure(let error):
                        self.error = error
-                       print(error.localizedDescription, "parse error latest Trailers")
                    }
                } receiveValue: { movies in
                    Task {
@@ -100,7 +97,6 @@ class HomeViewModel {
                        self.shouldReloadCollection = true
                    case .failure(let error):
                        self.error = error
-                       print(error.localizedDescription, "parse error trending")
                    }
                } receiveValue: { movies in
                    self.trendingMoviesArray = self.createArrayModels(movies)

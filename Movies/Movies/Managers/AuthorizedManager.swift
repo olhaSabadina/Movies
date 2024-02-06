@@ -57,7 +57,6 @@ final class AuthorizedManager: NSObject {
             } else if let result {
                 
                 let date = result.user.metadata.lastSignInDate
-                print("Last signed user = \(date ?? .now)")
 
                 self.userDefaults.set(email, forKey: TitleConstants.userEmail)
                 self.userDefaults.set(pasword, forKey: TitleConstants.userPassword)
