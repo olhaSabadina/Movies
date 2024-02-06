@@ -21,12 +21,6 @@
 		20765D6A2B4C116900B30CAB /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20765D692B4C116900B30CAB /* OpenSans-ExtraBold.ttf */; };
 		20765D6C2B4C127500B30CAB /* FontConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20765D6B2B4C127500B30CAB /* FontConstants.swift */; };
 		209965C32B497DFD00DB6634 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 209965C22B497DFC00DB6634 /* GoogleService-Info.plist */; };
-		209965C62B497F5700DB6634 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 209965C52B497F5700DB6634 /* FirebaseAuth */; };
-		209965C82B497F5700DB6634 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 209965C72B497F5700DB6634 /* FirebaseDatabase */; };
-		209965CA2B497F5700DB6634 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 209965C92B497F5700DB6634 /* FirebaseDatabaseSwift */; };
-		209965CC2B497F5700DB6634 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 209965CB2B497F5700DB6634 /* FirebaseFirestore */; };
-		209965CE2B497F5700DB6634 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 209965CD2B497F5700DB6634 /* FirebaseFirestoreSwift */; };
-		209965D02B497F5700DB6634 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 209965CF2B497F5700DB6634 /* FirebaseStorage */; };
 		209965D22B4983B900DB6634 /* AuthorizedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209965D12B4983B900DB6634 /* AuthorizedManager.swift */; };
 		209965D42B49843A00DB6634 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209965D32B49843A00DB6634 /* UserProfile.swift */; };
 		209965D62B49853D00DB6634 /* AuthorizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209965D52B49853D00DB6634 /* AuthorizedError.swift */; };
@@ -85,6 +79,14 @@
 		20E409012B6E71960021672D /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E409002B6E71960021672D /* DetailViewModel.swift */; };
 		20E409052B6E91D10021672D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E409042B6E91D10021672D /* SearchViewModel.swift */; };
 		20E409092B6FC60A0021672D /* CastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E409082B6FC60A0021672D /* CastModel.swift */; };
+		20E594C72B7268B2007130CE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594C62B7268B2007130CE /* FirebaseAuth */; };
+		20E594C92B7268D3007130CE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594C82B7268D3007130CE /* FirebaseDatabase */; };
+		20E594CB2B7268E4007130CE /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594CA2B7268E4007130CE /* FirebaseDatabaseSwift */; };
+		20E594CD2B7268F1007130CE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594CC2B7268F1007130CE /* FirebaseFirestore */; };
+		20E594CF2B72690A007130CE /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594CE2B72690A007130CE /* FirebaseFirestoreSwift */; };
+		20E594D12B72691D007130CE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594D02B72691D007130CE /* FirebaseStorage */; };
+		20E594D52B726A1B007130CE /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594D42B726A1B007130CE /* YouTubeiOSPlayerHelper */; };
+		20E594D72B726A54007130CE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20E594D62B726A54007130CE /* SDWebImage */; };
 		20EEB0BD2B62943B00E753CF /* MovieCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EEB0BC2B62943B00E753CF /* MovieCellModel.swift */; };
 		20FD106C2B4D440600D2297F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD106B2B4D440600D2297F /* HomeViewModel.swift */; };
 		20FD106E2B4D4E7C00D2297F /* HomeVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD106D2B4D4E7C00D2297F /* HomeVC+CollectionView.swift */; };
@@ -99,7 +101,6 @@
 		9C1072D12B6E99D1003BBC98 /* MainResultsMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D02B6E99D1003BBC98 /* MainResultsMovies.swift */; };
 		9C1072D32B6EF1B8003BBC98 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D22B6EF1B8003BBC98 /* VideoModel.swift */; };
 		9C1072D82B6F70A7003BBC98 /* YoutubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072D72B6F70A7003BBC98 /* YoutubeCell.swift */; };
-		9C1072DB2B6F7368003BBC98 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */; };
 		9C1072DD2B6F82A7003BBC98 /* HomeSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072DC2B6F82A7003BBC98 /* HomeSectionType.swift */; };
 		9C1072DF2B6F9338003BBC98 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072DE2B6F9338003BBC98 /* VideoViewController.swift */; };
 		9C1072E12B6F9F1C003BBC98 /* ImageFullModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072E02B6F9F1C003BBC98 /* ImageFullModel.swift */; };
@@ -107,7 +108,6 @@
 		9C1072E52B700281003BBC98 /* ActingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072E42B700281003BBC98 /* ActingModel.swift */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
-		9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C5EFB202B5FB213000D7B0E /* SDWebImage */; };
 		9C6F58F22B4DFEC900D820BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+Extension.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+extension.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
@@ -248,15 +248,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				209965CE2B497F5700DB6634 /* FirebaseFirestoreSwift in Frameworks */,
-				209965CA2B497F5700DB6634 /* FirebaseDatabaseSwift in Frameworks */,
-				9C5EFB212B5FB213000D7B0E /* SDWebImage in Frameworks */,
-				209965CC2B497F5700DB6634 /* FirebaseFirestore in Frameworks */,
-				209965C82B497F5700DB6634 /* FirebaseDatabase in Frameworks */,
-				209965C62B497F5700DB6634 /* FirebaseAuth in Frameworks */,
-				209965D02B497F5700DB6634 /* FirebaseStorage in Frameworks */,
+				20E594CB2B7268E4007130CE /* FirebaseDatabaseSwift in Frameworks */,
+				20E594C92B7268D3007130CE /* FirebaseDatabase in Frameworks */,
 				185734AC286C7EE5D8BBEE4D /* Pods_Movies.framework in Frameworks */,
-				9C1072DB2B6F7368003BBC98 /* YouTubeiOSPlayerHelper in Frameworks */,
+				20E594D52B726A1B007130CE /* YouTubeiOSPlayerHelper in Frameworks */,
+				20E594CD2B7268F1007130CE /* FirebaseFirestore in Frameworks */,
+				20E594D12B72691D007130CE /* FirebaseStorage in Frameworks */,
+				20E594D72B726A54007130CE /* SDWebImage in Frameworks */,
+				20E594C72B7268B2007130CE /* FirebaseAuth in Frameworks */,
+				20E594CF2B72690A007130CE /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +660,7 @@
 				201555552B46D293007A7423 /* Sources */,
 				201555562B46D293007A7423 /* Frameworks */,
 				201555572B46D293007A7423 /* Resources */,
-				39AC2B92CE5E80F0E00D8F35 /* [CP] Embed Pods Frameworks */,
+				D80E4CA5641664D109C29F6C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -668,14 +668,14 @@
 			);
 			name = Movies;
 			packageProductDependencies = (
-				209965C52B497F5700DB6634 /* FirebaseAuth */,
-				209965C72B497F5700DB6634 /* FirebaseDatabase */,
-				209965C92B497F5700DB6634 /* FirebaseDatabaseSwift */,
-				209965CB2B497F5700DB6634 /* FirebaseFirestore */,
-				209965CD2B497F5700DB6634 /* FirebaseFirestoreSwift */,
-				209965CF2B497F5700DB6634 /* FirebaseStorage */,
-				9C5EFB202B5FB213000D7B0E /* SDWebImage */,
-				9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */,
+				20E594C62B7268B2007130CE /* FirebaseAuth */,
+				20E594C82B7268D3007130CE /* FirebaseDatabase */,
+				20E594CA2B7268E4007130CE /* FirebaseDatabaseSwift */,
+				20E594CC2B7268F1007130CE /* FirebaseFirestore */,
+				20E594CE2B72690A007130CE /* FirebaseFirestoreSwift */,
+				20E594D02B72691D007130CE /* FirebaseStorage */,
+				20E594D42B726A1B007130CE /* YouTubeiOSPlayerHelper */,
+				20E594D62B726A54007130CE /* SDWebImage */,
 			);
 			productName = Movies;
 			productReference = 201555592B46D293007A7423 /* Movies.app */;
@@ -708,7 +708,7 @@
 				201555752B46D296007A7423 /* Sources */,
 				201555762B46D296007A7423 /* Frameworks */,
 				201555772B46D296007A7423 /* Resources */,
-				770198AF3C2AD22E9305AB5D /* [CP] Embed Pods Frameworks */,
+				BABCCE2E694507D8C2E0A93C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -753,9 +753,9 @@
 			);
 			mainGroup = 201555502B46D293007A7423;
 			packageReferences = (
-				209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				20E594D22B726934007130CE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				20E594D32B726A1B007130CE /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 2015555A2B46D293007A7423 /* Products */;
 			projectDirPath = "";
@@ -821,24 +821,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		39AC2B92CE5E80F0E00D8F35 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		770198AF3C2AD22E9305AB5D /* [CP] Embed Pods Frameworks */ = {
+		BABCCE2E694507D8C2E0A93C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -853,6 +836,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Movies-MoviesUITests/Pods-Movies-MoviesUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D80E4CA5641664D109C29F6C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E21090894A4A081AEE5C0AEA /* [CP] Check Pods Manifest.lock */ = {
@@ -1336,23 +1336,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.19.1;
+				minimumVersion = 10.20.0;
 			};
 		};
-		9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
-		9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		20E594D22B726934007130CE /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
 			requirement = {
@@ -1360,47 +1352,55 @@
 				minimumVersion = 5.18.10;
 			};
 		};
+		20E594D32B726A1B007130CE /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		209965C52B497F5700DB6634 /* FirebaseAuth */ = {
+		20E594C62B7268B2007130CE /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		209965C72B497F5700DB6634 /* FirebaseDatabase */ = {
+		20E594C82B7268D3007130CE /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
 		};
-		209965C92B497F5700DB6634 /* FirebaseDatabaseSwift */ = {
+		20E594CA2B7268E4007130CE /* FirebaseDatabaseSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
 		};
-		209965CB2B497F5700DB6634 /* FirebaseFirestore */ = {
+		20E594CC2B7268F1007130CE /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		209965CD2B497F5700DB6634 /* FirebaseFirestoreSwift */ = {
+		20E594CE2B72690A007130CE /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
-		209965CF2B497F5700DB6634 /* FirebaseStorage */ = {
+		20E594D02B72691D007130CE /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 209965C42B497F5700DB6634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
-		9C1072DA2B6F7368003BBC98 /* YouTubeiOSPlayerHelper */ = {
+		20E594D42B726A1B007130CE /* YouTubeiOSPlayerHelper */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9C1072D92B6F7368003BBC98 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			package = 20E594D32B726A1B007130CE /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
 			productName = YouTubeiOSPlayerHelper;
 		};
-		9C5EFB202B5FB213000D7B0E /* SDWebImage */ = {
+		20E594D62B726A54007130CE /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9C5EFB1F2B5FB1F3000D7B0E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 20E594D22B726934007130CE /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
