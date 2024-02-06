@@ -37,7 +37,7 @@ class CategoriesCell: UICollectionViewCell {
         addSubview(categoriesButton)
         
         let action = UIAction { _ in
-            print("button category action")
+            print("button category action") // left to see button action
         }
         categoriesButton.addAction(action, for: .touchUpInside)
     }

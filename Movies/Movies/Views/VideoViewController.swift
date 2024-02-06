@@ -64,7 +64,7 @@ class VideoViewController: UIViewController {
                 case .finished:
                     break
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.alertError(error)
                 }
             } receiveValue: { model in
                 guard let key = model.results.first?.key else { return }

@@ -34,6 +34,13 @@ class ConvenieceButton: ASDisplayNode {
         return ratioStack
     }
     
+    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        actionCompletion?(typeBtn)
+        title.isHidden = false
+        image.isHidden = false
+        self.borderWidth = 1
+    }
+    
     private func setNode() {
         
         let mainAttributes: [NSAttributedString.Key: Any] = [
@@ -51,13 +58,6 @@ class ConvenieceButton: ASDisplayNode {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        actionCompletion?(typeBtn)
-        title.isHidden = false
-        image.isHidden = false
-        self.borderWidth = 1
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

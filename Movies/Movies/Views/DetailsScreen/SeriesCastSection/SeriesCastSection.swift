@@ -52,6 +52,10 @@ class SeriesCastSection: ASDisplayNode {
         return stackInset
     }
     
+    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        isFullShow.toggle()
+    }
+    
     private func setHeader() {
         let attributesBold: [NSAttributedString.Key: Any] = [
             .font: UIFont.boldSystemFont(ofSize: 18),
@@ -64,10 +68,6 @@ class SeriesCastSection: ASDisplayNode {
         buttonSeeAll.addTarget(self, action: #selector(handleTap), forControlEvents: .touchUpInside)
        
         collectionActor.style.preferredLayoutSize = .init(width: ASDimensionAuto, height: ASDimensionMake(170))
-    }
-    
-    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        isFullShow.toggle()
     }
 }
 

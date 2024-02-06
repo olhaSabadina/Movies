@@ -65,6 +65,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
         super.loadView()
         seriesCastSection.collectionActor.openActorInfoDelegate = self
         sinkToProperties()
+        sinkToError()
     }
     
     private func playVideo() {
@@ -86,6 +87,15 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
                 self.mediaSection = MediaSectionNode(media: self.viewModel.mediaSection)
                 self.playVideo()
                 self.rootNode.setNeedsLayout()
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func sinkToError() {
+        viewModel.$error
+            .filter{$0 != nil}
+            .sink { error in
+                self.alertError(error)
             }
             .store(in: &cancellable)
     }

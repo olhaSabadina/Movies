@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
         gradienLayer()
         sinkToPopularMoviesArray()
         sinkToProperties()
+        sinkToError()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +64,16 @@ class HomeViewController: UIViewController {
             }
             .store(in: &cancellable)
     }
+    
+    private func sinkToError() {
+        homeViewModel.$error
+            .filter{$0 != nil}
+            .sink { error in
+                self.alertError(error)
+            }
+            .store(in: &cancellable)
+    }
+    
     
     func reloadCollection() {
         DispatchQueue.main.async {

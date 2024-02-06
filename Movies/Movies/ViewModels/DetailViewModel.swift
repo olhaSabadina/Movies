@@ -11,15 +11,13 @@ import Combine
 class DetailViewModel {
     
     @Published var error: Error?
-
-    let model: MovieCellModel
-
     @Published var isLoadData = false
     
     var headerData: MainSectionModel = .init()
     var castArray = [MovieCellModel]()
     var recommendations = [MovieCellModel]()
     var mediaSection = [MovieCellModel]()
+    let model: MovieCellModel
     
     private var cancellable = Set<AnyCancellable>()
     private let networkManager = NetworkManager()

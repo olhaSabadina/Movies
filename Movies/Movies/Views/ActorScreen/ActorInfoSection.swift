@@ -44,6 +44,13 @@ class ActorInfoSection: ASDisplayNode {
         SDWebImageDownloader.shared.downloadImage(urlString: actorModel.imageUrl ?? "" ) { self.photo.image = $0 }
     }
     
+    @objc func seeMore() {
+        isSeeMore.toggle()
+        buttonSeeMore.setTitle(isSeeMore ? "See Less" : "See More", with: .systemFont(ofSize: 13), with: isSeeMore ? .red : .blue, for: .normal)
+        actorDescription.maximumNumberOfLines = isSeeMore ? 0 : 7
+        self.setNeedsLayout()
+    }
+    
     private func setSection() {
         let attributesBold: [NSAttributedString.Key: Any] = [
             .font: UIFont.boldSystemFont(ofSize: 18),
@@ -62,13 +69,6 @@ class ActorInfoSection: ASDisplayNode {
         actorDescription.attributedText = description
         buttonSeeMore.addTarget(self, action: #selector(seeMore), forControlEvents: .touchUpInside)
         actorDescription.maximumNumberOfLines = 6
-    }
-    
-    @objc func seeMore() {
-        isSeeMore.toggle()
-        buttonSeeMore.setTitle(isSeeMore ? "See Less" : "See More", with: .systemFont(ofSize: 13), with: isSeeMore ? .red : .blue, for: .normal)
-        actorDescription.maximumNumberOfLines = isSeeMore ? 0 : 7
-        self.setNeedsLayout()
     }
 }
 

@@ -41,6 +41,10 @@ class VideoCell: ASDisplayNode {
         return ASInsetLayoutSpec(insets: .init(top: 5, left: 0, bottom: 10, right: 0), child: image)
     }
     
+    @objc private func playVideo() {
+        delegatePlayVideo?.didTapPlayButton()
+    }
+    
     private func setVideo(_ inMediaSection: Bool) {
         imageNode.contentMode = .scaleAspectFill
         imageNode.clipsToBounds = true
@@ -54,9 +58,5 @@ class VideoCell: ASDisplayNode {
         playButton.style.preferredSize = .init(width: 60, height: 60)
         playButton.setImage(UIImage(named: "play"), for: .normal)
         playButton.addTarget(self, action: #selector(playVideo), forControlEvents: .touchUpInside)
-    }
-    
-    @objc private func playVideo() {
-        delegatePlayVideo?.didTapPlayButton()
     }
 }

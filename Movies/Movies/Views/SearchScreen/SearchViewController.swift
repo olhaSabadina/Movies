@@ -45,6 +45,7 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
         super.loadView()
         setSearchController()
         sinkToIsShouldReloadTable()
+        sinkToError()
         navigationItem.backButtonTitle = ""
         tableSearch.openDetailDelegate = self
     }
@@ -76,6 +77,15 @@ class SearchViewController: ASDKViewController<ASDisplayNode> {
                 }
             }
         .store(in: &cancellable)
+    }
+    
+    private func sinkToError() {
+        viewModel.$error
+            .filter{$0 != nil}
+            .sink { error in
+                self.alertError(error)
+            }
+            .store(in: &cancellable)
     }
 }
 

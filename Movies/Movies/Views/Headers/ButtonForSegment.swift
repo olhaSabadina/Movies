@@ -31,6 +31,11 @@ class ButtonForSegment: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        tapAction?(tagButton)
+        isSelected = true
+    }
+    
     private func changeStateButton() {
         bottomLine.isHidden = !isSelected
     }
@@ -60,11 +65,6 @@ class ButtonForSegment: UIView {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        tapAction?(tagButton)
-        isSelected = true
     }
 }
 

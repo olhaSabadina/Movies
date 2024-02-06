@@ -55,8 +55,6 @@ final class AuthorizedManager: NSObject {
                 errorHandler?(err)
                 
             } else if let result {
-                
-                let date = result.user.metadata.lastSignInDate
 
                 self.userDefaults.set(email, forKey: TitleConstants.userEmail)
                 self.userDefaults.set(pasword, forKey: TitleConstants.userPassword)
