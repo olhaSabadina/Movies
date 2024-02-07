@@ -1,5 +1,5 @@
 //
-//  UITextFieldPudding.swift
+//  UITextFieldPadding.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 05.01.2024.
