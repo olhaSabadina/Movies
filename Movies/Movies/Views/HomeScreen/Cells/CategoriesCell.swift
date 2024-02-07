@@ -11,7 +11,7 @@ class CategoriesCell: UICollectionViewCell {
     
     static var identCell = "categoriesCell"
 
-    let categoriesButton = UIButton(type: .system)
+    let categoriesButton = UILabel()
     
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -21,7 +21,7 @@ class CategoriesCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        categoriesButton.setTitle("", for: .normal)
+        categoriesButton.text = ""
     }
     
     required init?(coder: NSCoder) {
@@ -29,17 +29,9 @@ class CategoriesCell: UICollectionViewCell {
     }
     
     private func setCategoriesButton() {
-        categoriesButton.backgroundColor = .clear
-        categoriesButton.titleLabel?.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
-        categoriesButton.tintColor = .label
-        categoriesButton.titleLabel?.textAlignment = .left
+        categoriesButton.font = UIFont(name: FontConstants.openSansSemiBold, size: 14)
         categoriesButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(categoriesButton)
-        
-        let action = UIAction { _ in
-            print("button category action") // left to see button action
-        }
-        categoriesButton.addAction(action, for: .touchUpInside)
     }
     
     private func setConstraint() {

@@ -12,4 +12,9 @@ enum AuthorizeError: String, Error {
     case docNotExists = "Sorry. \nThis document not exists"
     case sendDataFailed = "Sorry, can't send data profile to server FireStore"
     case userNotFound = "Sorry user not found"
+    
+    case sendErrorFail = "Can't send error to server"
+    case uidUserFail = "Can't find user uid in local store"
+    case errorEncode = "Can't encode model to data"
 }
+

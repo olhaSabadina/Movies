@@ -21,8 +21,7 @@ class HomeViewController: UIViewController {
         setCollectionView()
         setConstraints()
         gradienLayer()
-        sinkToPopularMoviesArray()
-        sinkToProperties()
+        sinkToShouldReloadCollections()
         sinkToError()
     }
     
@@ -38,27 +37,10 @@ class HomeViewController: UIViewController {
     
     //MARK: - private Functions:
     
-    private func sinkToProperties() {
-        homeViewModel.$seeAllSectionType
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink { type in
-                self.reloadCollection()
-        }
-        .store(in: &cancellable)
-        
-        homeViewModel.$segmentSectionsIndex
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink { type in
-                self.reloadCollection()
-        }
-        .store(in: &cancellable)
-    }
     
-    private func sinkToPopularMoviesArray() {
+    private func sinkToShouldReloadCollections() {
         homeViewModel.$shouldReloadCollection
-            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.8), scheduler: DispatchQueue.main)
             .sink { type in
                 self.reloadCollection()
             }
@@ -74,11 +56,9 @@ class HomeViewController: UIViewController {
             .store(in: &cancellable)
     }
     
-    
+    @MainActor
     func reloadCollection() {
-        DispatchQueue.main.async {
-            self.collectionView?.reloadData()
-        }
+            collectionView?.reloadData()
     }
     
     private func setView() {

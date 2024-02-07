@@ -27,9 +27,26 @@ class DetailViewModel {
         fetchMovieModel()
         fetchRecommendationMovies()
         fetchCastMovies()
+        sinkToError()
         Task{
            try await createMoviesArrayModels()
         }
+    }
+    
+    private func sinkToError() {
+        $error
+            .filter{$0 != nil}
+            .compactMap{$0}
+            .sink { error in
+                Task {
+                    do {
+                        try await DatabaseService.shared.uploadErrorToServer(error: error)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            .store(in: &cancellable)
     }
     
     private func fetchMovieModel() {

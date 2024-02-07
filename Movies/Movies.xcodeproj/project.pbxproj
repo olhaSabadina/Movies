@@ -107,6 +107,7 @@
 		9C1072E52B700281003BBC98 /* ActingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1072E42B700281003BBC98 /* ActingModel.swift */; };
 		9C26ABE52B53EEC200FDDA88 /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */; };
 		9C26ABE82B53EF5500FDDA88 /* BiometricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */; };
+		9C4C90182B743C8D00B6B193 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4C90172B743C8D00B6B193 /* ErrorModel.swift */; };
 		9C6F58F22B4DFEC900D820BA /* UIButton+SegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F12B4DFEC900D820BA /* UIButton+SegmentButton.swift */; };
 		9C6F58F42B4DFF1C00D820BA /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F32B4DFF1C00D820BA /* UIColor+Hex.swift */; };
 		9C6F58F62B4E01A000D820BA /* UIImage+PersonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+PersonImage.swift */; };
@@ -233,6 +234,7 @@
 		9C1072E42B700281003BBC98 /* ActingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActingModel.swift; sourceTree = "<group>"; };
 		9C26ABE42B53EEC200FDDA88 /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		9C26ABE72B53EF5500FDDA88 /* BiometricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricType.swift; sourceTree = "<group>"; };
+		9C4C90172B743C8D00B6B193 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		9C6F58F12B4DFEC900D820BA /* UIButton+SegmentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+SegmentButton.swift"; sourceTree = "<group>"; };
 		9C6F58F32B4DFF1C00D820BA /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		9C6F58F52B4E01A000D820BA /* UIImage+PersonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PersonImage.swift"; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				9C1072DC2B6F82A7003BBC98 /* HomeSectionType.swift */,
 				9C1072E02B6F9F1C003BBC98 /* ImageFullModel.swift */,
 				9C1072E42B700281003BBC98 /* ActingModel.swift */,
+				9C4C90172B743C8D00B6B193 /* ErrorModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				20A042162B5FC5D30021647F /* SearchCell.swift in Sources */,
 				20C159252B6BCE74002E96CA /* VideoCell.swift in Sources */,
 				20C1593A2B6BD0C3002E96CA /* ActorCell.swift in Sources */,
+				9C4C90182B743C8D00B6B193 /* ErrorModel.swift in Sources */,
 				9C6F58F42B4DFF1C00D820BA /* UIColor+Hex.swift in Sources */,
 				9C1072E12B6F9F1C003BBC98 /* ImageFullModel.swift in Sources */,
 				20C311B02B48300000936DBC /* ImageConstants.swift in Sources */,

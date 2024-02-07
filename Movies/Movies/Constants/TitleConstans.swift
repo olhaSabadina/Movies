@@ -21,6 +21,7 @@ enum TitleConstants {
     
     //AuthorizedManager
     static let profileCollection = "Users"
+    static let errorInfo = "ErrorInfo"
     
     //Key UserDefaults
     static let uid = "UiD"

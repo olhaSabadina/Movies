@@ -24,7 +24,7 @@ extension HomeViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-           
+            
             let sectionType: HomeSectionType = HomeSectionType(rawValue: sectionIndex) ?? .categories
             let isAll = self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] ?? false
             
@@ -49,7 +49,7 @@ extension HomeViewController {
         let item = CompositionalLayout.createItem(width: .fractionalWidth(0.25), height: .absolute(30), spacing: 10)
         
         let group = CompositionalLayout.createGroupeCount(aligment: .horizontal, width: .fractionalWidth(1), height: .absolute(30), item: item, count: 4)
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 0, leading: 16, bottom: 20, trailing: 16)
         return section
@@ -122,7 +122,7 @@ extension HomeViewController {
         return section
     }
 }
-    
+
 //  MARK: - CollectionViewDelegate,DataSours:
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -143,7 +143,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case .categories:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identCell, for: indexPath) as? CategoriesCell else { return UICollectionViewCell()}
-            cell.categoriesButton.setTitle(HomeSectionType.categoriesTitle[indexPath.item], for: .normal)
+            cell.categoriesButton.text = HomeSectionType.categoriesTitle[indexPath.item]
             return cell
             
         case .popular:
@@ -174,7 +174,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionType: HomeSectionType = HomeSectionType(rawValue: indexPath.section) ?? .categories
-       
+        
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCell.identCell, for: indexPath) as? HeaderCell else {return UICollectionReusableView()}
         let index = homeViewModel.segmentSectionsIndex[sectionType.segmentKeyForIndex] ?? 0
         header.selectedSegmentIndex = index
@@ -186,6 +186,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.homeViewModel.seeAllSectionDictionary[sectionType.segmentKeyForIndex] = newState
             self.homeViewModel.seeAllSectionType = sectionType
             header.isStateSeeAll = newState
+            
+            self.collectionView?.reloadSections(IndexSet(integer:header.sectionType.rawValue))
         }
         
         header.segmentAction = { index in
@@ -203,6 +205,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case .trending:
                 self.homeViewModel.fetchTrendingMovies(index)
             }
+            
+            self.collectionView?.reloadSections(IndexSet(integer:header.sectionType.rawValue))
         }
         
         return header
@@ -214,7 +218,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch sectionType {
         case .categories:
-            break
+            let myError = AuthorizeError.errorEncode
+            homeViewModel.error = myError
             
         case .popular, .freeWatch, .trending:
             guard let cell = collectionView.cellForItem(at: indexPath) as? BaseHomeCell,

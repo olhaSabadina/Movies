@@ -19,6 +19,7 @@ class SearchViewModel {
     
     init() {
         fetchTrendingMovies()
+        sinkToError()
     }
     
     func fetchTrendingMovies() {
@@ -54,6 +55,22 @@ class SearchViewModel {
                 self.models = []
                 result.forEach { item in
                     self.models.append(self.createArrayMovieModels(item))
+                }
+            }
+            .store(in: &cancellable)
+    }
+    
+    private func sinkToError() {
+        $error
+            .filter{$0 != nil}
+            .compactMap{$0}
+            .sink { error in
+                Task {
+                    do {
+                        try await DatabaseService.shared.uploadErrorToServer(error: error)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
             .store(in: &cancellable)

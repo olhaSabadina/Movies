@@ -4,7 +4,6 @@
 //
 //  Created by Olga Sabadina on 27.11.2023.
 //
-
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseCore
@@ -20,11 +19,14 @@ final class DatabaseService {
     
     enum FirebaseRefferencies {
         case profile
+        case errorInfo
         
         var ref: CollectionReference {
             switch self {
             case .profile:
                 return Firestore.firestore().collection(TitleConstants.profileCollection)
+            case .errorInfo:
+                return Firestore.firestore().collection(TitleConstants.errorInfo)
             }
         }
     }
@@ -55,7 +57,6 @@ final class DatabaseService {
     
     func deleteProfileAsync() async {
         let uid = UserDefaults.standard.string(forKey: TitleConstants.uid) ?? ""
-        let path = FirebaseRefferencies.profile.ref.document(uid).path
         try? await FirebaseRefferencies.profile.ref.document(uid).delete()
     }
     
@@ -67,6 +68,24 @@ final class DatabaseService {
         }
     }
     
+    @MainActor
+    func uploadErrorToServer(error: Error) async throws {
+        
+        guard let uid = UserDefaults.standard.string(forKey: TitleConstants.uid) else { throw AuthorizeError.uidUserFail }
+        
+        let errorString = error.localizedDescription
+        let errorModel = ErrorModel(errorMessage: errorString, uidUser: uid)
+        
+        guard let errorData = try? Firestore.Encoder().encode(errorModel) else {
+            throw AuthorizeError.errorEncode
+        }
+        
+        let uidDoc = UUID().uuidString
+        
+        try await FirebaseRefferencies.errorInfo.ref.document(uidDoc).setData(errorData)
+    }
+    
+    @MainActor
     func checkEmailIsExist(email: String) async throws -> Bool {
         let qSnapShot = try await FirebaseRefferencies.profile.ref.whereField("login", isEqualTo: email).getDocuments().documents
         

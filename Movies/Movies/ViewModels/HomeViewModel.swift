@@ -30,9 +30,26 @@ class HomeViewModel {
         fetchLatestMovies()
         fatchFreeToWatchMovies()
         fetchTrendingMovies()
+        sinkToError()
     }
     
     //MARK: - fatchPopularMovies
+    
+    private func sinkToError() {
+        $error
+            .filter{$0 != nil}
+            .compactMap{$0}
+            .sink { error in
+                Task {
+                    do {
+                        try await DatabaseService.shared.uploadErrorToServer(error: error)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            .store(in: &cancellable)
+    }
     
     private func fatchPopularMovies() {
         networkManager.fetchMovies(urlString: URLBuilder.popularMovies(), type: MainResultsMovies.self)
