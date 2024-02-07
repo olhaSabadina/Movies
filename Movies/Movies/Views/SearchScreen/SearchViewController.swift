@@ -109,7 +109,7 @@ extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate 
     }
 }
 
-extension SearchViewController: DetailMovieDelegate {
+extension SearchViewController: DetailMovieDelegateProtocol {
     func openDetailScreen(_ model: MovieCellModel) {
         let vc = DetailsViewController(model: model)
         navigationController?.pushViewController(vc, animated: true)

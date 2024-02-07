@@ -22,7 +22,7 @@ class SearchViewModel {
     }
     
     func fetchTrendingMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.trendingForWeekMovies(), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.trendingForWeekMovies(), type: MainResultsMovies.self)
             .sink { сompletion in
                 switch сompletion {
                 case .finished:
@@ -69,7 +69,7 @@ class SearchViewModel {
     }
     
     private func findBySearchWord(searchType: SearchCategories, searchWord: String) -> AnyPublisher<MainResultsMovies,Error> {
-        networkManager.fetchMovies(urlString: UrlCreator.findMovie(searchType: searchType, query: searchWord), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.findMovie(searchType: searchType, query: searchWord), type: MainResultsMovies.self)
     }
     
     private func createArrayMovieModels(_ movie: MainResultsMovies, isTrending: Bool = false) -> [MovieCellModel] {
@@ -105,13 +105,13 @@ class SearchViewModel {
     
     private func getImageURLPath(id: Int?) async throws -> String? {
         
-        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
+        guard let id, let urlString = URL(string: URLBuilder.imageMovie(id: id)) else { throw URLError(.badURL)}
         let (data, _) = try await URLSession.shared.data(from: urlString)
         
         let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
         let item = imageModels.backdrops.first { item in
             item.height < 1100
         }
-        return UrlCreator.imageUrl(item?.filePath)
+        return URLBuilder.imageUrl(item?.filePath)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  UIView+Extension.swift
+//  UIView+layer.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 05.01.2024.

@@ -7,7 +7,7 @@
 
 import AsyncDisplayKit
 
-protocol DetailMovieDelegate {
+protocol DetailMovieDelegateProtocol {
     func openDetailScreen(_ model: MovieCellModel)
 }
 
@@ -21,10 +21,10 @@ class RecomendationCollection: ASCollectionNode {
         return collectionViewFlowLayout
     }()
     
-    var detailDelegate: DetailMovieDelegate?
+    var detailDelegate: DetailMovieDelegateProtocol?
     private let movies: [MovieCellModel]
     
-    init(movies: [MovieCellModel], isRecomendation: Bool = true, delegate: DetailMovieDelegate?) {
+    init(movies: [MovieCellModel], isRecomendation: Bool = true, delegate: DetailMovieDelegateProtocol?) {
         self.movies = movies
         self.isRecomendation = isRecomendation
         self.detailDelegate = delegate

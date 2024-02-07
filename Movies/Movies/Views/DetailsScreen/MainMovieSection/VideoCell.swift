@@ -8,7 +8,7 @@
 import SDWebImage
 import AsyncDisplayKit
 
-protocol PlayVideo {
+protocol PlayVideoProtocol {
     func didTapPlayButton()
 }
 
@@ -16,7 +16,7 @@ class VideoCell: ASDisplayNode {
     private let videoUrl: String
     private let imageNode = ASImageNode()
     private let playButton = ASButtonNode()
-    private var delegatePlayVideo: PlayVideo?
+    private var delegatePlayVideo: PlayVideoProtocol?
     
     init(_ videoUrl: String?, inMediaSection: Bool = false) {
         self.videoUrl = videoUrl ?? ""

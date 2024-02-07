@@ -13,7 +13,7 @@ class RecomendationSection: ASDisplayNode {
     private let collectionMovies: RecomendationCollection
     var isRecommendation = true
         
-    init(movies: [MovieCellModel] = [], isRecomendation: Bool = true, delegate: DetailMovieDelegate? = nil) {
+    init(movies: [MovieCellModel] = [], isRecomendation: Bool = true, delegate: DetailMovieDelegateProtocol? = nil) {
         self.collectionMovies = RecomendationCollection(movies: movies, isRecomendation: isRecomendation, delegate: delegate)
         self.isRecommendation = isRecomendation
         super.init()

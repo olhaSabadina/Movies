@@ -7,12 +7,12 @@
 
 import UIKit
 
-class BaseCoordinator: NSObject, Coordinator {
+class BaseCoordinator: NSObject, CoordinatorProtocol {
     var finishDelegate: CoordinatorFinishDelegate?
     
     var navigationController: UINavigationController
     
-    var childCoordinators: [Coordinator] = []
+    var childCoordinators: [CoordinatorProtocol] = []
     
     var type: CoordinatorType
     

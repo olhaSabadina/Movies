@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol Coordinator: NSObject {
+protocol CoordinatorProtocol: NSObject {
     
     var finishDelegate: CoordinatorFinishDelegate? { get set }
     var navigationController: UINavigationController { get set }
-    var childCoordinators: [Coordinator] { get set }
+    var childCoordinators: [CoordinatorProtocol] { get set }
     var type: CoordinatorType { get }
     func start()
     
@@ -19,7 +19,7 @@ protocol Coordinator: NSObject {
     
 }
 
-extension Coordinator {
+extension CoordinatorProtocol {
     func finish() {
         childCoordinators.removeAll()
         finishDelegate?.coordinatorDidFinish(childCoordinator: self.type)

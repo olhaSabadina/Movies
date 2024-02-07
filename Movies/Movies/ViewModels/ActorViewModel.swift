@@ -23,8 +23,8 @@ class ActorViewModel {
     func prepareForShowData() {
         Task {
             model.biography = try await getBiography(idPersone: model.idPersone)
-            let recommendActing = try await getActing(urlString: UrlCreator.knownFor(id: model.idPersone ?? 0))
-            let actingData = try await getActing(urlString: UrlCreator.acting(id: model.idPersone ?? 0))
+            let recommendActing = try await getActing(urlString: URLBuilder.knownFor(id: model.idPersone ?? 0))
+            let actingData = try await getActing(urlString: URLBuilder.acting(id: model.idPersone ?? 0))
             recommendationsArray = getAllRecommendationMovieModels(recommendActing)
             actingArray = getAllActingMovieModels(actingData)
             shouldReload = true
@@ -33,7 +33,7 @@ class ActorViewModel {
     
     private func getBiography(idPersone: Int?) async throws -> String? {
         
-        guard let idPersone, let urlString = URL(string: UrlCreator.biography(id: idPersone)) else { throw URLError(.badURL) }
+        guard let idPersone, let urlString = URL(string: URLBuilder.biography(id: idPersone)) else { throw URLError(.badURL) }
         let (data, _) = try await URLSession.shared.data(from: urlString)
         
         let biographyModels = try JSONDecoder().decode(BiographyModel.self, from: data)
@@ -54,7 +54,7 @@ class ActorViewModel {
         
         for item in result.cast {
             
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.posterPath), title: item.title, idMovie: item.id)
+            let cellModel = MovieCellModel(imageUrl: URLBuilder.imageUrl(item.posterPath), title: item.title, idMovie: item.id)
             
             arrayKnownFor.append(cellModel)
         }
@@ -66,7 +66,7 @@ class ActorViewModel {
         
         for item in result.cast {
             
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.posterPath), title: item.title, asHeroInFilm: item.character, idMovie: item.id, releaseData: item.releaseDate )
+            let cellModel = MovieCellModel(imageUrl: URLBuilder.imageUrl(item.posterPath), title: item.title, asHeroInFilm: item.character, idMovie: item.id, releaseData: item.releaseDate )
             
             arrayActing.append(cellModel)
         }

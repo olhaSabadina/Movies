@@ -24,7 +24,7 @@ class SeriesCastSection: ASDisplayNode {
         }
     }
     
-    init(typeBtn: HeaderType = .simple, sectionData: [MovieCellModel] = [], actionBtn: ( (HeaderType) -> Void)? = nil, delegate: ActorInfo? = nil) {
+    init(typeBtn: HeaderType = .simple, sectionData: [MovieCellModel] = [], actionBtn: ( (HeaderType) -> Void)? = nil, delegate: ActorInfoProtocol? = nil) {
         self.buttonSeeAll = ASButtonNode()
         self.collectionActor = ActorsCollection(actors: sectionData)
         self.actionBtn = actionBtn

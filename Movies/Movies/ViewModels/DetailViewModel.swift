@@ -33,7 +33,7 @@ class DetailViewModel {
     }
     
     private func fetchMovieModel() {
-        networkManager.fetchMovies(urlString: UrlCreator.movie(id: model.idMovie ?? 0), type: Movie.self)
+        networkManager.fetchMovies(urlString: URLBuilder.movie(id: model.idMovie ?? 0), type: Movie.self)
             .sink { сompletion in
                 switch сompletion {
                 case .finished:
@@ -59,14 +59,14 @@ class DetailViewModel {
                                                genteType: movie.genresArray,
                                                descriptionHeader: movie.overview,
                                                percent: self.model.percent,
-                                               imageURL: UrlCreator.imageUrl(movie.posterPath)
+                                               imageURL: URLBuilder.imageUrl(movie.posterPath)
             )
         }
         
     }
     
     private func fetchRecommendationMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.getRecommendationMovies(id: model.idMovie ?? 0), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.getRecommendationMovies(id: model.idMovie ?? 0), type: MainResultsMovies.self)
             .sink { сompletion in
                 switch сompletion {
                 case .finished:
@@ -87,7 +87,7 @@ class DetailViewModel {
         
         for item in resultsArray {
             
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.posterPath), title: item.title, description: item.overview, percent: item.percent, idMovie: item.id, releaseData: item.releaseDate)
+            let cellModel = MovieCellModel(imageUrl: URLBuilder.imageUrl(item.posterPath), title: item.title, description: item.overview, percent: item.percent, idMovie: item.id, releaseData: item.releaseDate)
             
             arrayMovies.append(cellModel)
         }
@@ -98,7 +98,7 @@ class DetailViewModel {
         
         guard let id = model.idMovie else { return }
 
-        networkManager.fetchMovies(urlString: UrlCreator.videoKey(for: id), type: VideoModel.self)
+        networkManager.fetchMovies(urlString: URLBuilder.videoKey(for: id), type: VideoModel.self)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -117,7 +117,7 @@ class DetailViewModel {
         
         guard let id = model.idMovie else { return }
         
-        networkManager.fetchMovies(urlString: UrlCreator.castMovie(id: id), type: CastModel.self)
+        networkManager.fetchMovies(urlString: URLBuilder.castMovie(id: id), type: CastModel.self)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -135,7 +135,7 @@ class DetailViewModel {
         var arrayCasts = [MovieCellModel]()
         
         for item in result.cast {
-            let cellModel = MovieCellModel(imageUrl: UrlCreator.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character, genderPersone: item.genderCast, idPersone: item.id)
+            let cellModel = MovieCellModel(imageUrl: URLBuilder.imageUrl(item.profilePath), title: item.name, asHeroInFilm: item.character, genderPersone: item.genderCast, idPersone: item.id)
             
             arrayCasts.append(cellModel)
         }
@@ -160,13 +160,13 @@ class DetailViewModel {
     
     private func getImageURLPath(id: Int?) async throws -> String? {
         
-        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL) }
+        guard let id, let urlString = URL(string: URLBuilder.imageMovie(id: id)) else { throw URLError(.badURL) }
         let (data, _) = try await URLSession.shared.data(from: urlString)
         
         let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
         let item = imageModels.backdrops.first { item in
             item.height < 1100
         }
-        return UrlCreator.imageUrl(item?.filePath)
+        return URLBuilder.imageUrl(item?.filePath)
     }
 }

@@ -35,7 +35,7 @@ class HomeViewModel {
     //MARK: - fatchPopularMovies
     
     private func fatchPopularMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.popularMovies(), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.popularMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -52,7 +52,7 @@ class HomeViewModel {
     //MARK: - "free to watch" TMDB don't have (i use upcoming api)
     
     private func fatchFreeToWatchMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.upcomingMovies(), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.upcomingMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -69,7 +69,7 @@ class HomeViewModel {
     //MARK: - LatestTrailers Sections (i use nowPlayingMovies api)
     
     private func fetchLatestMovies() {
-        networkManager.fetchMovies(urlString: UrlCreator.nowPlayingMovies(), type: MainResultsMovies.self)
+        networkManager.fetchMovies(urlString: URLBuilder.nowPlayingMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
                    case .finished:
@@ -89,7 +89,7 @@ class HomeViewModel {
     //MARK: - TrendingMovies
     
     func fetchTrendingMovies(_ index: Int = 0) {
-        let urlString = index == 0 ? UrlCreator.trendingForDayMovies() : UrlCreator.trendingForWeekMovies()
+        let urlString = index == 0 ? URLBuilder.trendingForDayMovies() : URLBuilder.trendingForWeekMovies()
         networkManager.fetchMovies(urlString: urlString, type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
@@ -138,14 +138,14 @@ class HomeViewModel {
     
     private func getImageURLPath(id: Int?) async throws -> String? {
         
-        guard let id, let urlString = URL(string: UrlCreator.imageMovie(id: id)) else { throw URLError(.badURL)}
+        guard let id, let urlString = URL(string: URLBuilder.imageMovie(id: id)) else { throw URLError(.badURL)}
         let (data, _) = try await URLSession.shared.data(from: urlString)
 
         let imageModels = try JSONDecoder().decode(ImageFullModel.self, from: data)
         let item = imageModels.backdrops.first { item in
             item.height < 1100
         }
-        return UrlCreator.imageUrl(item?.filePath)
+        return URLBuilder.imageUrl(item?.filePath)
     }
     
     //MARK: - builder of Sections

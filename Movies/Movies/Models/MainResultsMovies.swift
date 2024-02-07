@@ -52,7 +52,7 @@ struct Movie: Codable {
     }
     
     var posterFullPath: String? {
-        UrlCreator.imageUrl(posterPath)
+        URLBuilder.imageUrl(posterPath)
     }
     
     var nameChannel: String {

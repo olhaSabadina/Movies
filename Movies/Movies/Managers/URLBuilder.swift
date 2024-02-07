@@ -1,5 +1,5 @@
 //
-//  UrlCreator.swift
+//  URLBuilder.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 02.02.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UrlCreator: String {
+enum URLBuilder: String {
     case api = "&api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
     case apiKey = "?api_key=4eefc1a2e5e226c9176fb1fc2cd2a9d1"
     case base = "https://api.themoviedb.org/3/movie"

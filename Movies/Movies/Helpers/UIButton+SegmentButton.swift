@@ -1,5 +1,5 @@
 //
-//  UIButton+Extension.swift
+//  UIButton+SegmentButton.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 09.01.2024.

@@ -40,7 +40,7 @@ class ActingSection: ASDisplayNode {
     }
 }
 
-extension ActingSection: HeaderShowFullTable {
+extension ActingSection: HeaderShowFullTableProtocol {
     func didShowFullTable() {
         isFullShow.toggle()
     }

@@ -58,7 +58,7 @@ class VideoViewController: UIViewController {
     
     private func fetchVideoKey(completion: @escaping (String)-> Void) {
 
-        NetworkManager().fetchMovies(urlString: UrlCreator.videoKey(for: movieID), type: VideoModel.self)
+        NetworkManager().fetchMovies(urlString: URLBuilder.videoKey(for: movieID), type: VideoModel.self)
             .sink { completion in
                 switch completion {
                 case .finished:

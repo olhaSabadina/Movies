@@ -7,7 +7,7 @@
 
 import AsyncDisplayKit
 
-protocol HeaderShowFullTable {
+protocol HeaderShowFullTableProtocol {
     func didShowFullTable()
 }
 
@@ -20,8 +20,8 @@ class SearchTable: ASTableNode {
     }
     var typeCell: TypeSearchCell = .short
     var completionAction: ((MovieCellModel) -> Void)?
-    var headerDelegate: HeaderShowFullTable?
-    var openDetailDelegate: DetailMovieDelegate?
+    var headerDelegate: HeaderShowFullTableProtocol?
+    var openDetailDelegate: DetailMovieDelegateProtocol?
     
     init(source: [[MovieCellModel]] = [], typeCell: TypeSearchCell = .full) {
         self.typeCell = typeCell

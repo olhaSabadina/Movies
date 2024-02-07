@@ -7,13 +7,13 @@
 
 import AsyncDisplayKit
 
-protocol ActorInfo {
+protocol ActorInfoProtocol {
     func didOpenActorInfo(_ actor: MovieCellModel)
 }
 
 class ActorsCollection: ASCollectionNode {
     
-    var openActorInfoDelegate: ActorInfo?
+    var openActorInfoDelegate: ActorInfoProtocol?
     var isFull: Bool = false
     private let actors: [MovieCellModel]
     

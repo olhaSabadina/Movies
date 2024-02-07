@@ -101,7 +101,7 @@ class DetailsViewController: ASDKViewController<ASScrollNode> {
     }
 }
 
-extension DetailsViewController: ActorInfo {
+extension DetailsViewController: ActorInfoProtocol {
     func didOpenActorInfo(_ actor: MovieCellModel) {
         navigationItem.backButtonTitle = ""
         let actorVC = ActorsViewController(actorModel: actor)
@@ -109,7 +109,7 @@ extension DetailsViewController: ActorInfo {
     }
 }
 
-extension DetailsViewController: PlayVideo {
+extension DetailsViewController: PlayVideoProtocol {
     func didTapPlayButton() {
         viewModel.fetchVideoUrl { youtubeId in
         
@@ -123,7 +123,7 @@ extension DetailsViewController: PlayVideo {
     }
 }
 
-extension DetailsViewController: DetailMovieDelegate {
+extension DetailsViewController: DetailMovieDelegateProtocol {
     func openDetailScreen(_ model: MovieCellModel) {
         let vc = DetailsViewController(model: model)
         navigationController?.pushViewController(vc, animated: true)

@@ -77,7 +77,7 @@ class ActorsViewController: ASDKViewController<ASScrollNode> {
     }
 }
 
-extension ActorsViewController: DetailMovieDelegate {
+extension ActorsViewController: DetailMovieDelegateProtocol {
     func openDetailScreen(_ model: MovieCellModel) {
         let vc = DetailsViewController(model: model)
         navigationController?.pushViewController(vc, animated: true)

@@ -1,5 +1,5 @@
 //
-//  UIImage+extension.swift
+//  UIImage+PersonImage.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 10.01.2024.

@@ -1,5 +1,5 @@
 //
-//  SDWebImage+extension.swift
+//  SDWebImage+Downloader.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 26.01.2024.
