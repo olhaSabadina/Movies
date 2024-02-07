@@ -5,13 +5,13 @@
 //  Created by Olga Sabadina on 04.02.2024.
 //
 
-import YouTubeiOSPlayerHelper
+import YouTubePlayer
 import UIKit
 import Combine
 
 class VideoViewController: UIViewController {
     
-    let youTubePlayer = YTPlayerView()
+    let youTubePlayer = YouTubePlayerView()
     let movieID: Int
     private var cancellable = Set<AnyCancellable>()
     
@@ -52,7 +52,7 @@ class VideoViewController: UIViewController {
     
     func fetchKeyVideoAndPlayVideo() {
         fetchVideoKey { key in
-            self.youTubePlayer.load(withVideoId: key)
+            self.youTubePlayer.loadVideoID(key)
         }
     }
     
@@ -74,9 +74,9 @@ class VideoViewController: UIViewController {
     }
 }
 
-extension VideoViewController: YTPlayerViewDelegate {
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        playerView.playVideo()
-        playerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+extension VideoViewController: YouTubePlayerDelegate {
+    
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        videoPlayer.play()
     }
 }
