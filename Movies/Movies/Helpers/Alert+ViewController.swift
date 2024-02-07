@@ -1,5 +1,5 @@
 //
-//  Alert+Extension.swift
+//  Alert+ViewController.swift
 //  Movies
 //
 //  Created by Olga Sabadina on 06.01.2024.
