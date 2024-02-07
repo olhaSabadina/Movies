@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
     private var authorizedStack = UIStackView()
     private var signUpStack = UIStackView()
     private let biometricIDAutn = BiometricIDAuth()
+    private let keychainManager = KeychainManager.shared
     private var email = ""
     private var password = ""
     private var biometricType: BiometricType = .none
@@ -54,12 +55,14 @@ class LoginViewController: UIViewController {
         
         guard let email = emailNumberTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else { return }
+        keychainManager.save(password: password, account: email)
         didSendEventClosure?(.logIn(email, password))
     }
     
     @objc func signUpUser() {
         guard let email = emailNumberTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else { return }
+        keychainManager.save(password: password, account: email)
         didSendEventClosure?(.signUp(email, password))
     }
     
@@ -79,11 +82,12 @@ class LoginViewController: UIViewController {
     }
     
     private func checkSavedUsersData() {
-        let userDefaults = UserDefaults.standard
-                guard let userEmail = userDefaults.string(forKey: TitleConstants.userEmail),
-                      let userPassword = userDefaults.string(forKey: TitleConstants.userPassword) else { return }
-           email = userEmail
-           password = userPassword
+        guard let userEmail = UserDefaults.standard.string(forKey: TitleConstants.userEmail),
+              let userPassword = keychainManager.read(account: userEmail)
+               else { return }
+        
+        email = userEmail
+        password = userPassword
         
         biometricIDAutn.canEvaluate { canEvaluate, bioType, biometricError in
             guard canEvaluate else { return }

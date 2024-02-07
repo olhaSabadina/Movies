@@ -113,6 +113,7 @@
 		9C6F58F62B4E01A000D820BA /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */; };
 		9C6F58F92B4E7A2700D820BA /* MoviesSegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */; };
 		9C6F58FB2B4EB6AB00D820BA /* CircleStrokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */; };
+		9C845C602B741CDB00D1376B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C845C5F2B741CDB00D1376B /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		9C6F58F52B4E01A000D820BA /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		9C6F58F82B4E7A2700D820BA /* MoviesSegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesSegmentControl.swift; sourceTree = "<group>"; };
 		9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleStrokeView.swift; sourceTree = "<group>"; };
+		9C845C5F2B741CDB00D1376B /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		A2492A5D14259973027CDB95 /* Pods-Movies-MoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies-MoviesUITests.release.xcconfig"; path = "Target Support Files/Pods-Movies-MoviesUITests/Pods-Movies-MoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CF90D3CC71F387E0E9D2D635 /* Pods-MoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesTests.debug.xcconfig"; path = "Target Support Files/Pods-MoviesTests/Pods-MoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E09A0E9879FEEDFA25436FAD /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 		20C311982B480F1D00936DBC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				9C845C5E2B741CDB00D1376B /* Keychain */,
 				9C26ABE62B53EF3900FDDA88 /* Biometric */,
 				209965D12B4983B900DB6634 /* AuthorizedManager.swift */,
 				209965D72B49871000DB6634 /* DataBaseManager.swift */,
@@ -647,6 +650,14 @@
 				9C6F58FA2B4EB6AB00D820BA /* CircleStrokeView.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		9C845C5E2B741CDB00D1376B /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				9C845C5F2B741CDB00D1376B /* KeychainManager.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -919,6 +930,7 @@
 				20FD106C2B4D440600D2297F /* HomeViewModel.swift in Sources */,
 				20A042182B5FFD8A0021647F /* HeaderInTable.swift in Sources */,
 				20B3FEAB2B48A23400566ACC /* ColorConstans.swift in Sources */,
+				9C845C602B741CDB00D1376B /* KeychainManager.swift in Sources */,
 				20A0421A2B5FFDC30021647F /* SearchTable.swift in Sources */,
 				20C159152B6BCBD6002E96CA /* MainMovieSection.swift in Sources */,
 				20B3FEB12B48B2FB00566ACC /* CreateViewController.swift in Sources */,

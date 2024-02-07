@@ -17,6 +17,7 @@ enum TitleConstants {
     static let eventDescriptionApp = "Millions of movies, TV shows and people to discover."
     static let email = "email"
     static let password = "password"
+    static let service = "Movies"
     
     //AuthorizedManager
     static let profileCollection = "Users"
