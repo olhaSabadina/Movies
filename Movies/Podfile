@@ -8,7 +8,7 @@ target 'Movies' do
   # Pods for Movies
   
 pod 'Texture'
-
+pod 'YouTubePlayer'
   target 'MoviesTests' do
     inherit! :search_paths
     # Pods for testing

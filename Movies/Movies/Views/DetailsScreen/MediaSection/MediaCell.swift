@@ -23,7 +23,7 @@ class MediaCell: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        let ratio: CGFloat = 1//16/9
+        let ratio: CGFloat = 1
             let imageRatioSpec = ASRatioLayoutSpec(ratio:ratio, child:self.imageNode)
         
         let buttonIns = ASCenterLayoutSpec(centeringOptions: .XY, sizingOptions: .minimumXY, child: playButton)
