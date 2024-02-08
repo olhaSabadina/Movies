@@ -218,9 +218,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch sectionType {
         case .categories:
-            let myError = AuthorizeError.errorEncode
-            homeViewModel.error = myError
-            
+            break
         case .popular, .freeWatch, .trending:
             guard let cell = collectionView.cellForItem(at: indexPath) as? BaseHomeCell,
                   let model = cell.model
