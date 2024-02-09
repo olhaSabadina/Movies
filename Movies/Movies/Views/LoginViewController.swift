@@ -266,6 +266,8 @@ extension LoginViewController {
         passwordTextField.addSequreAndClearButtons()
         emailNumberTextField.addEmailImageAndClearButton()
         emailNumberTextField.setActivityIndicator()
+        emailNumberTextField.accessibilityIdentifier = "LoginTF"
+        passwordTextField.accessibilityIdentifier = "PasswordTF"
     }
     
     private func setAuthorizedStack() {
