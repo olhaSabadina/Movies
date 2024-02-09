@@ -286,6 +286,7 @@
 			children = (
 				2015555B2B46D293007A7423 /* Movies */,
 				201555722B46D296007A7423 /* MoviesTests */,
+				2015557C2B46D296007A7423 /* MoviesUITests */,
 				2015555A2B46D293007A7423 /* Products */,
 				85B8F1D85478E43826E36468 /* Pods */,
 				8DC981F07044271BB07E8290 /* Frameworks */,
@@ -521,7 +522,6 @@
 				201555672B46D296007A7423 /* LaunchScreen.storyboard */,
 				209965C22B497DFC00DB6634 /* GoogleService-Info.plist */,
 				2015556A2B46D296007A7423 /* Info.plist */,
-				2015557C2B46D296007A7423 /* MoviesUITests */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
