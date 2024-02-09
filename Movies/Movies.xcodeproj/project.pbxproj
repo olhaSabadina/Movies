@@ -114,6 +114,8 @@
 		9CFF65DD2B763DBD007D3AF2 /* MoviesTestsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF65DC2B763DBD007D3AF2 /* MoviesTestsTest.swift */; };
 		9CFF65E42B763ED4007D3AF2 /* Pods_MoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CFF65E32B763ED4007D3AF2 /* Pods_MoviesTests.framework */; };
 		9CFF65E52B763ED4007D3AF2 /* Pods_MoviesTests.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9CFF65E32B763ED4007D3AF2 /* Pods_MoviesTests.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9CFF65F22B76741E007D3AF2 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFF65F12B76741E007D3AF2 /* Nimble */; };
+		9CFF65F52B76744D007D3AF2 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFF65F42B76744D007D3AF2 /* Quick */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,7 +290,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CFF65F52B76744D007D3AF2 /* Quick in Frameworks */,
 				9CFF65E42B763ED4007D3AF2 /* Pods_MoviesTests.framework in Frameworks */,
+				9CFF65F22B76741E007D3AF2 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +745,10 @@
 				9CFF65DF2B763DBD007D3AF2 /* PBXTargetDependency */,
 			);
 			name = MoviesTestsTest;
+			packageProductDependencies = (
+				9CFF65F12B76741E007D3AF2 /* Nimble */,
+				9CFF65F42B76744D007D3AF2 /* Quick */,
+			);
 			productName = MoviesTestsTest;
 			productReference = 9CFF65DA2B763DBD007D3AF2 /* MoviesTestsTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -780,6 +788,8 @@
 			packageReferences = (
 				20E594C52B726835007130CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				20E594D22B726934007130CE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				9CFF65F02B76741E007D3AF2 /* XCRemoteSwiftPackageReference "Nimble" */,
+				9CFF65F32B76744D007D3AF2 /* XCRemoteSwiftPackageReference "Quick" */,
 			);
 			productRefGroup = 2015555A2B46D293007A7423 /* Products */;
 			projectDirPath = "";
@@ -1353,6 +1363,22 @@
 				minimumVersion = 5.18.10;
 			};
 		};
+		9CFF65F02B76741E007D3AF2 /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		9CFF65F32B76744D007D3AF2 /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1390,6 +1416,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 20E594D22B726934007130CE /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		9CFF65F12B76741E007D3AF2 /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CFF65F02B76741E007D3AF2 /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+		9CFF65F42B76744D007D3AF2 /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CFF65F32B76744D007D3AF2 /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
