@@ -149,6 +149,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .popular:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.identCell, for: indexPath) as? HomeCell else { return UICollectionViewCell()}
             cell.model = homeViewModel.popularMoviesArray[indexPath.item]
+            
+            cell.accessibilityIdentifier = "popular_\(indexPath.row)"
+            
             return cell
             
         case .freeWatch:

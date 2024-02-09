@@ -7,10 +7,12 @@ target 'Movies' do
 
   # Pods for Movies
   
-pod 'Texture'
-pod 'YouTubePlayer'
+  pod 'Texture'
+  pod 'YouTubePlayer'
+  
   target 'MoviesTests' do
     inherit! :search_paths
+    pod 'Firebase'
     # Pods for testing
   end
 
