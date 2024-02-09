@@ -39,7 +39,8 @@ class MoviesSegmentControl: UIView {
         }
         
         DispatchQueue.main.async {
-            self.selectedViewWidth = (self.frame.width - 10) / CGFloat(buttonsTitles.count)
+            let itemSize = (self.bounds.size.width - 10) / CGFloat(buttonsTitles.count)
+            self.selectedViewWidth = itemSize > 0 ? itemSize : 0
             self.widthConstraint.constant = self.selectedViewWidth
             self.stackView.layoutIfNeeded()
             
