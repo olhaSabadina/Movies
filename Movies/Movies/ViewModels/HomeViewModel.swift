@@ -26,9 +26,9 @@ class HomeViewModel {
     
     init(_ networkManager: NetworkProtocol) {
         self.networkManager = networkManager
-        fatchPopularMovies()
+        fetchPopularMovies()
         fetchLatestMovies()
-        fatchFreeToWatchMovies()
+        fetchFreeToWatchMovies()
         fetchTrendingMovies()
         sinkToError()
     }
@@ -51,7 +51,7 @@ class HomeViewModel {
             .store(in: &cancellable)
     }
     
-    private func fatchPopularMovies() {
+    func fetchPopularMovies() {
         networkManager.fetchMovies(urlString: URLBuilder.popularMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
@@ -68,7 +68,7 @@ class HomeViewModel {
 
     //MARK: - "free to watch" TMDB don't have (i use upcoming api)
     
-    private func fatchFreeToWatchMovies() {
+    func fetchFreeToWatchMovies() {
         networkManager.fetchMovies(urlString: URLBuilder.upcomingMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
@@ -85,7 +85,7 @@ class HomeViewModel {
     
     //MARK: - LatestTrailers Sections (i use nowPlayingMovies api)
     
-    private func fetchLatestMovies() {
+    func fetchLatestMovies() {
         networkManager.fetchMovies(urlString: URLBuilder.nowPlayingMovies(), type: MainResultsMovies.self)
                .sink { сompletion in
                    switch сompletion {
