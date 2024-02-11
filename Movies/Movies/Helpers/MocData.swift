@@ -15,9 +15,3 @@ let mocDataForCurrentSeasonSection = [
 let mocForSocialSection = [
     SocialCellModel(text: "There are no discussions. Login to be first!")
 ]
-
-class Calculator {
-    func add(_ a: Int, _ b: Int) -> Int {
-        return a + b
-    }
-}
